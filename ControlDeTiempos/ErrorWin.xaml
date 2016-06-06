@@ -5,7 +5,8 @@
                    Width="600"
                    Height="300"
                    Header="Ventana de Errores"
-                   Loaded="RadWindow_Loaded">
+                   Loaded="RadWindow_Loaded"
+                   WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -29,6 +30,7 @@
                 Margin="10,213,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Click="BtnAgregar_Click"
                 Content="Agregar"
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnModificar"
@@ -36,6 +38,7 @@
                 Margin="95,213,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Click="BtnModificar_Click"
                 Content="Editar"
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnEliminar"
@@ -43,6 +46,7 @@
                 Margin="180,213,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Click="BtnEliminar_Click"
                 Content="Eliminar"
                 Style="{StaticResource BlueButton}" />
 
@@ -85,6 +89,7 @@
                 Margin="205,104,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Click="BtnVerArchivo_Click"
                 Content="Ver"
                 Style="{StaticResource BlueButton}" />
         <Label Grid.Column="1"

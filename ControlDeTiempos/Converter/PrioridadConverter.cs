@@ -13,11 +13,11 @@ namespace ControlDeTiempos.Converter
 
             switch (medio)
             {
-                case 1: return new SolidColorBrush(Colors.Black);  // CD
-                case 2: return new SolidColorBrush(Colors.Red);  // DVD
-                case 3: return new SolidColorBrush(Colors.Green); //Libro
-                case 4: return new SolidColorBrush(Colors.Blue);  //Ebook
-                case 5: return new SolidColorBrush(Colors.Purple);     //VHS
+                case 1: return new SolidColorBrush(Colors.Black);  
+                case 2: return new SolidColorBrush(Colors.Red);  // 
+                case 3: return new SolidColorBrush(Colors.Green); //
+                case 4: return new SolidColorBrush(Colors.Blue);  //
+                case 5: return new SolidColorBrush(Colors.Purple);     //
                 
                 default: return new SolidColorBrush(Colors.Black);
             }

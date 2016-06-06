@@ -49,10 +49,10 @@ namespace ControlDeTiempos
             CbxTipoAsunto.DataContext = TipoAsuntoSingleton.TipoAsunto;
 
             //Condición sobre el usuario que se firma en la aplicación
-            if (AccesoUsuario.IdTipoAbogado < 3)
-                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 4);
+            if (AccesoUsuario.IdTipoAbogado == 1)
+                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3 && (n.Seccion == AccesoUsuario.IdSeccion || n.Seccion == 3));
             else
-                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 4 && (n.Seccion == AccesoUsuario.IdSeccion || n.Seccion == 3));
+                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3 );
 
 
             listaActividades = new Actividades().GetActividades();
@@ -416,6 +416,13 @@ namespace ControlDeTiempos
                 if (actividades.Contains(actividad.IdActividad))
                     actividad.IsSelected = true;
 
+        }
+
+        private void BtnErrores_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorWin errorWin = new ErrorWin(trabajo);
+            errorWin.Owner = this;
+            errorWin.ShowDialog();
         }
        
     }

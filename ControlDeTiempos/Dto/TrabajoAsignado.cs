@@ -11,7 +11,7 @@ namespace ControlDeTiempos.Dto
         private int idTrabajo = -1;
         private int idAbogado = -1;
         private int tipoDocumento =  -1;
-        private int idActividad = -1;
+        private int idActividad = 0;
         private string otraActividad;
         private string particularidades;
         private int idPrioridad = -1;
@@ -21,7 +21,7 @@ namespace ControlDeTiempos.Dto
         private int idOperativo = -1;
         private string servicioSocial;
         private int idQuienAsigna = -1;
-        private int enTiempo;
+        private int enTiempo = 0;
         private int idTipoAsunto;
         private int numExpediente;
         private int anioExpediente = 2016;

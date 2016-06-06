@@ -15,11 +15,11 @@ namespace ControlDeTiempos.Model
 
         private readonly string connectionStr = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
-        public List<KeyValuePair<string, int>> GetActividadesByOperativo(int idOperativo)
+        public List<ActOperativos> GetActividadesByOperativo(int idOperativo)
         {
             int legislacion = 0, estandarizacion = 0, cotejo = 0, correcciones = 0, octava = 0, subvinculo = 0, otros = 0;
 
-            List<KeyValuePair<string, int>> listadoActs = new List<KeyValuePair<string, int>>();
+            List<ActOperativos> listadoActs = new List<ActOperativos>();
 
             OleDbConnection connection = new OleDbConnection(connectionStr);
             OleDbCommand cmd;
@@ -29,7 +29,7 @@ namespace ControlDeTiempos.Model
             {
                 connection.Open();
 
-                cmd = new OleDbCommand("SELECT * FROM Tesis WHERE IdPerOperativo = @IdPerOperativo", connection);
+                cmd = new OleDbCommand("SELECT * FROM trabajo WHERE IdPerOperativo = @IdPerOperativo", connection);
                 cmd.Parameters.AddWithValue("@IdPerOperativo", idOperativo);
                 reader = cmd.ExecuteReader();
 
@@ -54,14 +54,14 @@ namespace ControlDeTiempos.Model
 
                 }
 
-                
-                listadoActs.Add(new KeyValuePair<string,int>("Legislación", legislacion));
-                listadoActs.Add(new KeyValuePair<string, int>("Estandarización", estandarizacion));
-                listadoActs.Add(new KeyValuePair<string, int>("Cotejo", cotejo));
-                listadoActs.Add(new KeyValuePair<string, int>("Correcciones", correcciones));
-                listadoActs.Add(new KeyValuePair<string, int>("Octava Parte", octava));
-                listadoActs.Add(new KeyValuePair<string, int>("Subvínculo Precedentes", subvinculo));
-                listadoActs.Add(new KeyValuePair<string, int>("Otro", otros));
+
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Legislación", Valor = legislacion });
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Estandarización", Valor = estandarizacion });
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Cotejo", Valor = cotejo });
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Correcciones", Valor = correcciones });
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Octava Parte", Valor = octava });
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Subvínculo Precedentes", Valor = subvinculo });
+                listadoActs.Add(new ActOperativos() { Etiqueta = "Otro", Valor = otros });
 
                 reader.Close();
                 cmd.Dispose();

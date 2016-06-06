@@ -91,3 +91,25 @@ C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\Venta
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.g.resources
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.Properties.Resources.resources
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.csproj.GenerateResource.Cache
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Chart.dll
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Chart.xml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ErrorWin.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\ActiOper.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ErrorWin.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\ActiOper.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\ControlDeTiempos.exe.manifest
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\ControlDeTiempos.application
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.exe.manifest
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.application
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AltaErrores.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AltaErrores.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Prueba.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Prueba.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.ScheduleView.dll
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.ScheduleView.xml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\MainView.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\MainView.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ScheduleView.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ListView.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ScheduleView.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ListView.baml

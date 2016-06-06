@@ -1,5 +1,7 @@
 ﻿using ControlDeTiempos.Dto;
+using ControlDeTiempos.Graphs;
 using ControlDeTiempos.Model;
+using ControlDeTiempos.Reportes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,6 +66,18 @@ namespace ControlDeTiempos
         private void RBtnEntregar_Click(object sender, RoutedEventArgs e)
         {
             new TrabajoAsignadoModel().UpdateFechaEntrega(selectedTrabajo);
+        }
+
+        private void RBtnHojaControl_Click(object sender, RoutedEventArgs e)
+        {
+            WordReport wrd = new WordReport();
+            wrd.HojaDeControl(selectedTrabajo);
+        }
+
+        private void RBtnGraficas_Click(object sender, RoutedEventArgs e)
+        {
+            ActiOper graph = new ActiOper();
+            graph.ShowDialog();
         }
 
         

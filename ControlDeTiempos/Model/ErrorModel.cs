@@ -134,7 +134,7 @@ namespace ControlDeTiempos.Model
         }
 
 
-        public bool UpdateError(TrabajoAsignado trabajo)
+        public bool UpdateError(ErrorOperativo error)
         {
             OleDbConnection connection = new OleDbConnection(connectionStr);
             OleDbDataAdapter dataAdapter;
@@ -152,16 +152,14 @@ namespace ControlDeTiempos.Model
 
                 dataAdapter = new OleDbDataAdapter();
                 dataAdapter.SelectCommand = new OleDbCommand("SELECT * FROM ErroresOperativos WHERE IdError = @IdError", connection);
-                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdError", trabajo.IdTrabajo);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdError", error.IdError);
                 dataAdapter.Fill(dataSet, "ErroresOperativos");
 
                 dr = dataSet.Tables["ErroresOperativos"].Rows[0];
                 dr.BeginEdit();
-                dr["IdError"] = trabajo.IdTrabajo;
-                dr["IdTrabajo"] = trabajo.IdAbogado;
-                dr["Descripcion"] = trabajo.TipoDocumento;
-                dr["NombreArchivo"] = trabajo.IdActividad;
-                dr["Comentario"] = trabajo.OtraActividad;
+                dr["Descripcion"] = error.Descripcion;
+                dr["NombreArchivo"] = error.NombreArchivo;
+                dr["Comentario"] = error.Comentarios;
 
                 dr.EndEdit();
 

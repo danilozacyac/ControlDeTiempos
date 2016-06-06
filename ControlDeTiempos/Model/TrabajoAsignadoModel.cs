@@ -78,6 +78,71 @@ namespace ControlDeTiempos.Model
             return listaTrabajos;
         }
 
+        public TrabajoAsignado GetTrabajos(string idTrabajo)
+        {
+            TrabajoAsignado trabajo = null;
+
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            try
+            {
+                connection.Open();
+
+                cmd = new OleDbCommand("SELECT * FROM Trabajo WHERE IdTrabajo = @IdTrabajo ORDER BY FechaIndicada Desc", connection);
+                cmd.Parameters.AddWithValue("@IdTrabajo", idTrabajo);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    trabajo = new TrabajoAsignado()
+                    {
+                        IdTrabajo = Convert.ToInt32(reader["IdTrabajo"]),
+                        IdAbogado = Convert.ToInt32(reader["IdAbogado"]),
+                        TipoDocumento = Convert.ToInt32(reader["TipoDocumento"]),
+                        IdActividad = Convert.ToInt32(reader["IdActividad"]),
+                        OtraActividad = reader["OtraActividad"].ToString(),
+                        Particularidades = reader["Particularidades"].ToString(),
+                        IdPrioridad = Convert.ToInt32(reader["IdPrioridad"]),
+                        FechaInicio = DateTimeUtilities.GetDateFromReader(reader, "FechaInicio"),
+                        FechaIndicada = DateTimeUtilities.GetDateFromReader(reader, "FechaIndicada"),
+                        FechaEntrega = DateTimeUtilities.GetDateFromReader(reader, "FechaEntrega"),
+                        EnTiempo = Convert.ToInt32(reader["EnTiempo"]),
+                        IdOperativo = Convert.ToInt32(reader["IdPerOperativo"]),
+                        ServicioSocial = reader["ServicioSocial"].ToString(),
+                        IdQuienAsigna = Convert.ToInt32(reader["IdQuienAsigna"]),
+                        PaginasEjecutoria = Convert.ToInt32(reader["PaginasEjecutoria"]),
+                        NumExpediente = Convert.ToInt32(reader["NumExpediente"]),
+                        AnioExpediente = Convert.ToInt32(reader["AnioExpediente"]),
+                        IdTipoAsunto = Convert.ToInt32(reader["IdTipoAsunto"]),
+                        Tesis = new TesisModel().GetTesisByTrabajo(Convert.ToInt32(reader["IdTrabajo"])),
+                        Votos = new VotosModel().GetVotosByTrabajo(Convert.ToInt32(reader["IdTrabajo"]))
+                    };
+
+                }
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return trabajo;
+        }
+
 
         public bool SetNewTrabajo(ref TrabajoAsignado trabajo)
         {
@@ -153,13 +218,17 @@ namespace ControlDeTiempos.Model
                     TesisModel tModel = new TesisModel();
                     if (trabajo.Tesis != null && trabajo.Tesis.Count > 0)
                         foreach (Tesis tesis in trabajo.Tesis)
+                        {
+                            tesis.IdTrabajo = trabajo.IdTrabajo;
                             tModel.SetNewTesis(tesis);
-
+                        }
                     VotosModel vModel = new VotosModel();
                     if (trabajo.Votos != null)
                         foreach (Voto voto in trabajo.Votos)
+                        {
+                            voto.IdTrabajo = trabajo.IdTrabajo;
                             vModel.SetNewVoto(voto);
-
+                        }
                     insertCompleted = true;
                 }
             }
@@ -307,6 +376,9 @@ namespace ControlDeTiempos.Model
             {
                 trabajo.FechaEntrega = DateTime.Now;
 
+                if (trabajo.FechaEntrega < trabajo.FechaIndicada)
+                    trabajo.EnTiempo = 1;
+
                 connection.Open();
 
                 DataSet dataSet = new DataSet();
@@ -321,14 +393,16 @@ namespace ControlDeTiempos.Model
                 dr.BeginEdit();
                 dr["FechaEntrega"] = trabajo.FechaEntrega;
                 dr["FechaEntregaInt"] = DateTimeUtilities.DateToInt(trabajo.FechaEntrega);
+                dr["EnTiempo"] = trabajo.EnTiempo;
                 dr.EndEdit();
 
                 dataAdapter.UpdateCommand = connection.CreateCommand();
 
-                dataAdapter.UpdateCommand.CommandText = "UPDATE Trabajo SET FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt WHERE IdTrabajo = @IdTrabajo";
+                dataAdapter.UpdateCommand.CommandText = "UPDATE Trabajo SET FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt, EnTiempo = @EnTiempo WHERE IdTrabajo = @IdTrabajo";
 
                 dataAdapter.UpdateCommand.Parameters.Add("@FechaEntrega", OleDbType.Date, 0, "FechaEntrega");
                 dataAdapter.UpdateCommand.Parameters.Add("@FechaEntregaInt", OleDbType.Numeric, 0, "FechaEntregaInt");
+                dataAdapter.UpdateCommand.Parameters.Add("@EnTiempo", OleDbType.Numeric, 0, "EnTiempo");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
 
                 dataAdapter.Update(dataSet, "Trabajo");

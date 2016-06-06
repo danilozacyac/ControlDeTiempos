@@ -24,9 +24,6 @@ namespace ControlDeTiempos
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             StyleManager.ApplicationTheme = new Windows8Theme();
-            //VentanaCaptura ven = new VentanaCaptura();
-            //ven.ShowDialog();
-
             
         }
 
@@ -47,7 +44,7 @@ namespace ControlDeTiempos
 
             if (new AccesoUsuarioModel().IsValidUser(TxtUsuario.Text, TxtPass.Password))
             {
-                new ListaAsuntos().Show();
+                new MainView().Show();
                 this.Close();
             }
             else

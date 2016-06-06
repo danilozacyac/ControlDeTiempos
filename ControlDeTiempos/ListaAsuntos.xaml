@@ -6,6 +6,7 @@
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="900"
                    Height="300"
+                   Header=" "
                    Loaded="RadWindow_Loaded"
                    WindowState="Maximized">
     <telerik:RadWindow.Resources>
@@ -13,7 +14,7 @@
         <converter:TipoDocumentoConverter x:Key="tipoDConv" />
         <converter:TipoAsuntoConverter x:Key="tipoAConv" />
         <converter:PrioridadConverter x:Key="priorConv" />
-        <converter:EstadoEntregaConverter x:Key="estadoConv" />
+        <converter:ATiempoConverter x:Key="tiempoConv" />
     </telerik:RadWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -50,6 +51,19 @@
                                              IsEnabled="True"
                                              LargeImage="Resources/clock_128.png"
                                              Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnHojaControl"
+                                             Click="RBtnHojaControl_Click"
+                                             Content="Hoja de control"
+                                             IsEnabled="True"
+                                             LargeImage="Resources/printer_blue.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Graficas">
+                    <telerik:RadRibbonButton x:Name="RBtnGraficas"
+                                             Content="Reporte"
+                                             IsEnabled="True"
+                                             LargeImage="Resources/printer_blue.png"
+                                             Size="Large" Click="RBtnGraficas_Click" />
                 </telerik:RadRibbonGroup>
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
@@ -116,7 +130,7 @@
                                             DataMemberBinding="{Binding FechaEntrega}"
                                             Header="F. Entrega"
                                             IsFilterable="False" />
-                <telerik:GridViewDataColumn Width="120"
+                <!--<telerik:GridViewDataColumn Width="120"
                                             Header="Estado"
                                             IsFilterable="True">
                     <telerik:GridViewDataColumn.CellStyle>
@@ -124,7 +138,12 @@
                             <Setter Property="Background" Value="{Binding FechaIndicada, Converter={StaticResource estadoConv}}" />
                         </Style>
                     </telerik:GridViewDataColumn.CellStyle>
-                </telerik:GridViewDataColumn>
+                </telerik:GridViewDataColumn>-->
+
+                <telerik:GridViewImageColumn DataMemberBinding="{Binding EnTiempo,
+                                                                         Converter={StaticResource tiempoConv}}"
+                                             Header="En tiempo"
+                                             ImageStretch="None" />
             </telerik:RadGridView.Columns>
             <telerik:RadGridView.RowStyle>
                 <Style TargetType="{x:Type telerik:GridViewRow}">

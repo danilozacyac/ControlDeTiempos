@@ -24,7 +24,6 @@ namespace ControlDeTiempos.Dto
             }
         }
 
-        [Range(0,int.MaxValue,ErrorMessage="Indicar a que trabajo esta relacionado este voto")]
         public int IdTrabajo
         {
             get

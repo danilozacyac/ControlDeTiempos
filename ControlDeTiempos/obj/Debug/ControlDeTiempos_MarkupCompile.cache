@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\
 ControlDeTiempos
 none
 false
 DEBUG;TRACE
-C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\App.xaml
-7-901793677
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\App.xaml
+13-627376652
 
-37-910324243
-251411448302
-ErrorWin.xaml;ListaAsuntos.xaml;MainWindow.xaml;TesisWin.xaml;Theme\ControlTheme.xaml;VentanaCaptura.xaml;VotosWin.xaml;
+501977067465
+281999435314
+Controles\ListView.xaml;ErrorWin.xaml;Formularios\AltaErrores.xaml;Graphs\ActiOper.xaml;ListaAsuntos.xaml;MainView.xaml;MainWindow.xaml;Prueba.xaml;Controles\ScheduleView.xaml;TesisWin.xaml;Theme\ControlTheme.xaml;VentanaCaptura.xaml;VotosWin.xaml;
 
 False
 
