@@ -1,12 +1,10 @@
 ﻿using ControlDeTiempos.Dto;
 using ScjnUtilities;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
-using System.Linq;
 
 namespace ControlDeTiempos.Model
 {
@@ -51,7 +49,9 @@ namespace ControlDeTiempos.Model
                         PaginasEjecutoria = Convert.ToInt32(reader["PaginasEjecutoria"]),
                         NumExpediente = Convert.ToInt32(reader["NumExpediente"]),
                         AnioExpediente = Convert.ToInt32(reader["AnioExpediente"]),
-                        IdTipoAsunto = Convert.ToInt32(reader["IdTipoAsunto"])
+                        IdTipoAsunto = Convert.ToInt32(reader["IdTipoAsunto"]),
+                        Tesis = new TesisModel().GetTesisByTrabajo(Convert.ToInt32(reader["IdTrabajo"])),
+                        Votos = new VotosModel().GetVotosByTrabajo(Convert.ToInt32(reader["IdTrabajo"]))
                     };
                     listaTrabajos.Add(trabajo);
 
@@ -149,6 +149,17 @@ namespace ControlDeTiempos.Model
 
                     dataSet.Dispose();
                     dataAdapter.Dispose();
+
+                    TesisModel tModel = new TesisModel();
+                    if (trabajo.Tesis != null && trabajo.Tesis.Count > 0)
+                        foreach (Tesis tesis in trabajo.Tesis)
+                            tModel.SetNewTesis(tesis);
+
+                    VotosModel vModel = new VotosModel();
+                    if (trabajo.Votos != null)
+                        foreach (Voto voto in trabajo.Votos)
+                            vModel.SetNewVoto(voto);
+
                     insertCompleted = true;
                 }
             }
@@ -220,6 +231,7 @@ namespace ControlDeTiempos.Model
                     dr["FechaEntrega"] = trabajo.FechaEntrega;
                     dr["FechaEntregaInt"] = DateTimeUtilities.DateToInt(trabajo.FechaEntrega);
                 }
+
                 dr["IdTipoAsunto"] = trabajo.IdTipoAsunto;
                 dr["NumExpediente"] = trabajo.NumExpediente;
                 dr["AnioExpediente"] = trabajo.AnioExpediente;
@@ -251,9 +263,72 @@ namespace ControlDeTiempos.Model
                 dataAdapter.UpdateCommand.Parameters.Add("@PaginasEjecutoria", OleDbType.Numeric, 0, "PaginasEjecutoria");
                 dataAdapter.UpdateCommand.Parameters.Add("@FechaEntrega", OleDbType.Date, 0, "FechaEntrega");
                 dataAdapter.UpdateCommand.Parameters.Add("@FechaEntregaInt", OleDbType.Numeric, 0, "FechaEntregaInt");
-                dataAdapter.InsertCommand.Parameters.Add("@IdTipoAsunto", OleDbType.Numeric, 0, "IdTipoAsunto");
-                dataAdapter.InsertCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
-                dataAdapter.InsertCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
+                dataAdapter.UpdateCommand.Parameters.Add("@IdTipoAsunto", OleDbType.Numeric, 0, "IdTipoAsunto");
+                dataAdapter.UpdateCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
+                dataAdapter.UpdateCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
+                dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
+
+                dataAdapter.Update(dataSet, "Trabajo");
+
+                dataSet.Dispose();
+                dataAdapter.Dispose();
+
+                insertCompleted = true;
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "PadronApi");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "PadronApi");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return insertCompleted;
+        }
+
+
+        public bool UpdateFechaEntrega(TrabajoAsignado trabajo)
+        {
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbDataAdapter dataAdapter;
+            OleDbCommand cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            bool insertCompleted = false;
+
+            try
+            {
+                trabajo.FechaEntrega = DateTime.Now;
+
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+                DataRow dr;
+
+                dataAdapter = new OleDbDataAdapter();
+                dataAdapter.SelectCommand = new OleDbCommand("SELECT * FROM Trabajo WHERE IdTrabajo = @IdTrabajo", connection);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdTrabajo", trabajo.IdTrabajo);
+                dataAdapter.Fill(dataSet, "Trabajo");
+
+                dr = dataSet.Tables["Trabajo"].Rows[0];
+                dr.BeginEdit();
+                dr["FechaEntrega"] = trabajo.FechaEntrega;
+                dr["FechaEntregaInt"] = DateTimeUtilities.DateToInt(trabajo.FechaEntrega);
+                dr.EndEdit();
+
+                dataAdapter.UpdateCommand = connection.CreateCommand();
+
+                dataAdapter.UpdateCommand.CommandText = "UPDATE Trabajo SET FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt WHERE IdTrabajo = @IdTrabajo";
+
+                dataAdapter.UpdateCommand.Parameters.Add("@FechaEntrega", OleDbType.Date, 0, "FechaEntrega");
+                dataAdapter.UpdateCommand.Parameters.Add("@FechaEntregaInt", OleDbType.Numeric, 0, "FechaEntregaInt");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
 
                 dataAdapter.Update(dataSet, "Trabajo");

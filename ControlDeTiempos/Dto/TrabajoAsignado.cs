@@ -64,6 +64,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.tipoDocumento = value;
+                this.OnPropertyChanged("TipoDocumento");
             }
         }
 
@@ -114,6 +115,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.idPrioridad = value;
+                this.OnPropertyChanged("IdPrioridad");
             }
         }
 
@@ -127,6 +129,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.fechaInicio = value;
+                this.OnPropertyChanged("FechaInicio");
             }
         }
 
@@ -139,6 +142,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.fechaIndicada = value;
+                this.OnPropertyChanged("FechaIndicada");
             }
         }
 
@@ -151,6 +155,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.fechaEntrega = value;
+                this.OnPropertyChanged("FechaEntrega");
             }
         }
 
@@ -163,6 +168,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.idOperativo = value;
+                this.OnPropertyChanged("IdOperativo");
             }
         }
 
@@ -212,6 +218,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.idTipoAsunto = value;
+                this.OnPropertyChanged("IdTipoAsunto");
             }
         }
 
@@ -225,6 +232,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.numExpediente = value;
+                this.OnPropertyChanged("NumExpediente");
             }
         }
 
@@ -238,6 +246,7 @@ namespace ControlDeTiempos.Dto
             set
             {
                 this.anioExpediente = value;
+                this.OnPropertyChanged("AnioExpediente");
             }
         }
 

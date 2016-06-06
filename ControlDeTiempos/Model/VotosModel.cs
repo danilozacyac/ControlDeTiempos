@@ -20,7 +20,7 @@ namespace ControlDeTiempos.Model
 
         public ObservableCollection<Voto> GetVotosByTrabajo(int idTrabajo)
         {
-            ObservableCollection<Voto> listaVotos = new ObservableCollection<Voto>();
+            ObservableCollection<Voto> listaVotos = null;
 
             OleDbConnection connection = new OleDbConnection(connectionStr);
             OleDbCommand cmd;
@@ -36,6 +36,9 @@ namespace ControlDeTiempos.Model
 
                 while (reader.Read())
                 {
+                    if(listaVotos == null)
+                        listaVotos = new ObservableCollection<Voto>();
+
                     Voto tesis = new Voto()
                     {
                         IdVoto = Convert.ToInt32(reader["IdVoto"]),
@@ -71,7 +74,7 @@ namespace ControlDeTiempos.Model
         }
 
 
-        public bool SetNewVoto(ref Voto voto)
+        public bool SetNewVoto(Voto voto)
         {
             bool insertCompleted = false;
 

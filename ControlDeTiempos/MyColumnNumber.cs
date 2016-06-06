@@ -17,6 +17,7 @@ namespace ControlDeTiempos
             }
 
             textBlock.Text = string.Format("{0}", this.DataControl.Items.IndexOf(dataItem) + 1);
+            textBlock.TextAlignment = TextAlignment.Center;
 
             return textBlock;
         }

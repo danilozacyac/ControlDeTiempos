@@ -48,6 +48,13 @@ namespace ControlDeTiempos
             CbxAbogResp.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 1);
             CbxTipoAsunto.DataContext = TipoAsuntoSingleton.TipoAsunto;
 
+            //Condición sobre el usuario que se firma en la aplicación
+            if (AccesoUsuario.IdTipoAbogado < 3)
+                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 4);
+            else
+                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 4 && (n.Seccion == AccesoUsuario.IdSeccion || n.Seccion == 3));
+
+
             listaActividades = new Actividades().GetActividades();
             RLstActividades.DataContext = listaActividades;
 
@@ -88,8 +95,7 @@ namespace ControlDeTiempos
         {
             selectedAbogado = CbxAbogResp.SelectedItem as PersonalCcst;
 
-            //Condición sobre el usuario que se firma en la aplicación
-            CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3 && (n.Seccion == 1 || n.Seccion == 3));
+            
         }
 
         private void TxtNumExpediente_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -332,6 +338,9 @@ namespace ControlDeTiempos
             trabajo.IdTipoAsunto = Convert.ToInt32(CbxTipoAsunto.SelectedValue);
             trabajo.IdPrioridad = Convert.ToInt32(CbxPrioridad.SelectedValue);
             trabajo.IdOperativo = Convert.ToInt32(CbxOperativos.SelectedValue);
+
+            if (trabajo.IdOperativo != -1)
+                trabajo.IdQuienAsigna = AccesoUsuario.IdUsuario;
 
             if (trabajo.IdOperativo == 40 && String.IsNullOrWhiteSpace(trabajo.ServicioSocial) && String.IsNullOrEmpty(trabajo.ServicioSocial))
             {

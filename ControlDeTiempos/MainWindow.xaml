@@ -8,14 +8,14 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Margin="36,36,0,0"
+        <Label Margin="20,36,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Usuario:"
                FontSize="14"
                FontWeight="Bold" />
 
-        <Label Margin="36,77,0,0"
+        <Label Margin="20,77,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Contraseña:"
@@ -24,28 +24,32 @@
         <TextBox x:Name="TxtUsuario"
                  Width="154"
                  Height="23"
-                 Margin="128,36,0,0"
+                 Margin="112,36,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  TextWrapping="Wrap" />
         <PasswordBox x:Name="TxtPass"
                      Width="153"
-                     Margin="129,77,0,0"
+                     Margin="113,77,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top" />
         <Button x:Name="BtnSalir"
                 Width="80"
-                Margin="202,121,0,0"
+                Margin="186,121,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Click="BtnSalir_Click"
                 Content="Salir"
+                IsCancel="True"
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnGuardar"
                 Width="80"
-                Margin="117,121,0,0"
+                Margin="101,121,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
+                Click="BtnGuardar_Click"
                 Content="Guardar"
+                IsDefault="True"
                 Style="{StaticResource BlueButton}" />
     </Grid>
 </Window>

@@ -42,6 +42,13 @@ namespace ControlDeTiempos
             ventana.ShowDialog();
         }
 
+        private void RBtnEditarTrabajo_Click(object sender, RoutedEventArgs e)
+        {
+            VentanaCaptura ventana = new VentanaCaptura(selectedTrabajo, false);
+            ventana.Owner = this;
+            ventana.ShowDialog();
+        }
+
         private void RBtnVerTrabajo_Click(object sender, RoutedEventArgs e)
         {
             VentanaCaptura ventana = new VentanaCaptura(selectedTrabajo, true);
@@ -53,5 +60,12 @@ namespace ControlDeTiempos
         {
             selectedTrabajo = GPorTrabajar.SelectedItem as TrabajoAsignado;
         }
+
+        private void RBtnEntregar_Click(object sender, RoutedEventArgs e)
+        {
+            new TrabajoAsignadoModel().UpdateFechaEntrega(selectedTrabajo);
+        }
+
+        
     }
 }

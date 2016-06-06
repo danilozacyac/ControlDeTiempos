@@ -53,7 +53,7 @@ namespace ControlDeTiempos
             {
                 if (isUpdating)
                 {
-                    if (new VotosModel().SetNewVoto(ref voto))
+                    if (new VotosModel().SetNewVoto(voto))
                     {
                         if (trabajo.Votos == null)
                             trabajo.Votos = new ObservableCollection<Voto>();

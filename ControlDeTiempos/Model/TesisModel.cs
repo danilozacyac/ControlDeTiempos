@@ -18,7 +18,7 @@ namespace ControlDeTiempos.Model
 
         public ObservableCollection<Tesis> GetTesisByTrabajo(int idTrabajo)
         {
-            ObservableCollection<Tesis> listaTesis = new ObservableCollection<Tesis>();
+            ObservableCollection<Tesis> listaTesis = null;
 
             OleDbConnection connection = new OleDbConnection(connectionStr);
             OleDbCommand cmd;
@@ -34,6 +34,9 @@ namespace ControlDeTiempos.Model
 
                 while (reader.Read())
                 {
+                    if(listaTesis == null)
+                        listaTesis = new ObservableCollection<Tesis>();
+
                     Tesis tesis = new Tesis()
                     {
                         IdTesis = Convert.ToInt32(reader["IdTesis"]),
@@ -68,7 +71,7 @@ namespace ControlDeTiempos.Model
         }
 
 
-        public bool SetNewTesis(ref Tesis tesis)
+        public bool SetNewTesis(Tesis tesis)
         {
             bool insertCompleted = false;
 
@@ -103,7 +106,7 @@ namespace ControlDeTiempos.Model
 
                     dataAdapter.InsertCommand.Parameters.Add("@IdTesis", OleDbType.Numeric, 0, "IdTesis");
                     dataAdapter.InsertCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
-                    dataAdapter.InsertCommand.Parameters.Add("@NumIdentifica", OleDbType.Numeric, 0, "NumIdentifica");
+                    dataAdapter.InsertCommand.Parameters.Add("@NumIdentifica", OleDbType.VarChar, 0, "NumIdentifica");
                     dataAdapter.InsertCommand.Parameters.Add("@Paginas", OleDbType.Numeric, 0, "Paginas");
 
                     dataAdapter.Update(dataSet, "Tesis");

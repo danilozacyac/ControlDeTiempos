@@ -9,13 +9,18 @@ namespace ControlDeTiempos.Converter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            DateTime fechaIndicada = System.Convert.ToDateTime( value);
+            DateTime fechaIndicada = System.Convert.ToDateTime(value);
 
-            if(fechaIndicada < DateTime.Now)
-                return new SolidColorBrush(Colors.Red);
-            else
+            TimeSpan remain = fechaIndicada.Subtract(DateTime.Now);
+
+            if (remain.Days >=0 && remain.Hours > 1)
                 return new SolidColorBrush(Colors.Green);
-            
+            if (remain.Days == 0 && remain.Hours == 0)
+                return new SolidColorBrush(Colors.Yellow);
+            else
+                return new SolidColorBrush(Colors.Red);
+
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

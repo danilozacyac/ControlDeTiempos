@@ -49,7 +49,7 @@ namespace ControlDeTiempos
             {
                 if (isUpdating)
                 {
-                    if (new TesisModel().SetNewTesis(ref tesis))
+                    if (new TesisModel().SetNewTesis(tesis))
                     {
                         if (trabajo.Tesis == null)
                             trabajo.Tesis = new ObservableCollection<Tesis>();

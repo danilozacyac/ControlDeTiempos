@@ -6,7 +6,6 @@
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="900"
                    Height="300"
-                   Header="ListaAsuntos"
                    Loaded="RadWindow_Loaded"
                    WindowState="Maximized">
     <telerik:RadWindow.Resources>
@@ -22,7 +21,7 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <telerik:RadRibbonView VerticalAlignment="Top">
+        <telerik:RadRibbonView VerticalAlignment="Top" ApplicationName="Listado de asuntos trabajados">
             <telerik:RadRibbonTab Header="General">
                 <telerik:RadRibbonGroup Header="Acciones">
                     <telerik:RadRibbonButton x:Name="RBtnVerTrabajo"
@@ -36,12 +35,20 @@
                                              LargeImage="Resources/1425495838_add-notes.png"
                                              Size="Large" />
                     <telerik:RadRibbonButton x:Name="RBtnEditarTrabajo"
+                                             Click="RBtnEditarTrabajo_Click"
                                              Content="Editar"
                                              LargeImage="Resources/1425495821_edit-notes.png"
                                              Size="Large" />
                     <telerik:RadRibbonButton x:Name="RBtnEliminarTrabajo"
                                              Content="Eliminar"
+                                             IsEnabled="False"
                                              LargeImage="Resources/1425495925_delete-notes.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnEntregar"
+                                             Click="RBtnEntregar_Click"
+                                             Content="Entregar"
+                                             IsEnabled="True"
+                                             LargeImage="Resources/clock_128.png"
                                              Size="Large" />
                 </telerik:RadRibbonGroup>
             </telerik:RadRibbonTab>
@@ -57,20 +64,27 @@
                              SelectionChanged="GPorTrabajar_SelectionChanged"
                              ShowGroupPanel="False">
             <telerik:RadGridView.Columns>
-                <CustomColumn:MyColumnNumber Width="30"
+                <CustomColumn:MyColumnNumber Width="60"
                                              CellStyle="{StaticResource ColumnaNumerica}"
-                                             Header="#" />
-                <telerik:GridViewDataColumn Width="100"
+                                             Header="#"
+                                             HeaderTextAlignment="Center"
+                                             TextAlignment="Center" />
+                <telerik:GridViewDataColumn Width="150"
                                             DataMemberBinding="{Binding IdTipoAsunto,
                                                                         Converter={StaticResource tipoAConv}}"
                                             Header="Tipo de Asunto"
+                                            HeaderTextAlignment="Center"
                                             IsFilterable="False" />
-                <telerik:GridViewDataColumn Width="80"
+                <telerik:GridViewDataColumn Width="100"
                                             DataMemberBinding="{Binding NumExpediente}"
-                                            Header="Núm. Exp." />
+                                            Header="Núm. Exp."
+                                            HeaderTextAlignment="Center"
+                                            TextAlignment="Center" />
                 <telerik:GridViewDataColumn Width="120"
                                             DataMemberBinding="{Binding AnioExpediente}"
-                                            Header="Año" />
+                                            Header="Año"
+                                            HeaderTextAlignment="Center"
+                                            TextAlignment="Center" />
                 <telerik:GridViewDataColumn Width="120"
                                             DataMemberBinding="{Binding IdAbogado,
                                                                         Converter={StaticResource persConv}}"
@@ -86,23 +100,31 @@
                                                                         Converter={StaticResource tipoDConv}}"
                                             Header="Documento"
                                             ShowFieldFilters="False" />
-                <telerik:GridViewDataColumn Width="120"
+                <telerik:GridViewDataColumn Width="Auto"
+                                            DataFormatString="{} {0:dd/MM/yyyy hh:mm}"
                                             DataMemberBinding="{Binding FechaInicio}"
                                             Header="F. Inicio"
                                             IsFilterable="False" />
-                <telerik:GridViewDataColumn Width="120"
+                <telerik:GridViewDataColumn Width="Auto"
+                                            DataFormatString="{} {0:dd/MM/yyyy hh:mm}"
                                             DataMemberBinding="{Binding FechaIndicada}"
                                             Header="F. Indicada"
                                             IsFilterable="False" />
-                <telerik:GridViewDataColumn Width="120"
+                <telerik:GridViewDataColumn Width="Auto"
+                                            MinWidth="120"
+                                            DataFormatString="{} {0:dd/MM/yyyy hh:mm}"
                                             DataMemberBinding="{Binding FechaEntrega}"
-                                            Header="F. Inicio"
+                                            Header="F. Entrega"
                                             IsFilterable="False" />
                 <telerik:GridViewDataColumn Width="120"
-                                            Background="{Binding FechaIndicada,
-                                                                 Converter={StaticResource estadoConv}}"
                                             Header="Estado"
-                                            IsFilterable="False" />
+                                            IsFilterable="True">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding FechaIndicada, Converter={StaticResource estadoConv}}" />
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
             </telerik:RadGridView.Columns>
             <telerik:RadGridView.RowStyle>
                 <Style TargetType="{x:Type telerik:GridViewRow}">
