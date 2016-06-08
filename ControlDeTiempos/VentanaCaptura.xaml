@@ -271,7 +271,8 @@
                             Margin="42,47,0,27"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Stretch"
-                            ItemsSource="{Binding}">
+                            ItemsSource="{Binding}"
+                            LostFocus="RLstActividades_LostFocus">
             <telerik:RadListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Margin="5,5,0,0"
@@ -317,6 +318,16 @@
                FontSize="14"
                FontWeight="Bold"
                Visibility="Collapsed" />
+        <TextBlock x:Name="TxtEstimado"
+                   Grid.Row="4"
+                   Width="276"
+                   Height="100"
+                   Margin="318,47,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="14"
+                   Foreground="Red"
+                   TextWrapping="Wrap" />
         <Label Grid.Row="5"
                Margin="42,17,0,0"
                HorizontalAlignment="Left"
@@ -374,18 +385,21 @@
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    EndTime="18:00"
-                                   SelectedValue="{Binding FechaInicio}"
+                                   SelectedValue="{Binding FechaInicio,
+                                                           Mode=TwoWay}"
                                    StartTime="7:00" />
         <telerik:RadDateTimePicker x:Name="RdtpFechaIndicada"
                                    Grid.Row="6"
                                    Width="250"
-                                   Margin="721,17,0,0"
+                                   Margin="710,17,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    EndTime="18:00"
-                                   SelectedValue="{Binding FechaIndicada}"
+                                   SelectedValue="{Binding FechaIndicada,
+                                                           Mode=TwoWay}"
                                    StartTime="7:00" />
-        <Label Grid.Row="7"
+        <Label x:Name="LblFEntrega"
+               Grid.Row="7"
                Margin="41,10,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"

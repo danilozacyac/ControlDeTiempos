@@ -1,10 +1,15 @@
-﻿using ControlDeTiempos.Dto;
-using ScjnUtilities;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.Linq;
+using System.Windows.Media;
+using ControlDeTiempos.Dto;
+using ControlDeTiempos.Singleton;
+using ScjnUtilities;
+using Telerik.Windows.Controls;
+using Telerik.Windows.Controls.ScheduleView;
 
 namespace ControlDeTiempos.Model
 {
@@ -13,7 +18,7 @@ namespace ControlDeTiempos.Model
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
 
-        public ObservableCollection<TrabajoAsignado> GetTrabajos()
+        public ObservableCollection<TrabajoAsignado> GetTrabajos(int entregados)
         {
             ObservableCollection<TrabajoAsignado> listaTrabajos = new ObservableCollection<TrabajoAsignado>();
 
@@ -21,11 +26,19 @@ namespace ControlDeTiempos.Model
             OleDbCommand cmd;
             OleDbDataReader reader;
 
+            string sqlQuery = String.Empty;
+            string entregaCondition = (entregados == 0) ? " FechaEntregaInt = 0 " : " FechaEntregaInt > 0 ";
+
+            if (AccesoUsuario.IdTipoAbogado == 2 || AccesoUsuario.IdTipoAbogado == 4)
+                sqlQuery = String.Format("SELECT * FROM Trabajo WHERE {0} ORDER BY FechaIndicada Desc", entregaCondition);
+            else
+                sqlQuery = String.Format("SELECT * FROM Trabajo WHERE IdAbogado = {0} AND {1} ORDER BY FechaIndicada Desc", AccesoUsuario.IdUsuario, entregaCondition);
+
             try
             {
                 connection.Open();
 
-                cmd = new OleDbCommand("SELECT * FROM Trabajo ORDER BY FechaIndicada Desc", connection);
+                cmd = new OleDbCommand(sqlQuery, connection);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -142,6 +155,128 @@ namespace ControlDeTiempos.Model
 
             return trabajo;
         }
+
+
+        public ObservableAppointmentCollection GetTrabajosByAbogado(int idAbogado, bool entregado)
+        {
+            ObservableAppointmentCollection listaEventos = new ObservableAppointmentCollection();
+
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            string entregaCondition = (!entregado) ? " FechaEntregaInt = 0 " : " FechaEntregaInt > 0 ";
+
+
+            string sqlQuery = String.Format("SELECT * FROM Trabajo WHERE IdAbogado = {0} AND {1} ORDER BY FechaIndicada Desc", idAbogado, entregaCondition);
+
+            try
+            {
+                string abogado = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == idAbogado).Nombre;
+
+                connection.Open();
+
+                cmd = new OleDbCommand(sqlQuery, connection);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    
+                    string operativo = (Convert.ToInt32(reader["IdPerOperativo"]) > 0) ? PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == Convert.ToInt32(reader["IdPerOperativo"])).NombreCompleto : String.Empty;
+
+                    Appointment app = new Appointment()
+                    {
+                        Subject = String.Format("{0}/{1} {2} - {3}", reader["NumExpediente"], reader["AnioExpediente"], abogado, operativo),
+                        Start = Convert.ToDateTime(reader["FechaIndicada"]),
+                        End = Convert.ToDateTime(reader["FechaIndicada"]).AddMinutes(25),
+                        Category = (entregado) ? GetCompletedAppointmentCategory(Convert.ToInt32(reader["EnTiempo"])) : GetAppointmentCategory(Convert.ToInt32(reader["IdPrioridad"])),
+                        UniqueId = reader["IdTrabajo"].ToString()
+
+                    };
+                    listaEventos.Add(app);
+                }
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return listaEventos;
+        }
+
+        public ObservableAppointmentCollection GetTrabajosByOperativo(int idOperativo, bool entregado)
+        {
+            ObservableAppointmentCollection listaEventos = new ObservableAppointmentCollection();
+
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            string entregaCondition = (!entregado) ? " FechaEntregaInt = 0 " : " FechaEntregaInt > 0 ";
+
+
+            string sqlQuery = String.Format("SELECT * FROM Trabajo WHERE IdPerOperativo = {0} AND {1} ORDER BY FechaIndicada Desc", idOperativo, entregaCondition);
+
+            try
+            {
+                string operativo = (idOperativo > 0) ? PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == idOperativo).NombreCompleto : String.Empty;
+
+                connection.Open();
+
+                cmd = new OleDbCommand(sqlQuery, connection);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    string abogado = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == Convert.ToInt32(reader["IdAbogado"])).Nombre;
+
+                    Appointment app = new Appointment()
+                    {
+                        Subject = String.Format("{0}/{1} {2} - {3}", reader["NumExpediente"], reader["AnioExpediente"], abogado, operativo),
+                        Start = Convert.ToDateTime(reader["FechaIndicada"]),
+                        End = Convert.ToDateTime(reader["FechaIndicada"]).AddMinutes(25),
+                        Category = (entregado) ? GetCompletedAppointmentCategory(Convert.ToInt32(reader["EnTiempo"])) : GetAppointmentCategory(Convert.ToInt32(reader["IdPrioridad"])),
+                        UniqueId = reader["IdTrabajo"].ToString()
+
+                    };
+                    listaEventos.Add(app);
+                }
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return listaEventos;
+        }
+
 
 
         public bool SetNewTrabajo(ref TrabajoAsignado trabajo)
@@ -294,11 +429,13 @@ namespace ControlDeTiempos.Model
                 {
                     dr["FechaEntrega"] = DBNull.Value;
                     dr["FechaEntregaInt"] = 0;
+                    dr["EnTiempo"] = 0;
                 }
                 else
                 {
                     dr["FechaEntrega"] = trabajo.FechaEntrega;
                     dr["FechaEntregaInt"] = DateTimeUtilities.DateToInt(trabajo.FechaEntrega);
+                    dr["EnTiempo"] = (trabajo.FechaEntrega < trabajo.FechaIndicada) ? 1 : 0;
                 }
 
                 dr["IdTipoAsunto"] = trabajo.IdTipoAsunto;
@@ -313,7 +450,7 @@ namespace ControlDeTiempos.Model
                     "IdPrioridad = @IdPrioridad, FechaInicio = @FechaInicio, FechaInicioInt = @FechaInicioInt," +
                     "FechaIndicada = @FechaIndicada, FechaIndicadaInt = @FechaIndicadaInt,IdPerOperativo = @IdPerOperativo," +
                     "ServicioSocial = @ServicioSocial,IdQuienAsigna = @IdQuienAsigna, PaginasEjecutoria = @PaginasEjecutoria, " +
-                    "FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt,IdTipoAsunto = @IdTipoAsunto,NumExpediente = @NumExpediente,AnioExpediente = @AnioExpediente " +
+                    "FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt,EnTiempo = @EnTiempo, IdTipoAsunto = @IdTipoAsunto,NumExpediente = @NumExpediente,AnioExpediente = @AnioExpediente " +
                     " WHERE IdTrabajo = @IdTrabajo";
 
                 dataAdapter.UpdateCommand.Parameters.Add("@IdAbogado", OleDbType.Numeric, 0, "IdAbogado");
@@ -332,6 +469,7 @@ namespace ControlDeTiempos.Model
                 dataAdapter.UpdateCommand.Parameters.Add("@PaginasEjecutoria", OleDbType.Numeric, 0, "PaginasEjecutoria");
                 dataAdapter.UpdateCommand.Parameters.Add("@FechaEntrega", OleDbType.Date, 0, "FechaEntrega");
                 dataAdapter.UpdateCommand.Parameters.Add("@FechaEntregaInt", OleDbType.Numeric, 0, "FechaEntregaInt");
+                dataAdapter.UpdateCommand.Parameters.Add("@EnTiempo", OleDbType.Numeric, 0, "EnTiempo");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdTipoAsunto", OleDbType.Numeric, 0, "IdTipoAsunto");
                 dataAdapter.UpdateCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
                 dataAdapter.UpdateCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
@@ -428,6 +566,102 @@ namespace ControlDeTiempos.Model
             }
 
             return insertCompleted;
+        }
+
+        public bool UpdatePersonalOperativo(TrabajoAsignado trabajo)
+        {
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbDataAdapter dataAdapter;
+            OleDbCommand cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            bool insertCompleted = false;
+
+            try
+            {
+                trabajo.FechaEntrega = DateTime.Now;
+
+                if (trabajo.FechaEntrega < trabajo.FechaIndicada)
+                    trabajo.EnTiempo = 1;
+
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+                DataRow dr;
+
+                dataAdapter = new OleDbDataAdapter();
+                dataAdapter.SelectCommand = new OleDbCommand("SELECT * FROM Trabajo WHERE IdTrabajo = @IdTrabajo", connection);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdTrabajo", trabajo.IdTrabajo);
+                dataAdapter.Fill(dataSet, "Trabajo");
+
+                dr = dataSet.Tables["Trabajo"].Rows[0];
+                dr.BeginEdit();
+                dr["IdPerOperativo"] = trabajo.IdOperativo;
+                dr.EndEdit();
+
+                dataAdapter.UpdateCommand = connection.CreateCommand();
+
+                dataAdapter.UpdateCommand.CommandText = "UPDATE Trabajo SET IdPerOperativo = @IdPerOperativo WHERE IdTrabajo = @IdTrabajo";
+
+                dataAdapter.UpdateCommand.Parameters.Add("@IdPerOperativo", OleDbType.Numeric, 0, "IdPerOperativo");
+                dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
+
+                dataAdapter.Update(dataSet, "Trabajo");
+
+                dataSet.Dispose();
+                dataAdapter.Dispose();
+
+                insertCompleted = true;
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "PadronApi");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "PadronApi");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return insertCompleted;
+        }
+
+
+        public static Category GetAppointmentCategory(int idPrioridad)
+        {
+            switch (idPrioridad)
+            {
+                case 1:
+                    return new Category("Miércoles siguiente", new SolidColorBrush(Colors.Gray));
+                case 2:
+                    return new Category("Urgente", new SolidColorBrush(Colors.Red));
+                case 3:
+                    return new Category("Octava Parte", new SolidColorBrush(Colors.Green));
+                case 4:
+                    return new Category("Subvínculo precedentes", new SolidColorBrush(Colors.Blue));
+                case 5:
+                    return new Category("Prioridad media", new SolidColorBrush(Colors.Purple));
+
+                default: return new Category("Miércoles siguiente", new SolidColorBrush(Colors.Gray));
+            }
+        }
+
+        private Category GetCompletedAppointmentCategory(int idPrioridad)
+        {
+            switch (idPrioridad)
+            {
+                case 0:
+                    return new Category("Fuera de Tiempo", new SolidColorBrush(Colors.LightPink));
+                case 1:
+                    return new Category("En Tiempo", new SolidColorBrush(Colors.LightGreen));
+
+                default: return new Category("Fuera de Tiempo", new SolidColorBrush(Colors.LightPink));
+            }
         }
 
     }

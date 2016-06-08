@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using ControlDeTiempos.Controles;
 using Telerik.Windows.Controls;
+using ControlDeTiempos.Graphs;
+using ControlDeTiempos.Dto;
 
 namespace ControlDeTiempos
 {
@@ -13,7 +15,10 @@ namespace ControlDeTiempos
     public partial class MainView
     {
         ScheduleView scheduleControl;
+        ScheduleViewEntregados scheduleControlEn;
 
+
+        int vista = 1; //1. Pendientes   2. Entregados  3. Listado
 
         public MainView()
         {
@@ -22,18 +27,39 @@ namespace ControlDeTiempos
 
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            EnableButtons();
+
             if (scheduleControl == null)
                 scheduleControl = new ScheduleView();
 
             CentralPanel.Children.Add(scheduleControl);
+
+            if (AccesoUsuario.IdTipoAbogado != 4)
+                GraphReports.Visibility = Visibility.Collapsed;
         }
 
         private void RBtnVistaCal_Click(object sender, RoutedEventArgs e)
         {
-            if (scheduleControl == null)
-                scheduleControl = new ScheduleView();
+            //CleanCentralPanel();
+            //if (scheduleControl == null)
+            //    scheduleControl = new ScheduleView();
 
-            CentralPanel.Children.Add(scheduleControl);
+            //CentralPanel.Children.Add(scheduleControl);
+            scheduleControl.CargaAsuntos(false);
+            vista = 1;
+            EnableButtons();
+        }
+
+        private void RBtnVistaCalOk_Click(object sender, RoutedEventArgs e)
+        {
+            //CleanCentralPanel();
+            //if (scheduleControlEn == null)
+            //    scheduleControlEn = new ScheduleViewEntregados();
+
+            //CentralPanel.Children.Add(scheduleControlEn);
+            scheduleControl.CargaAsuntos(true);
+            vista = 2;
+            EnableButtons();
         }
 
         private void RBtnVistaListado_Click(object sender, RoutedEventArgs e)
@@ -43,32 +69,33 @@ namespace ControlDeTiempos
 
         private void RBtnVerTrabajo_Click(object sender, RoutedEventArgs e)
         {
-
+            scheduleControl.VerInfo();
         }
 
         private void RBtnAgregarTrabajo_Click(object sender, RoutedEventArgs e)
         {
-
+            scheduleControl.Agregar();
         }
 
         private void RBtnEditarTrabajo_Click(object sender, RoutedEventArgs e)
         {
-
+            scheduleControl.Editar();
         }
 
         private void RBtnEntregar_Click(object sender, RoutedEventArgs e)
         {
-
+            scheduleControl.Entregar();
         }
 
         private void RBtnHojaControl_Click(object sender, RoutedEventArgs e)
         {
-
+            scheduleControl.HojaControl();
         }
 
         private void RBtnGraficas_Click(object sender, RoutedEventArgs e)
         {
-
+            ActiOper graph = new ActiOper();
+            graph.ShowDialog();
         }
 
         public void ShowInTaskbar(RadWindow control, string title)
@@ -85,6 +112,48 @@ namespace ControlDeTiempos
         {
             if (CentralPanel.Children.Count > 0)
                 CentralPanel.Children.RemoveAt(0);
+        }
+
+        private void EnableButtons()
+        {
+            if (AccesoUsuario.IdTipoAbogado == 1)
+            {
+                GrpAcciones.Visibility = Visibility.Visible;
+                GrpAsignaciones.Visibility = Visibility.Visible;
+            }
+            else if (AccesoUsuario.IdTipoAbogado == 4)
+            {
+                GrpAcciones.Visibility = Visibility.Visible;
+                GrpAsignaciones.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                GrpAcciones.Visibility = Visibility.Collapsed;
+                GrpAsignaciones.Visibility = Visibility.Visible;
+            }
+
+            if (vista == 2)
+            {
+                RBtnAgregarTrabajo.IsEnabled = false;
+                RBtnEditarTrabajo.IsEnabled = false;
+                RBtnEntregar.IsEnabled = false;
+            }
+            else
+            {
+                RBtnAgregarTrabajo.IsEnabled = true;
+                RBtnEditarTrabajo.IsEnabled = true;
+                RBtnEntregar.IsEnabled = true;
+            }
+        }
+
+        private void RBtnColores_Click(object sender, RoutedEventArgs e)
+        {
+            new Colores().ShowDialog();
+        }
+
+        private void RBtnAsignarOperativo_Click(object sender, RoutedEventArgs e)
+        {
+            scheduleControl.AsignaOperativo();
         }
     }
 }

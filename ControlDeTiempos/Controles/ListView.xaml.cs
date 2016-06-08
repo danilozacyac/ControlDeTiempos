@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ControlDeTiempos.Dto;
-using ControlDeTiempos.Model;
 
 namespace ControlDeTiempos.Controles
 {
@@ -23,8 +22,8 @@ namespace ControlDeTiempos.Controles
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            listaTrabajo = new TrabajoAsignadoModel().GetTrabajos();
-            GPorTrabajar.DataContext = listaTrabajo;
+            //listaTrabajo = new TrabajoAsignadoModel().GetTrabajos();
+            //GPorTrabajar.DataContext = listaTrabajo;
         }
 
         private void GPorTrabajar_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)

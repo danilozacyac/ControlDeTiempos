@@ -17,7 +17,7 @@
     <PublishUrl>\\ctedi-25086-mgo\ControlDeTiempos\Updates\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -28,7 +28,7 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -123,8 +123,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Colores.xaml.cs">
+      <DependentUpon>Colores.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controles\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ScheduleViewEntregados.xaml.cs">
+      <DependentUpon>ScheduleViewEntregados.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\ATiempoConverter.cs" />
     <Compile Include="Converter\EmisorConverter.cs" />
@@ -150,6 +156,9 @@
     <Compile Include="Formularios\AltaErrores.xaml.cs">
       <DependentUpon>AltaErrores.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\AsignarOperativo.xaml.cs">
+      <DependentUpon>AsignarOperativo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Graphs\ActiOper.xaml.cs">
       <DependentUpon>ActiOper.xaml</DependentUpon>
     </Compile>
@@ -164,13 +173,11 @@
     <Compile Include="Model\ActividadesModel.cs" />
     <Compile Include="Model\CalendarModel.cs" />
     <Compile Include="Model\ErrorModel.cs" />
+    <Compile Include="Model\PersonalModel.cs" />
     <Compile Include="Model\TesisModel.cs" />
     <Compile Include="Model\TrabajoAsignadoModel.cs" />
     <Compile Include="Model\VotosModel.cs" />
     <Compile Include="MyColumnNumber.cs" />
-    <Compile Include="Prueba.xaml.cs">
-      <DependentUpon>Prueba.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Reportes\WordReport.cs" />
     <Compile Include="Controles\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
@@ -190,7 +197,15 @@
     <Compile Include="VotosWin.xaml.cs">
       <DependentUpon>VotosWin.xaml</DependentUpon>
     </Compile>
+    <Page Include="Colores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controles\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ScheduleViewEntregados.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +214,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Formularios\AltaErrores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\AsignarOperativo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -226,10 +245,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Prueba.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controles\ScheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -277,7 +292,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\minus.png" />
@@ -364,6 +381,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1425495920_send-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\guiaColor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

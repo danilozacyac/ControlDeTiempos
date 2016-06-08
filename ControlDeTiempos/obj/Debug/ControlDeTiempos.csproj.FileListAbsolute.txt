@@ -103,8 +103,6 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.application
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AltaErrores.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AltaErrores.g.cs
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Prueba.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Prueba.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.ScheduleView.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.ScheduleView.xml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\MainView.baml
@@ -113,3 +111,9 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ListView.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ScheduleView.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ListView.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ScheduleViewEntregados.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Controles\ScheduleViewEntregados.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Colores.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Colores.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AsignarOperativo.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AsignarOperativo.g.cs

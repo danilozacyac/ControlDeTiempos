@@ -48,7 +48,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnGuardar_Click"
-                Content="Guardar"
+                Content="Aceptar"
                 IsDefault="True"
                 Style="{StaticResource BlueButton}" />
     </Grid>

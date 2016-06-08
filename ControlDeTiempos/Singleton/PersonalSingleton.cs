@@ -1,4 +1,5 @@
 ﻿using ControlDeTiempos.Dto;
+using ControlDeTiempos.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace ControlDeTiempos.Singleton
             get
             {
                 if (personal == null)
-                    personal = new PersonalCcst().GetPersonal();
+                    personal = new PersonalModel().GetPersonal();
 
                 return personal;
             }

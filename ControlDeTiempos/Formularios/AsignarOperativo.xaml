@@ -1,0 +1,44 @@
+﻿<telerik:RadWindow x:Class="ControlDeTiempos.Formularios.AsignarOperativo"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="317"
+                   Height="197"
+                   Header="Asignar personal operativo"
+                   Loaded="RadWindow_Loaded"
+                   ResizeMode="NoResize"
+                   WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Margin="23,35,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Asignar a:"
+               FontSize="14"
+               FontWeight="Bold" />
+        <telerik:RadComboBox x:Name="CbxPersonal"
+                             Width="250"
+                             Margin="23,69,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             DisplayMemberPath="NombreCompleto"
+                             ItemsSource="{Binding}"
+                             SelectedValuePath="IdPersonal" />
+        <Button x:Name="BtnCancelar"
+                Width="80"
+                Margin="193,108,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnCancelar_Click"
+                Content="Cancelar"
+                Style="{StaticResource BlueButton}" />
+        <Button x:Name="BtnAsignar"
+                Width="80"
+                Margin="108,108,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnAsignar_Click"
+                Content="Asignar"
+                Style="{StaticResource BlueButton}" />
+
+    </Grid>
+</telerik:RadWindow>

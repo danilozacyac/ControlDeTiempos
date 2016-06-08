@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,14 +11,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using Telerik.Windows.Controls;
+
 namespace ControlDeTiempos
 {
     /// <summary>
-    /// Interaction logic for Prueba.xaml
+    /// Interaction logic for Colores.xaml
     /// </summary>
-    public partial class Prueba : Window
+    public partial class Colores
     {
-        public Prueba()
+        public Colores()
         {
             InitializeComponent();
         }

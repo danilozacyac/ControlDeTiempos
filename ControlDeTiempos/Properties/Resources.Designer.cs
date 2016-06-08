@@ -133,6 +133,16 @@ namespace ControlDeTiempos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1425495920_send_user {
+            get {
+                object obj = ResourceManager.GetObject("_1425495920_send_user", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _1425495925_delete_notes {
             get {
                 object obj = ResourceManager.GetObject("_1425495925_delete_notes", resourceCulture);
@@ -206,6 +216,16 @@ namespace ControlDeTiempos.Properties {
         internal static System.Drawing.Bitmap good {
             get {
                 object obj = ResourceManager.GetObject("good", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap guiaColor {
+            get {
+                object obj = ResourceManager.GetObject("guiaColor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

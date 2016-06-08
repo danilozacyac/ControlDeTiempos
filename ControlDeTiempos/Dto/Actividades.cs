@@ -12,6 +12,10 @@ namespace ControlDeTiempos.Dto
         private int idActividad;
         private string actividad;
         private bool isSelected;
+        private int numHojas;
+        private int minutosMedia;
+
+        
 
         public int IdActividad
         {
@@ -49,6 +53,30 @@ namespace ControlDeTiempos.Dto
             }
         }
 
+        public int NumHojas
+        {
+            get
+            {
+                return this.numHojas;
+            }
+            set
+            {
+                this.numHojas = value;
+            }
+        }
+
+        public int MinutosMedia
+        {
+            get
+            {
+                return this.minutosMedia;
+            }
+            set
+            {
+                this.minutosMedia = value;
+            }
+        }
+
         private string Connection = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
 
@@ -73,7 +101,9 @@ namespace ControlDeTiempos.Dto
                     {
                         IdActividad = Convert.ToInt32(reader["IdActividad"]),
                         Actividad = reader["Descripcion"].ToString(),
-                        IsSelected = false
+                        IsSelected = false,
+                        NumHojas = Convert.ToInt32(reader["NumHojas"]),
+                        MinutosMedia = Convert.ToInt32(reader["TiempoMedioMin"])
                     };
                     listaActividades.Add(prioridad);
 

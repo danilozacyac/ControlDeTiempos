@@ -1,12 +1,10 @@
-﻿using ControlDeTiempos.Graphs;
-using ScjnUtilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.OleDb;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ControlDeTiempos.Graphs;
+using ScjnUtilities;
 
 namespace ControlDeTiempos.Model
 {

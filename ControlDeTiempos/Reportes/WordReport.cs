@@ -1,12 +1,10 @@
-﻿using ControlDeTiempos.Dto;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ControlDeTiempos.Dto;
 using ControlDeTiempos.Singleton;
 using Microsoft.Office.Interop.Word;
 using ScjnUtilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControlDeTiempos.Reportes
 {
@@ -57,7 +55,7 @@ namespace ControlDeTiempos.Reportes
                 oTable.Cell(1, 1).Range.Text = "Abogado responsable:";
                 oTable.Cell(1, 2).Range.Text = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdAbogado).NombreCompleto;
                 oTable.Cell(2, 1).Range.Text = "Personal operativo:";
-                oTable.Cell(2, 2).Range.Text = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdOperativo).NombreCompleto; ;
+                oTable.Cell(2, 2).Range.Text = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdOperativo).NombreCompleto; 
                 oTable.Cell(3, 1).Range.Text = "Tipo de Asunto:";
                 oTable.Cell(3, 2).Range.Text = TipoAsuntoSingleton.TipoAsunto.SingleOrDefault(n => n.IdTipoAsunto == trabajo.IdTipoAsunto).Descripcion;
                 oTable.Cell(4, 1).Range.Text = "Número de expediente:";

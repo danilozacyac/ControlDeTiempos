@@ -24,6 +24,14 @@ namespace ControlDeTiempos
         ObservableCollection<Actividades> listaActividades;
         ObservableCollection<TrabajoAsignado> listaTrabajos;
 
+
+        public VentanaCaptura(ref TrabajoAsignado trabajo)
+        {
+            InitializeComponent();
+            this.trabajo = trabajo;
+        }
+
+
         public VentanaCaptura(ObservableCollection<TrabajoAsignado> listaTrabajos)
         {
             InitializeComponent();
@@ -58,10 +66,21 @@ namespace ControlDeTiempos
             listaActividades = new Actividades().GetActividades();
             RLstActividades.DataContext = listaActividades;
 
+            trabajo.FechaInicio = DateTime.Now.AddMinutes(25);
+
+
             this.DataContext = trabajo;
+
+            if (!isUpdating)
+            {
+                LblFEntrega.Visibility = Visibility.Collapsed;
+                RdtpEntrega.Visibility = Visibility.Collapsed;
+            }
 
             if(trabajo.IdTrabajo != -1)
             LoadForUpdate();
+
+            
         }
 
         private void CheckBoxList_Checked(object sender, RoutedEventArgs e)
@@ -321,16 +340,22 @@ namespace ControlDeTiempos
                 }
             }
 
-
+            int tiempoEstimado = 0;
+            int paginasTotales = Convert.ToInt32(TxtTotalPags.Text);
+            
+            trabajo.IdActividad = 0;
             foreach (Actividades actividad in listaActividades)
                 if (actividad.IsSelected)
                 {
-                    trabajo.IdActividad += actividad.IdActividad;
                     if (actividad.IdActividad == 64 && actividad.IsSelected && String.IsNullOrWhiteSpace(trabajo.OtraActividad) && String.IsNullOrEmpty(trabajo.OtraActividad))
                     {
                         MessageBox.Show("Especifíca la \"Otra\" actividad a realizar");
                         return;
                     }
+
+                    trabajo.IdActividad += actividad.IdActividad;
+
+                    
                 }
 
             trabajo.TipoDocumento = tipoDocumento;
@@ -357,6 +382,7 @@ namespace ControlDeTiempos
                 {
                     if (new TrabajoAsignadoModel().UpdateTrabajo(trabajo))
                     {
+                        DialogResult = true;
                         this.Close();
                     }
                     else
@@ -368,7 +394,10 @@ namespace ControlDeTiempos
                 {
                     if (new TrabajoAsignadoModel().SetNewTrabajo(ref trabajo))
                     {
-                        listaTrabajos.Add(trabajo);
+                        if(listaTrabajos != null )
+                            listaTrabajos.Add(trabajo);
+
+                        DialogResult = true;
                         this.Close();
                     }
                     else
@@ -423,6 +452,27 @@ namespace ControlDeTiempos
             ErrorWin errorWin = new ErrorWin(trabajo);
             errorWin.Owner = this;
             errorWin.ShowDialog();
+        }
+
+        int tiempoEstimado;
+        private void RLstActividades_LostFocus(object sender, RoutedEventArgs e)
+        {
+            tiempoEstimado = 0;
+            foreach (Actividades actividad in listaActividades)
+            {
+                if (actividad.IsSelected && actividad.MinutosMedia > 0)
+                {
+                    tiempoEstimado += (Convert.ToInt32(TxtTotalPags.Text) * actividad.MinutosMedia) / actividad.NumHojas;
+                }
+            }
+
+            if (tiempoEstimado > 0)
+            {
+                //trabajo.FechaIndicada = trabajo.FechaInicio.Value.AddMinutes(tiempoEstimado);
+                //RdtpFechaIndicada.ToolTip = "Tiempo estimado de entrega sin tomar en cuenta actividades como el cotejo y observaciones";
+
+                TxtEstimado.Text = "** El tiempo estimado de trabajo es de " + (tiempoEstimado / 60) + " horas, contando las actividades con tiempo de trabajo medio";
+            }
         }
        
     }

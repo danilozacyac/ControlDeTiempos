@@ -60,10 +60,11 @@
                 </telerik:RadRibbonGroup>
                 <telerik:RadRibbonGroup Header="Graficas">
                     <telerik:RadRibbonButton x:Name="RBtnGraficas"
+                                             Click="RBtnGraficas_Click"
                                              Content="Reporte"
                                              IsEnabled="True"
                                              LargeImage="Resources/printer_blue.png"
-                                             Size="Large" Click="RBtnGraficas_Click" />
+                                             Size="Large" />
                 </telerik:RadRibbonGroup>
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>

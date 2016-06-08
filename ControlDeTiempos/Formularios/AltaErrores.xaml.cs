@@ -66,31 +66,38 @@ namespace ControlDeTiempos.Formularios
                 return;
             }
 
-            error.NombreArchivo = Path.GetFileName(error.NombreArchivo);
-
-
-            string nuevaRuta = String.Format("{0}{1}{2}", ConfigurationManager.AppSettings["ArchivosErrores"],Guid.NewGuid(), Path.GetExtension(TxtArchivo.Text));
-
-            bool fileCopy = FilesUtilities.CopyToLocalResource(TxtArchivo.Text, nuevaRuta);
-
-
-            if (fileCopy)
+            if (String.IsNullOrEmpty(TxtArchivo.Text))
             {
                 ErrorModel model = new ErrorModel();
                 bool complete = (!isUpdating) ? model.SetNewError(ref error) : model.UpdateError(error);
+            }
+            else
+            {
+                error.NombreArchivo = Path.GetFileName(error.NombreArchivo);
 
-                if (!complete)
+
+                string nuevaRuta = String.Format("{0}{1}{2}", ConfigurationManager.AppSettings["ArchivosErrores"], Guid.NewGuid(), Path.GetExtension(TxtArchivo.Text));
+
+                bool fileCopy = FilesUtilities.CopyToLocalResource(TxtArchivo.Text, nuevaRuta);
+
+
+                if (fileCopy)
                 {
-                    MessageBox.Show("No se pudo completar la operación, favor de volver a intentarlo", "Error de actualización", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                else
-                {
-                    DialogResult = true;
-                    this.Close();
+                    ErrorModel model = new ErrorModel();
+                    bool complete = (!isUpdating) ? model.SetNewError(ref error) : model.UpdateError(error);
+
+                    if (!complete)
+                    {
+                        MessageBox.Show("No se pudo completar la operación, favor de volver a intentarlo", "Error de actualización", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        DialogResult = true;
+                        this.Close();
+                    }
                 }
             }
-
         }
     }
 }
