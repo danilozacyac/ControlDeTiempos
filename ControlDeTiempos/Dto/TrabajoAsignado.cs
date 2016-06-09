@@ -119,7 +119,7 @@ namespace ControlDeTiempos.Dto
             }
         }
 
-
+        [Required(ErrorMessage="Debes ingresar la fecha y hora en que se le entregará al personal operativo")]
         public DateTime? FechaInicio
         {
             get
@@ -133,6 +133,7 @@ namespace ControlDeTiempos.Dto
             }
         }
 
+        [Required(ErrorMessage = "Debes ingresar la fecha y hora en que se sugiere que el personal operativo entregue el trabajo")]
         public DateTime? FechaIndicada
         {
             get

@@ -87,7 +87,7 @@ namespace ControlDeTiempos
         {
             CheckBox check = sender as CheckBox;
 
-            if (Convert.ToInt16(check.Tag) == 64)
+            if (Convert.ToInt16(check.Tag) == 128)
             {
                 TxtActOtro.Visibility = Visibility.Visible;
                 LblOtraActividad.Visibility = Visibility.Visible;
@@ -98,7 +98,7 @@ namespace ControlDeTiempos
         {
             CheckBox check = sender as CheckBox;
 
-            if (Convert.ToInt16(check.Tag) == 64)
+            if (Convert.ToInt16(check.Tag) == 128)
             {
                 TxtActOtro.Text = String.Empty;
                 TxtActOtro.Visibility = Visibility.Collapsed;
@@ -315,6 +315,8 @@ namespace ControlDeTiempos
         {
             int tipoDocumento = 0;
 
+            TxtPrioridades.Text = VerificationUtilities.TextBoxStringValidation(TxtPrioridades.Text);
+
             if (ChkTesis.IsChecked == true)
             {
                 tipoDocumento += Convert.ToInt32(ChkTesis.Tag);
@@ -347,7 +349,7 @@ namespace ControlDeTiempos
             foreach (Actividades actividad in listaActividades)
                 if (actividad.IsSelected)
                 {
-                    if (actividad.IdActividad == 64 && actividad.IsSelected && String.IsNullOrWhiteSpace(trabajo.OtraActividad) && String.IsNullOrEmpty(trabajo.OtraActividad))
+                    if (actividad.IdActividad == 128 && actividad.IsSelected && String.IsNullOrWhiteSpace(trabajo.OtraActividad) && String.IsNullOrEmpty(trabajo.OtraActividad))
                     {
                         MessageBox.Show("Especifíca la \"Otra\" actividad a realizar");
                         return;

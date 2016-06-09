@@ -52,7 +52,7 @@ namespace ControlDeTiempos.Controles
         {
             e.Cancel = true;
 
-            if (selectedTrabajo != null)
+            if (selectedAppointment != null && selectedTrabajo != null)
             {
                 VentanaCaptura vantana = new VentanaCaptura(selectedTrabajo, true);
                 vantana.Owner = this;

@@ -41,6 +41,7 @@ namespace ControlDeTiempos
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
+            TxtnumIdenti.Text = VerificationUtilities.TextBoxStringValidation(TxtnumIdenti.Text);
 
             var oVldResults = new List<ValidationResult>();
             var oVldContext = new ValidationContext(tesis, null, null);
