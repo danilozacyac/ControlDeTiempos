@@ -137,6 +137,12 @@ namespace ControlDeTiempos.Controles
                 return;
             }
 
+            if (selectedTrabajo.IdOperativo == -1 || selectedTrabajo.IdOperativo == 0)
+            {
+                MessageBox.Show("Para poder marcar este asunto como entregado primero debes asignar al personal que lo trabajó ");
+                return;
+            }
+
             new TrabajoAsignadoModel().UpdateFechaEntrega(selectedTrabajo);
             listaAppointment.Remove(selectedAppointment);
         }

@@ -22,7 +22,7 @@ namespace ControlDeTiempos.Formularios
 
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            CbxPersonal.DataContext = PersonalSingleton.Personal;
+            CbxPersonal.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3);
         }
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
