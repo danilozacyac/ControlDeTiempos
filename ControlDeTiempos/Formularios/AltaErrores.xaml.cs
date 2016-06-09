@@ -19,10 +19,11 @@ namespace ControlDeTiempos.Formularios
         ErrorOperativo error;
         bool isUpdating = false;
 
-        public AltaErrores()
+        public AltaErrores(int idTrabajo)
         {
             InitializeComponent();
             error = new ErrorOperativo();
+            error.IdTrabajo = idTrabajo;
 
         }
 
@@ -70,6 +71,7 @@ namespace ControlDeTiempos.Formularios
             {
                 ErrorModel model = new ErrorModel();
                 bool complete = (!isUpdating) ? model.SetNewError(ref error) : model.UpdateError(error);
+                this.Close();
             }
             else
             {

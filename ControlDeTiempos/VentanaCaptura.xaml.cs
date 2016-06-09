@@ -60,27 +60,25 @@ namespace ControlDeTiempos
             if (AccesoUsuario.IdTipoAbogado == 1)
                 CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3 && (n.Seccion == AccesoUsuario.IdSeccion || n.Seccion == 3));
             else
-                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3 );
+                CbxOperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3);
 
 
             listaActividades = new Actividades().GetActividades();
             RLstActividades.DataContext = listaActividades;
 
-            trabajo.FechaInicio = DateTime.Now.AddMinutes(25);
-
-
-            this.DataContext = trabajo;
-
             if (!isUpdating)
             {
                 LblFEntrega.Visibility = Visibility.Collapsed;
                 RdtpEntrega.Visibility = Visibility.Collapsed;
+                trabajo.FechaInicio = DateTime.Now.AddMinutes(15);
             }
 
-            if(trabajo.IdTrabajo != -1)
-            LoadForUpdate();
+            this.DataContext = trabajo;
 
-            
+            if (trabajo.IdTrabajo != -1)
+                LoadForUpdate();
+
+
         }
 
         private void CheckBoxList_Checked(object sender, RoutedEventArgs e)

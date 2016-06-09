@@ -27,7 +27,7 @@
                             SelectionChanged="RadListBox_SelectionChanged" />
         <Button x:Name="BtnAgregar"
                 Width="80"
-                Margin="10,213,0,0"
+                Margin="10,219,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnAgregar_Click"
@@ -35,7 +35,7 @@
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnModificar"
                 Width="80"
-                Margin="95,213,0,0"
+                Margin="95,219,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnModificar_Click"
@@ -43,7 +43,7 @@
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnEliminar"
                 Width="80"
-                Margin="180,213,0,0"
+                Margin="180,219,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnEliminar_Click"

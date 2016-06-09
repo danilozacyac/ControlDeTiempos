@@ -435,7 +435,7 @@ namespace ControlDeTiempos.Model
                 {
                     dr["FechaEntrega"] = trabajo.FechaEntrega;
                     dr["FechaEntregaInt"] = DateTimeUtilities.DateToInt(trabajo.FechaEntrega);
-                    dr["EnTiempo"] = (trabajo.FechaEntrega < trabajo.FechaIndicada) ? 1 : 0;
+                    dr["EnTiempo"] = (trabajo.FechaEntrega <= trabajo.FechaIndicada) ? 1 : 0;
                 }
 
                 dr["IdTipoAsunto"] = trabajo.IdTipoAsunto;

@@ -3,7 +3,7 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="350"
-                   Height="343"
+                   Height="353.394"
                    Header="Error"
                    Loaded="RadWindow_Loaded"
                    ResizeMode="NoResize"
@@ -60,7 +60,7 @@
                  TextWrapping="Wrap" />
         <Button x:Name="BtnSalir"
                 Width="80"
-                Margin="240,269,0,0"
+                Margin="240,277,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnSalir_Click"
@@ -69,7 +69,7 @@
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnGuardar"
                 Width="80"
-                Margin="155,269,0,0"
+                Margin="155,277,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnGuardar_Click"

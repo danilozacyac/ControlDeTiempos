@@ -44,7 +44,7 @@ namespace ControlDeTiempos
 
         private void BtnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            AltaErrores alta = new AltaErrores();
+            AltaErrores alta = new AltaErrores(trabajo.IdTrabajo);
             alta.Owner = this;
             alta.ShowDialog();
 
