@@ -52,14 +52,20 @@ namespace ControlDeTiempos.Model
 
                 }
 
-
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Legislación", Valor = legislacion });
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Estandarización", Valor = estandarizacion });
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Cotejo", Valor = cotejo });
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Correcciones", Valor = correcciones });
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Octava Parte", Valor = octava });
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Subvínculo Precedentes", Valor = subvinculo });
-                listadoActs.Add(new ActOperativos() { Etiqueta = "Otro", Valor = otros });
+                if (legislacion > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Legislación", Valor = legislacion });
+                if (estandarizacion > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Estandarización", Valor = estandarizacion });
+                if (cotejo > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Cotejo", Valor = cotejo });
+                if (correcciones > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Correcciones", Valor = correcciones });
+                if (octava > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Octava Parte", Valor = octava });
+                if (subvinculo > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Subvínculo Precedentes", Valor = subvinculo });
+                if (otros > 0)
+                    listadoActs.Add(new ActOperativos() { Etiqueta = "Otro", Valor = otros });
 
                 reader.Close();
                 cmd.Dispose();

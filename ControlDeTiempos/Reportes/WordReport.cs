@@ -10,14 +10,14 @@ namespace ControlDeTiempos.Reportes
 {
     public class WordReport
     {
-        Microsoft.Office.Interop.Word.Application oWord;
-        Microsoft.Office.Interop.Word.Document aDoc;
+        Application oWord;
+        Document aDoc;
         object oMissing = System.Reflection.Missing.Value;
         object oEndOfDoc = "\\endofdoc";
 
         public void HojaDeControl(TrabajoAsignado trabajo)
         {
-            oWord = new Microsoft.Office.Interop.Word.Application();
+            oWord = new Application();
             aDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
             aDoc.PageSetup.Orientation = WdOrientation.wdOrientPortrait;
 
@@ -25,8 +25,7 @@ namespace ControlDeTiempos.Reportes
             try
             {
                 //Insert a paragraph at the beginning of the document.
-                Microsoft.Office.Interop.Word.Paragraph oPara1;
-                oPara1 = aDoc.Content.Paragraphs.Add(ref oMissing);
+                Paragraph oPara1 = aDoc.Content.Paragraphs.Add(ref oMissing);
                 //oPara1.Range.Text = "SUPREMA CORTE DE JUSTICIA DE LA NACIÓN";
                 //oPara1.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
 
@@ -44,7 +43,7 @@ namespace ControlDeTiempos.Reportes
                 Table oTable = aDoc.Tables.Add(wrdRng, 13, 2, ref oMissing, ref oMissing);
                 oTable.Rows[1].HeadingFormat = -1; //Repite el encabezado de la tabla en cada hoja
                 oTable.Range.ParagraphFormat.SpaceAfter = 6;
-                oTable.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oTable.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
                 oTable.Range.Font.Size = 14;
                 oTable.Range.Font.Name = "Arial";
                 oTable.Range.Font.Bold = 0;
@@ -55,11 +54,11 @@ namespace ControlDeTiempos.Reportes
                 oTable.Cell(1, 1).Range.Text = "Abogado responsable:";
                 oTable.Cell(1, 2).Range.Text = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdAbogado).NombreCompleto;
                 oTable.Cell(2, 1).Range.Text = "Personal operativo:";
-                oTable.Cell(2, 2).Range.Text = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdOperativo).NombreCompleto; 
+                oTable.Cell(2, 2).Range.Text = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdOperativo).NombreCompleto;
                 oTable.Cell(3, 1).Range.Text = "Tipo de Asunto:";
                 oTable.Cell(3, 2).Range.Text = TipoAsuntoSingleton.TipoAsunto.SingleOrDefault(n => n.IdTipoAsunto == trabajo.IdTipoAsunto).Descripcion;
                 oTable.Cell(4, 1).Range.Text = "Número de expediente:";
-                oTable.Cell(4, 2).Range.Text = String.Format("{0}/{1}",trabajo.NumExpediente,trabajo.AnioExpediente);
+                oTable.Cell(4, 2).Range.Text = String.Format("{0}/{1}", trabajo.NumExpediente, trabajo.AnioExpediente);
                 oTable.Cell(5, 1).Range.Text = "Páginas:";
                 oTable.Cell(5, 2).Range.Text = trabajo.PaginasEjecutoria.ToString();
                 oTable.Cell(6, 1).Range.Text = "Trabajo";
@@ -73,7 +72,7 @@ namespace ControlDeTiempos.Reportes
                 oTable.Cell(10, 1).Range.Text = "Fecha y hora indicada:";
                 oTable.Cell(10, 2).Range.Text = trabajo.FechaIndicada.ToString();
                 oTable.Cell(11, 1).Range.Text = "Fecha y hora de entrega:";
-                oTable.Cell(11, 2).Range.Text = " ";
+                oTable.Cell(11, 2).Range.Text = trabajo.FechaEntrega.ToString(); 
                 oTable.Cell(12, 1).Range.Text = "\n\n ____________________";
                 oTable.Cell(12, 2).Range.Text = "\n\n ____________________";
                 oTable.Cell(13, 1).Range.Text = "Firma abogado";

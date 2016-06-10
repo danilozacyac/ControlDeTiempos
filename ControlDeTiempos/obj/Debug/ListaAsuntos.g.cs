@@ -36,6 +36,7 @@ using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.Animation;
 using Telerik.Windows.Controls.Carousel;
 using Telerik.Windows.Controls.ChartView;
+using Telerik.Windows.Controls.Charting;
 using Telerik.Windows.Controls.Docking;
 using Telerik.Windows.Controls.DragDrop;
 using Telerik.Windows.Controls.GridView;
