@@ -12,7 +12,17 @@ namespace ControlDeTiempos.Graphs
         private string periodo;
         private int total;
 
-        public NumeroAsuntos() { }
+        
+
+        public NumeroAsuntos()
+        {
+        }
+
+        public NumeroAsuntos(string periodo, int total)
+        {
+            this.periodo = periodo;
+            this.total = total;
+        }
 
         public NumeroAsuntos(string nombre, string periodo, int total)
         {

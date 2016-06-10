@@ -145,6 +145,8 @@ namespace ControlDeTiempos.Controles
 
             new TrabajoAsignadoModel().UpdateFechaEntrega(selectedTrabajo);
             listaAppointment.Remove(selectedAppointment);
+            selectedAppointment = null;
+            selectedTrabajo = null;
         }
 
         public void AsignaOperativo()

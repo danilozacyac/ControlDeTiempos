@@ -24,6 +24,12 @@ namespace ControlDeTiempos
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             StyleManager.ApplicationTheme = new Windows8Theme();
+
+            if (new AccesoUsuarioModel().IsValidUser())
+            {
+                new MainView().Show();
+                this.Close();
+            }
             
         }
 

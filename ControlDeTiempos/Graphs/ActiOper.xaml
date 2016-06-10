@@ -1,8 +1,9 @@
-﻿<telerik:RadWindow x:Class="ControlDeTiempos.Graphs.ActiOper"
+﻿<telerik:RadWindow
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:local="clr-namespace:ControlDeTiempos.Graphs"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:StatusEntrega="clr-namespace:ControlDeTiempos.Graphs.StatusEntrega" x:Class="ControlDeTiempos.Graphs.ActiOper"
                    Width="700"
                    Height="700"
                    Header="ActiOper"
@@ -12,29 +13,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <telerik:RadComboBox x:Name="Cbxoperativos"
-                             Width="211"
-                             Margin="19,20,0,0"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top"
-                             DisplayMemberPath="NombreCompleto"
-                             ItemsSource="{Binding}"
-                             SelectedValuePath="IdPersonal"
-                             SelectionChanged="Cbxoperativos_SelectionChanged" />
+			Width="211"
+			Margin="19,20,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			DisplayMemberPath="NombreCompleto"
+			ItemsSource="{Binding}"
+			SelectedValuePath="IdPersonal"
+			SelectionChanged="Cbxoperativos_SelectionChanged" />
         <telerik:RadPieChart x:Name="ActsOper"
-                             Grid.Row="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
-                             Palette="Windows8">
+			Grid.Row="1"
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+			Palette="Windows8">
             <telerik:PieSeries ItemsSource="{Binding}"
-                               ShowLabels="True"
-                               ValueBinding="Valor">
+				ShowLabels="True"
+				ValueBinding="Valor">
                 <telerik:PieSeries.LabelDefinitions>
                     <telerik:ChartSeriesLabelDefinition Binding="Etiqueta" />
                 </telerik:PieSeries.LabelDefinitions>
             </telerik:PieSeries>
         </telerik:RadPieChart>
+
+        <StatusEntrega:EnTiempo HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch"/>
 
     </Grid>
 </telerik:RadWindow>

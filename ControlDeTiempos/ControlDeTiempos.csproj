@@ -28,7 +28,7 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -81,6 +81,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -167,10 +168,16 @@
       <DependentUpon>ActiOper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\ActOperativos.cs" />
+    <Compile Include="Graphs\StatusEntrega\ChartSeriesTypeSwitch.cs" />
+    <Compile Include="Graphs\StatusEntrega\CombineModeToVisibilityConverter.cs" />
     <Compile Include="Graphs\NumAsuntoGraph.xaml.cs">
       <DependentUpon>NumAsuntoGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\NumeroAsuntos.cs" />
+    <Compile Include="Graphs\StatusEntrega\EnTiempo.xaml.cs">
+      <DependentUpon>EnTiempo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphs\StatusEntrega\EnTiempoViewModel.cs" />
     <Compile Include="ListaAsuntos.xaml.cs">
       <DependentUpon>ListaAsuntos.xaml</DependentUpon>
     </Compile>
@@ -235,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Graphs\NumAsuntoGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphs\StatusEntrega\EnTiempo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

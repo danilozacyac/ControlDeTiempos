@@ -47,11 +47,11 @@
         <telerik:RadChart x:Name="RchNumAsun"
                           Grid.Row="1"
                           HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch" >
+                          VerticalAlignment="Stretch">
             <telerik:RadChart.DefaultView>
                 <telerik:ChartDefaultView>
                     <telerik:ChartDefaultView.ChartTitle>
-                        <telerik:ChartTitle Content="Número de asuntos por abogado por mes" HorizontalAlignment="Center"/>
+                        <telerik:ChartTitle HorizontalAlignment="Center" Content="Número de asuntos por abogado por mes" />
                     </telerik:ChartDefaultView.ChartTitle>
                 </telerik:ChartDefaultView>
             </telerik:RadChart.DefaultView>

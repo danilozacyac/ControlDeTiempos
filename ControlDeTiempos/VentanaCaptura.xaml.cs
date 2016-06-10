@@ -68,6 +68,7 @@ namespace ControlDeTiempos
 
             if (!isUpdating)
             {
+                RdtpFechaInicio.SelectableDateStart = DateTime.Now;
                 LblFEntrega.Visibility = Visibility.Collapsed;
                 RdtpEntrega.Visibility = Visibility.Collapsed;
                 trabajo.FechaInicio = DateTime.Now.AddMinutes(15);
@@ -340,8 +341,7 @@ namespace ControlDeTiempos
                 }
             }
 
-            int tiempoEstimado = 0;
-            int paginasTotales = Convert.ToInt32(TxtTotalPags.Text);
+
             
             trabajo.IdActividad = 0;
             foreach (Actividades actividad in listaActividades)
@@ -449,8 +449,7 @@ namespace ControlDeTiempos
 
         private void BtnErrores_Click(object sender, RoutedEventArgs e)
         {
-            ErrorWin errorWin = new ErrorWin(trabajo);
-            errorWin.Owner = this;
+            ErrorWin errorWin = new ErrorWin(trabajo) { Owner = this };
             errorWin.ShowDialog();
         }
 
@@ -471,7 +470,7 @@ namespace ControlDeTiempos
                 //trabajo.FechaIndicada = trabajo.FechaInicio.Value.AddMinutes(tiempoEstimado);
                 //RdtpFechaIndicada.ToolTip = "Tiempo estimado de entrega sin tomar en cuenta actividades como el cotejo y observaciones";
 
-                TxtEstimado.Text = "** El tiempo estimado de trabajo es de " + (tiempoEstimado / 60) + " horas, contando las actividades con tiempo de trabajo medio";
+                TxtEstimado.Text = String.Format("** El tiempo estimado de trabajo es de {0} horas, contando las actividades con tiempo de trabajo medio", (tiempoEstimado / 60));
             }
         }
        
