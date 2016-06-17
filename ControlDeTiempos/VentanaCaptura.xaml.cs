@@ -72,6 +72,7 @@ namespace ControlDeTiempos
                 LblFEntrega.Visibility = Visibility.Collapsed;
                 RdtpEntrega.Visibility = Visibility.Collapsed;
                 trabajo.FechaInicio = DateTime.Now.AddMinutes(15);
+                RadScjn.IsChecked = true;
             }
 
             this.DataContext = trabajo;
@@ -472,6 +473,16 @@ namespace ControlDeTiempos
 
                 TxtEstimado.Text = String.Format("** El tiempo estimado de trabajo es de {0} horas, contando las actividades con tiempo de trabajo medio", (tiempoEstimado / 60));
             }
+        }
+
+        private void RadScjn_Checked(object sender, RoutedEventArgs e)
+        {
+            trabajo.IdInstancia = 1;
+        }
+
+        private void RadPleno_Checked(object sender, RoutedEventArgs e)
+        {
+            trabajo.IdInstancia = 2;
         }
        
     }

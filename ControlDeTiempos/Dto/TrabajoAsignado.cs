@@ -10,6 +10,7 @@ namespace ControlDeTiempos.Dto
     {
         private int idTrabajo = -1;
         private int idAbogado = -1;
+        private int idInstancia = 0;
         private int tipoDocumento =  -1;
         private int idActividad = 0;
         private string otraActividad;
@@ -29,7 +30,7 @@ namespace ControlDeTiempos.Dto
         private ObservableCollection<Tesis> tesis;
         private ObservableCollection<Voto> votos;
 
-        public int IdTrabajo
+       public int IdTrabajo
         {
             get
             {
@@ -53,6 +54,20 @@ namespace ControlDeTiempos.Dto
                 this.idAbogado = value;
             }
         }
+
+        public int IdInstancia
+        {
+            get
+            {
+                return this.idInstancia;
+            }
+            set
+            {
+                this.idInstancia = value;
+            }
+        }
+
+        
 
         [Range(1,128,ErrorMessage="Debes seleccionar al menos un tipo de documento para continuar")]
         public int TipoDocumento

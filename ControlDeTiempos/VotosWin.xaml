@@ -20,6 +20,8 @@
                              Margin="22,60,0,0"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
+                             IsFilteringEnabled="True"
+                             TextSearchMode="Contains"
                              DisplayMemberPath="NombreCompleto"
                              ItemsSource="{Binding}"
                              SelectedValuePath="IdEmisor" />

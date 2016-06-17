@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ControlDeTiempos.exe" size="1032128">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ControlDeTiempos.exe" size="1034688">
       <assemblyIdentity name="ControlDeTiempos" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4ZmRlycPVURhjxeTSfv8RcRXQ8Y8FLpZTLymnQDIzSg=</dsig:DigestValue>
+        <dsig:DigestValue>niAdK2Wkar9jxZFlDcNI5x4ZhT7e96U/Hyt9BnhTsRI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -258,13 +258,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ControlDeTiempos.exe.config" size="1698">
+  <file name="ControlDeTiempos.exe.config" size="1884">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>GYGXAZ26juC0FEIyTqvz9g9DM+UFMnLx1rec+7tREeU=</dsig:DigestValue>
+      <dsig:DigestValue>pSMhy6ys76Ta1GdtyHjScWky//+WtIlFG9DakfyeazQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="monitor.ico" size="102531">

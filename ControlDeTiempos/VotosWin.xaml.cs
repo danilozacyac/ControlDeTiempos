@@ -31,7 +31,9 @@ namespace ControlDeTiempos
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
             CbxTipoVoto.DataContext = TipoVotoSingleton.TipoVoto;
-            CbxEmisores.DataContext = EmisorSingleton.Emisor;
+            CbxEmisores.DataContext = from n in EmisorSingleton.Emisor
+                                      where n.IdSeccion == trabajo.IdInstancia
+                                      select n;
 
             this.DataContext = voto;
         }
