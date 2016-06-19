@@ -127,7 +127,7 @@ namespace ControlDeTiempos
         {
             selectedOperativo = CbxOperativos.SelectedItem as PersonalCcst;
 
-            if (selectedOperativo.IdPersonal == 40)
+            if (selectedOperativo.IdPersonal == 42)
             {
                 LblServicioSoc.Visibility = Visibility.Visible;
                 TxtServicio.Visibility = Visibility.Visible;
@@ -368,7 +368,7 @@ namespace ControlDeTiempos
             if (trabajo.IdOperativo != -1)
                 trabajo.IdQuienAsigna = AccesoUsuario.IdUsuario;
 
-            if (trabajo.IdOperativo == 40 && String.IsNullOrWhiteSpace(trabajo.ServicioSocial) && String.IsNullOrEmpty(trabajo.ServicioSocial))
+            if (trabajo.IdOperativo == 42 && String.IsNullOrWhiteSpace(trabajo.ServicioSocial) && String.IsNullOrEmpty(trabajo.ServicioSocial))
             {
                 MessageBox.Show("Ingresa el nombre del prestador de servicio social");
                 return;

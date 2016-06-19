@@ -405,7 +405,8 @@
                                    EndTime="18:00"
                                    SelectedValue="{Binding FechaInicio,
                                                            Mode=TwoWay}"
-                                   StartTime="7:00" />
+                                   StartTime="7:00"
+                                   TimeInterval="0:30" />
         <telerik:RadDateTimePicker x:Name="RdtpFechaIndicada"
                                    Grid.Row="6"
                                    Width="250"
@@ -415,7 +416,8 @@
                                    EndTime="18:00"
                                    SelectedValue="{Binding FechaIndicada,
                                                            Mode=TwoWay}"
-                                   StartTime="7:00" />
+                                   StartTime="7:00"
+                                   TimeInterval="0:30" />
         <Label x:Name="LblFEntrega"
                Grid.Row="7"
                Margin="41,10,0,0"

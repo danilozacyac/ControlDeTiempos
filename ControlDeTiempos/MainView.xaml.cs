@@ -23,6 +23,17 @@ namespace ControlDeTiempos
         public MainView()
         {
             InitializeComponent();
+            ShowInTaskbar(this, "Control de asignaciones");
+        }
+
+        public void ShowInTaskbar(RadWindow control, string title)
+        {
+            control.Show();
+            var window = control.ParentOfType<Window>();
+            window.ShowInTaskbar = true;
+            window.Title = title;
+            var uri = new Uri("pack://application:,,,/ControlDeTiempos;component/Resources/monitor.ico");
+            window.Icon = BitmapFrame.Create(uri);
         }
 
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
@@ -98,15 +109,7 @@ namespace ControlDeTiempos
             graph.ShowDialog();
         }
 
-        public void ShowInTaskbar(RadWindow control, string title)
-        {
-            control.Show();
-            var window = control.ParentOfType<Window>();
-            window.ShowInTaskbar = true;
-            window.Title = title;
-            var uri = new Uri("pack://application:,,,/ControlDeTiempos;component/Resources/monitor.ico");
-            window.Icon = BitmapFrame.Create(uri);
-        }
+        
 
         private void CleanCentralPanel()
         {
@@ -119,7 +122,7 @@ namespace ControlDeTiempos
             if (AccesoUsuario.IdTipoAbogado == 1)
             {
                 GrpAcciones.Visibility = Visibility.Visible;
-                GrpAsignaciones.Visibility = Visibility.Visible;
+                GrpAsignaciones.Visibility = Visibility.Collapsed;
             }
             else if (AccesoUsuario.IdTipoAbogado == 4)
             {

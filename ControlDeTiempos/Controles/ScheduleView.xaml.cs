@@ -90,6 +90,8 @@ namespace ControlDeTiempos.Controles
                     Category = CalendarModel.GetAppointmentCategory(trabajo.IdPrioridad),
                     UniqueId = trabajo.IdTrabajo.ToString()
                 };
+
+                listaAppointment.Add(app);
             }
         }
 

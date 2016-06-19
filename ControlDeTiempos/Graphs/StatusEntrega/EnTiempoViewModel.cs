@@ -7,7 +7,7 @@ using Telerik.Windows.Controls;
 
 namespace ControlDeTiempos.Graphs.StatusEntrega
 {
-    public class EnTiempoViewModel: ViewModelBase
+    public class EnTiempoViewModel : ViewModelBase
     {
         private List<NumeroAsuntos> collection1, collection2;
         private List<string> _chartTypes;
@@ -20,7 +20,7 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
         public EnTiempoViewModel()
         {
             this.InitializeChartTypes();
-            this.SelectedChartType = this.ChartTypes[0];
+            this.SelectedChartType = this.ChartTypes[5];
         }
 
         public List<string> ChartTypes
@@ -51,7 +51,8 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
             {
                 if (this.collection1 == null)
                 {
-                    this.collection1 = new GraficasModel().GetTotalQueTiempo(1,32,DateTime.Now.Month,DateTime.Now.Year);
+                    this.collection1 = new GraficasModel().GetTotalQueTiempo(1, 32, DateTime.Now.Month, DateTime.Now.Year);
+                    this.collection1.AddRange(new GraficasModel().GetTotalQueTiempo(1, 32, 7, DateTime.Now.Year));
                 }
                 return this.collection1;
             }
@@ -64,6 +65,7 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
                 if (this.collection2 == null)
                 {
                     this.collection2 = new GraficasModel().GetTotalQueTiempo(0, 32, DateTime.Now.Month, DateTime.Now.Year);
+                    this.collection2.AddRange(new GraficasModel().GetTotalQueTiempo(0, 32, 7, DateTime.Now.Year));
                 }
                 return this.collection2;
             }

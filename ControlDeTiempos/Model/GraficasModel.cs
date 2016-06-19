@@ -95,8 +95,8 @@ namespace ControlDeTiempos.Model
                 connection.Open();
 
                 cmd = new OleDbCommand(sqlQuery, connection);
-                cmd.Parameters.AddWithValue("@EnTiempo", mes);
-                cmd.Parameters.AddWithValue("@IdOperativo", year);
+                cmd.Parameters.AddWithValue("@EnTiempo", enTiempo);
+                cmd.Parameters.AddWithValue("@IdOperativo", idOperativo);
                 cmd.Parameters.AddWithValue("@mMes", mes);
                 cmd.Parameters.AddWithValue("@mYear", year);
                 reader = cmd.ExecuteReader();
