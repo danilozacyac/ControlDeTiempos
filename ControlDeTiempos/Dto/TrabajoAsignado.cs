@@ -55,6 +55,7 @@ namespace ControlDeTiempos.Dto
             }
         }
 
+        [Range(1,3,ErrorMessage="Selecciona la instancia a la que pertence este asunto")]
         public int IdInstancia
         {
             get

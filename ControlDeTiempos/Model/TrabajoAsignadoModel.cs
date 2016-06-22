@@ -64,7 +64,8 @@ namespace ControlDeTiempos.Model
                         AnioExpediente = Convert.ToInt32(reader["AnioExpediente"]),
                         IdTipoAsunto = Convert.ToInt32(reader["IdTipoAsunto"]),
                         Tesis = new TesisModel().GetTesisByTrabajo(Convert.ToInt32(reader["IdTrabajo"])),
-                        Votos = new VotosModel().GetVotosByTrabajo(Convert.ToInt32(reader["IdTrabajo"]))
+                        Votos = new VotosModel().GetVotosByTrabajo(Convert.ToInt32(reader["IdTrabajo"])),
+                        IdInstancia = Convert.ToInt32(reader["IdInstancia"])
                     };
                     listaTrabajos.Add(trabajo);
 
@@ -130,7 +131,8 @@ namespace ControlDeTiempos.Model
                         AnioExpediente = Convert.ToInt32(reader["AnioExpediente"]),
                         IdTipoAsunto = Convert.ToInt32(reader["IdTipoAsunto"]),
                         Tesis = new TesisModel().GetTesisByTrabajo(Convert.ToInt32(reader["IdTrabajo"])),
-                        Votos = new VotosModel().GetVotosByTrabajo(Convert.ToInt32(reader["IdTrabajo"]))
+                        Votos = new VotosModel().GetVotosByTrabajo(Convert.ToInt32(reader["IdTrabajo"])),
+                        IdInstancia = Convert.ToInt32(reader["IdInstancia"])
                     };
 
                 }
@@ -319,12 +321,13 @@ namespace ControlDeTiempos.Model
                     dr["IdTipoAsunto"] = trabajo.IdTipoAsunto;
                     dr["NumExpediente"] = trabajo.NumExpediente;
                     dr["AnioExpediente"] = trabajo.AnioExpediente;
+                    dr["IdInstancia"] = trabajo.IdInstancia;
 
                     dataSet.Tables["Trabajo"].Rows.Add(dr);
 
                     dataAdapter.InsertCommand = connection.CreateCommand();
-                    dataAdapter.InsertCommand.CommandText = "INSERT INTO Trabajo(IdTrabajo,IdAbogado,TipoDocumento,IdActividad,OtraActividad,Particularidades,IdPrioridad,FechaInicio,FechaInicioInt,FechaIndicada,FechaIndicadaInt,IdPerOperativo,ServicioSocial,IdQuienAsigna,PaginasEjecutoria,IdTipoAsunto,NumExpediente,AnioExpediente)" +
-                                                            " VALUES(@IdTrabajo,@IdAbogado,@TipoDocumento,@IdActividad,@OtraActividad,@Particularidades,@IdPrioridad,@FechaInicio,@FechaInicioInt,@FechaIndicada,@FechaIndicadaInt,@IdPerOperativo,@ServicioSocial,@IdQuienAsigna,@PaginasEjecutoria,@IdTipoAsunto,@NumExpediente,@AnioExpediente)";
+                    dataAdapter.InsertCommand.CommandText = "INSERT INTO Trabajo(IdTrabajo,IdAbogado,TipoDocumento,IdActividad,OtraActividad,Particularidades,IdPrioridad,FechaInicio,FechaInicioInt,FechaIndicada,FechaIndicadaInt,IdPerOperativo,ServicioSocial,IdQuienAsigna,PaginasEjecutoria,IdTipoAsunto,NumExpediente,AnioExpediente,IdInstancia)" +
+                                                            " VALUES(@IdTrabajo,@IdAbogado,@TipoDocumento,@IdActividad,@OtraActividad,@Particularidades,@IdPrioridad,@FechaInicio,@FechaInicioInt,@FechaIndicada,@FechaIndicadaInt,@IdPerOperativo,@ServicioSocial,@IdQuienAsigna,@PaginasEjecutoria,@IdTipoAsunto,@NumExpediente,@AnioExpediente,@IdInstancia)";
 
                     dataAdapter.InsertCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
                     dataAdapter.InsertCommand.Parameters.Add("@IdAbogado", OleDbType.Numeric, 0, "IdAbogado");
@@ -344,6 +347,7 @@ namespace ControlDeTiempos.Model
                     dataAdapter.InsertCommand.Parameters.Add("@IdTipoAsunto", OleDbType.Numeric, 0, "IdTipoAsunto");
                     dataAdapter.InsertCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
                     dataAdapter.InsertCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
+                    dataAdapter.InsertCommand.Parameters.Add("@IdInstancia", OleDbType.Numeric, 0, "IdInstancia");
 
                     dataAdapter.Update(dataSet, "Trabajo");
 
@@ -441,6 +445,7 @@ namespace ControlDeTiempos.Model
                 dr["IdTipoAsunto"] = trabajo.IdTipoAsunto;
                 dr["NumExpediente"] = trabajo.NumExpediente;
                 dr["AnioExpediente"] = trabajo.AnioExpediente;
+                dr["IdInstancia"] = trabajo.IdInstancia;
                 dr.EndEdit();
 
                 dataAdapter.UpdateCommand = connection.CreateCommand();
@@ -450,7 +455,8 @@ namespace ControlDeTiempos.Model
                     "IdPrioridad = @IdPrioridad, FechaInicio = @FechaInicio, FechaInicioInt = @FechaInicioInt," +
                     "FechaIndicada = @FechaIndicada, FechaIndicadaInt = @FechaIndicadaInt,IdPerOperativo = @IdPerOperativo," +
                     "ServicioSocial = @ServicioSocial,IdQuienAsigna = @IdQuienAsigna, PaginasEjecutoria = @PaginasEjecutoria, " +
-                    "FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt,EnTiempo = @EnTiempo, IdTipoAsunto = @IdTipoAsunto,NumExpediente = @NumExpediente,AnioExpediente = @AnioExpediente " +
+                    "FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt,EnTiempo = @EnTiempo, IdTipoAsunto = @IdTipoAsunto," +
+                    "NumExpediente = @NumExpediente,AnioExpediente = @AnioExpediente, IdInstancia = @IdInstancia " +
                     " WHERE IdTrabajo = @IdTrabajo";
 
                 dataAdapter.UpdateCommand.Parameters.Add("@IdAbogado", OleDbType.Numeric, 0, "IdAbogado");
@@ -473,6 +479,7 @@ namespace ControlDeTiempos.Model
                 dataAdapter.UpdateCommand.Parameters.Add("@IdTipoAsunto", OleDbType.Numeric, 0, "IdTipoAsunto");
                 dataAdapter.UpdateCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
                 dataAdapter.UpdateCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
+                dataAdapter.UpdateCommand.Parameters.Add("@IdInstancia", OleDbType.Numeric, 0, "IdInstancia");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
 
                 dataAdapter.Update(dataSet, "Trabajo");

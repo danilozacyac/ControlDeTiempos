@@ -134,7 +134,7 @@ namespace ControlDeTiempos.Dto
         {
             ObservableCollection<Emisor> catalogoTitulares = new ObservableCollection<Emisor>();
 
-            string sqlQuery = "SELECT * FROM C_Titular WHERE IdEstatus <> 5 AND IdTitulo = 2 Or IdTitulo = 1 ORDER BY Apellidos";
+            string sqlQuery = "SELECT * FROM C_Titular WHERE IdEstatus <> 5 AND IdTitulo = 2 Or IdTitulo = 1  ORDER BY Apellidos";
             
 
             SqlConnection connection = new SqlConnection(connectionString);

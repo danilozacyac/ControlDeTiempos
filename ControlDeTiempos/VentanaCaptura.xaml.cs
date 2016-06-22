@@ -379,6 +379,8 @@ namespace ControlDeTiempos
 
             if (Validator.TryValidateObject(trabajo, oVldContext, oVldResults, true))
             {
+                
+
                 if (isUpdating)
                 {
                     if (new TrabajoAsignadoModel().UpdateTrabajo(trabajo))
@@ -417,6 +419,10 @@ namespace ControlDeTiempos
 
         public void LoadForUpdate()
         {
+            if (trabajo.IdInstancia == 1)
+                RadScjn.IsChecked = true;
+            else if (trabajo.IdInstancia == 2)
+                RadPleno.IsChecked = true;
 
             CbxAbogResp.SelectedValue = trabajo.IdAbogado;
             CbxTipoAsunto.SelectedValue = trabajo.IdTipoAsunto;

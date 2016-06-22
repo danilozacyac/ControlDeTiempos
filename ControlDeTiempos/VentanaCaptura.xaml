@@ -463,6 +463,13 @@
                 Click="BtnGuardar_Click"
                 Content="Guardar"
                 Style="{StaticResource BlueButton}" />
+        <Label
+        	Margin="546,13,0,0"
+        	HorizontalAlignment="Left"
+        	VerticalAlignment="Top"
+        	Content="Instancia:"
+        	FontSize="14"
+        	FontWeight="Bold" />
 
     </Grid>
 </telerik:RadWindow>

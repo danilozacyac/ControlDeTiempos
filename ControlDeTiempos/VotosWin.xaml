@@ -20,11 +20,12 @@
                              Margin="22,60,0,0"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             IsFilteringEnabled="True"
-                             TextSearchMode="Contains"
                              DisplayMemberPath="NombreCompleto"
+                             IsEditable="True"
+                             IsFilteringEnabled="True"
                              ItemsSource="{Binding}"
-                             SelectedValuePath="IdEmisor" />
+                             SelectedValuePath="IdEmisor"
+                             TextSearchMode="Contains" />
         <Label Margin="22,106,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
