@@ -3,7 +3,7 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="317"
-                   Height="197"
+                   Height="381"
                    Header="Asignar personal operativo"
                    Loaded="RadWindow_Loaded"
                    ResizeMode="NoResize"
@@ -25,7 +25,7 @@
                              SelectedValuePath="IdPersonal" />
         <Button x:Name="BtnCancelar"
                 Width="80"
-                Margin="193,108,0,0"
+                Margin="193,299,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnCancelar_Click"
@@ -33,12 +33,14 @@
                 Style="{StaticResource BlueButton}" />
         <Button x:Name="BtnAsignar"
                 Width="80"
-                Margin="108,108,0,0"
+                Margin="108,299,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="BtnAsignar_Click"
                 Content="Asignar"
                 Style="{StaticResource BlueButton}" />
+        <TextBlock HorizontalAlignment="Left" Foreground="Red" Margin="23,106,0,0" TextWrapping="Wrap" Text="**Se sugiere considerar el siguiente orden para la asignación del asunto" VerticalAlignment="Top" Width="250"/>
+        <ListBox x:Name="LstSugerido" ItemsSource="{Binding}" DisplayMemberPath="NombreCompleto" HorizontalAlignment="Left" Height="144" Margin="23,150,0,0" VerticalAlignment="Top" Width="250"/>
 
     </Grid>
 </telerik:RadWindow>

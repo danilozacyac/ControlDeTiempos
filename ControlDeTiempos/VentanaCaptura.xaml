@@ -60,6 +60,12 @@
                                 Checked="RadPleno_Checked"
                                 Content="  Pleno de Circuito  "
                                 IsChecked="False" />
+        <Label Margin="546,13,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Instancia:"
+               FontSize="14"
+               FontWeight="Bold" />
         <CheckBox x:Name="ChkTesis"
                   Grid.Row="1"
                   Margin="55,61,0,0"
@@ -463,13 +469,6 @@
                 Click="BtnGuardar_Click"
                 Content="Guardar"
                 Style="{StaticResource BlueButton}" />
-        <Label
-        	Margin="546,13,0,0"
-        	HorizontalAlignment="Left"
-        	VerticalAlignment="Top"
-        	Content="Instancia:"
-        	FontSize="14"
-        	FontWeight="Bold" />
 
     </Grid>
 </telerik:RadWindow>

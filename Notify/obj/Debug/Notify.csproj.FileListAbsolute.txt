@@ -1,0 +1,7 @@
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\obj\Debug\Notify.csprojResolveAssemblyReference.cache
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\obj\Debug\Notify.Properties.Resources.resources
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\obj\Debug\Notify.csproj.GenerateResource.Cache
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\bin\Debug\Notify.dll
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\bin\Debug\Notify.pdb
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\obj\Debug\Notify.dll
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\Notify\obj\Debug\Notify.pdb

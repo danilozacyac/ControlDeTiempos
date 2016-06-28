@@ -1,7 +1,9 @@
-﻿using ControlDeTiempos.Model;
+﻿using ControlDeTiempos.Dto;
+using ControlDeTiempos.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Telerik.Charting;
 using Telerik.Windows.Controls;
 
@@ -17,10 +19,18 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
         private bool _showLabels = true;
         private string _selectedChartType;
 
+        private List<PersonalCcst> personal;
+        private PersonalCcst selectedPersonal;
+
+
+        private List<ActOperativos> distribucionActividades;
+
         public EnTiempoViewModel()
         {
             this.InitializeChartTypes();
             this.SelectedChartType = this.ChartTypes[5];
+            this.InitializePersonal();
+            this.SelectedPersonal = this.personal[0];
         }
 
         public List<string> ChartTypes
@@ -45,6 +55,38 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
             }
         }
 
+        public List<PersonalCcst> Personal
+        {
+            get { return this.personal; }
+        }
+
+        public PersonalCcst SelectedPersonal
+        {
+            get
+            {
+                return this.selectedPersonal;
+            }
+            set
+            {
+                if (selectedPersonal == value)
+                    return;
+
+                this.selectedPersonal = value;
+                this.OnPropertyChanged("SelectedPersonal");
+                this.OnSelectedPersonalChanged();
+            }
+        }
+
+        public List<ActOperativos> DistribucionActividades
+        {
+            get { return this.distribucionActividades; }
+            set
+            {
+                this.distribucionActividades = value;
+                this.OnPropertyChanged("DistribucionActividades");
+            }
+        }
+
         public List<NumeroAsuntos> Collection1
         {
             get
@@ -52,7 +94,7 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
                 if (this.collection1 == null)
                 {
                     this.collection1 = new GraficasModel().GetTotalQueTiempo(1, 32, DateTime.Now.Month, DateTime.Now.Year);
-                    this.collection1.AddRange(new GraficasModel().GetTotalQueTiempo(1, 32, 7, DateTime.Now.Year));
+                    //this.collection1.AddRange(new GraficasModel().GetTotalQueTiempo(1, 32, DateTime.Now.Month, DateTime.Now.Year));
                 }
                 return this.collection1;
             }
@@ -65,7 +107,7 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
                 if (this.collection2 == null)
                 {
                     this.collection2 = new GraficasModel().GetTotalQueTiempo(0, 32, DateTime.Now.Month, DateTime.Now.Year);
-                    this.collection2.AddRange(new GraficasModel().GetTotalQueTiempo(0, 32, 7, DateTime.Now.Year));
+                    //this.collection2.AddRange(new GraficasModel().GetTotalQueTiempo(0, 32, DateTime.Now.Month, DateTime.Now.Year));
                 }
                 return this.collection2;
             }
@@ -169,6 +211,20 @@ namespace ControlDeTiempos.Graphs.StatusEntrega
             {
                 this.SelectedCombineMode = this.CombineModes[0];
             }
+        }
+
+        private void OnSelectedPersonalChanged()
+        {
+            //MessageBox.Show(String.Format("{0}. {1}", selectedPersonal.IdPersonal, selectedPersonal.NombreCompleto));
+
+            this.DistribucionActividades = new List<ActOperativos>();
+            this.DistribucionActividades = new ActividadesModel().GetActividadesByOperativo(selectedPersonal.IdPersonal);
+        }
+
+        private void InitializePersonal()
+        {
+            this.personal = new List<PersonalCcst>();
+            this.personal = new PersonalModel().GetPersonal(3).ToList();
         }
     }
 }

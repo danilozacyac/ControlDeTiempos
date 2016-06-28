@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlDeTiempos", "ControlDeTiempos\ControlDeTiempos.csproj", "{019CBFA8-2FF0-4C74-93B8-1AC8CCC164D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notify", "Notify\Notify.csproj", "{6601232B-89CB-40AE-AC90-7EC655AD87AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{019CBFA8-2FF0-4C74-93B8-1AC8CCC164D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019CBFA8-2FF0-4C74-93B8-1AC8CCC164D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019CBFA8-2FF0-4C74-93B8-1AC8CCC164D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6601232B-89CB-40AE-AC90-7EC655AD87AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6601232B-89CB-40AE-AC90-7EC655AD87AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6601232B-89CB-40AE-AC90-7EC655AD87AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6601232B-89CB-40AE-AC90-7EC655AD87AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

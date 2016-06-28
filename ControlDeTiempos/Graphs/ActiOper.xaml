@@ -38,9 +38,9 @@
             </telerik:PieSeries>
         </telerik:RadPieChart>
 
-        <StatusEntrega:EnTiempo Grid.Row="2"
+        <!--<StatusEntrega:EnTiempo Grid.Row="2"
                                 HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
+                                VerticalAlignment="Stretch" />-->
 
     </Grid>
 </telerik:RadWindow>
