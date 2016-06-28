@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="ControlDeTiempos.Notificaciones.NotificationBalloon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Notify="clr-namespace:Notify;assembly=Notify"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="me"
+             Width="550"
+             Height="200"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="grid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="0.95" />
+                <SplineDoubleKeyFrame KeyTime="00:00:03" Value="0.95" />
+                <!--  <SplineDoubleKeyFrame KeyTime="00:00:05" Value="0"/>  -->
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HighlightCloseButton">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="imgClose"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.4" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="FadeCloseButton">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="imgClose"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.4" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="FadeBack">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="grid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="FadeOut" Completed="OnFadeOutCompleted">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                           Storyboard.TargetName="grid"
+                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.2" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Notify:TaskbarIcon.BalloonShowing">
+            <BeginStoryboard x:Name="FadeIn_BeginStoryboard" Storyboard="{StaticResource FadeIn}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="imgClose">
+            <BeginStoryboard x:Name="HighlightCloseButton_BeginStoryboard" Storyboard="{StaticResource HighlightCloseButton}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="imgClose">
+            <BeginStoryboard x:Name="FadeCloseButton_BeginStoryboard" Storyboard="{StaticResource FadeCloseButton}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+            <StopStoryboard BeginStoryboardName="FadeIn_BeginStoryboard" />
+            <BeginStoryboard x:Name="FadeBack_BeginStoryboard1" Storyboard="{StaticResource FadeBack}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Notify:TaskbarIcon.BalloonClosing">
+            <BeginStoryboard x:Name="FadeOut_BeginStoryboard" Storyboard="{StaticResource FadeOut}" />
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid x:Name="grid" MouseEnter="GridMouseEnter">
+        <Border Margin="5,5,5,5"
+                HorizontalAlignment="Stretch"
+                BorderBrush="#1ba1e2"
+                BorderThickness="1,1,1,1">
+            <Border.Effect>
+                <DropShadowEffect Color="#FF747474" />
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF4B4B4B" />
+                    <GradientStop Offset="1" Color="#FF8F8F8F" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Image Width="128"
+               Height="128"
+               Margin="15,30,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Source="/ControlDeTiempos;component/Resources/clock_128.png"
+               Stretch="Fill" />
+
+        <Ellipse x:Name="RedCircle"
+                 Width="50"
+                 Height="50"
+                 Margin="180,50,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Fill="Red" />
+        <Ellipse x:Name="YellowCircle"
+                 Width="50"
+                 Height="50"
+                 Margin="180,120,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Fill="Yellow" />
+
+        <TextBlock Name="TxtInfo"
+                   Margin="250,55,10,0"
+                   VerticalAlignment="Top"
+                   Foreground="#FFECAD25"
+                   TextWrapping="Wrap"><Run Language="de-ch" Text="This is a user control. The animation uses the attached " /><Run FontStyle="Italic"
+                 FontWeight="Bold"
+                 Language="de-ch"
+                 Text="BalloonShowing " /><Run Language="de-ch" Text="event." />
+        </TextBlock>
+
+        <TextBlock Name="TxtPorVencer"
+                   Margin="250,125,10,0"
+                   VerticalAlignment="Top"
+                   Foreground="#FFECAD25"
+                   TextWrapping="Wrap"><Run Language="de-ch" Text="This is a user control. The animation uses the attached " /><Run FontStyle="Italic"
+                 FontWeight="Bold"
+                 Language="de-ch"
+                 Text="BalloonShowing " /><Run Language="de-ch" Text="event." />
+        </TextBlock>
+
+        <Path Height="1"
+              Margin="180,38.2,10,0"
+              VerticalAlignment="Top"
+              Data="M26,107 L220.04123,107"
+              Fill="#1ba1e2"
+              SnapsToDevicePixels="True"
+              Stretch="Fill">
+            <Path.Stroke>
+                <LinearGradientBrush StartPoint="0.005,0.5" EndPoint="0.973,0.5">
+                    <GradientStop Offset="1" Color="#00ECAD25" />
+                    <GradientStop Offset="0" Color="#1ba1e2" />
+                </LinearGradientBrush>
+            </Path.Stroke>
+        </Path>
+        <TextBlock Height="23.2"
+                   Margin="180,10,10,0"
+                   VerticalAlignment="Top"
+                   FontWeight="Bold"
+                   Foreground="#FFECAD25"
+                   Text="{Binding Path=BalloonText,
+                                  ElementName=me,
+                                  Mode=Default}"
+                   TextWrapping="Wrap" />
+        <Image x:Name="imgClose"
+               Width="16"
+               Height="16"
+               Margin="0,10,10,0"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top"
+               MouseLeftButtonDown="ImgCloseMouseLeftButtonDown"
+               Opacity="0.4"
+               Source="/ControlDeTiempos;component/Resources/Close.png"
+               Stretch="Fill"
+               ToolTip="Close Balloon" />
+
+    </Grid>
+</UserControl>

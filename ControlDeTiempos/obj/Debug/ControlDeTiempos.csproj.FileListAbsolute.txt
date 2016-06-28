@@ -152,3 +152,7 @@ C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graph
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\StatusEntrega\EnTiempo.baml
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.exe.manifest
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.application
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Notify.dll
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Notify.pdb
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Notificaciones\NotificationBalloon.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Notificaciones\NotificationBalloon.g.cs

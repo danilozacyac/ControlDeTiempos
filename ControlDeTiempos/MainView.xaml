@@ -1,6 +1,7 @@
 ﻿<telerik:RadWindow x:Class="ControlDeTiempos.MainView"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:Notify="clr-namespace:Notify;assembly=Notify"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="900"
                    Height="500"
@@ -105,12 +106,14 @@
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
 
+        <Notify:TaskbarIcon x:Name="MyNotifyIcon"
+                            IconSource="monitor.ico"
+                            ToolTipText="Waiting for processor time" />
+
         <DockPanel x:Name="CentralPanel"
                    Grid.Row="1"
                    HorizontalAlignment="Stretch"
                    VerticalAlignment="Stretch"
                    LastChildFill="True" />
-
-
     </Grid>
 </telerik:RadWindow>

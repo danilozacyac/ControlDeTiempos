@@ -1,11 +1,17 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using ControlDeTiempos.Controles;
-using Telerik.Windows.Controls;
-using ControlDeTiempos.Graphs;
 using ControlDeTiempos.Dto;
+using ControlDeTiempos.Graphs;
+using ControlDeTiempos.Notificaciones;
+using Telerik.Windows.Controls;
+using ControlDeTiempos.Model;
+using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace ControlDeTiempos
 {
@@ -15,7 +21,6 @@ namespace ControlDeTiempos
     public partial class MainView
     {
         ScheduleView scheduleControl;
-        ScheduleViewEntregados scheduleControlEn;
 
 
         int vista = 1; //1. Pendientes   2. Entregados  3. Listado
@@ -47,6 +52,13 @@ namespace ControlDeTiempos
 
             if (AccesoUsuario.IdTipoAbogado != 4)
                 GraphReports.Visibility = Visibility.Collapsed;
+
+            //NotificationBalloon ballon = new NotificationBalloon();
+            //ballon.BalloonText = "Estoy probando";
+            //ballon.TxtInfo.Text = "Este mensaje es de prueba";
+
+            //MyNotifyIcon.ShowCustomBalloon(ballon, PopupAnimation.Slide, 10000);
+            DoBackgroundWork();
         }
 
         private void RBtnVistaCal_Click(object sender, RoutedEventArgs e)
@@ -158,5 +170,98 @@ namespace ControlDeTiempos
         {
             scheduleControl.AsignaOperativo();
         }
+
+
+        #region BackgroundWorker
+
+
+        /// <summary>
+        /// Creates a BackgroundWorker class to do work
+        /// on a background thread.
+        /// </summary>
+        private void DoBackgroundWork()
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+
+            // Tell the worker to report progress.
+            worker.WorkerReportsProgress = true;
+
+            worker.ProgressChanged += ProgressChanged;
+            worker.DoWork += DoWork;
+            worker.RunWorkerCompleted += WorkerCompleted;
+            worker.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// The work for the BackgroundWorker to perform.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        void DoWork(object sender, DoWorkEventArgs e)
+        {
+            ObservableCollection<TrabajoAsignado> listaTrabajos = new TrabajoAsignadoModel().GetTrabajos(0);
+
+            var tiempoExcedido = from n in listaTrabajos
+                                 where n.FechaIndicada < DateTime.Now
+                                 select n;
+            trabajosTiempoExcedido = tiempoExcedido.Count();
+
+            var porVencer = from n in listaTrabajos
+                            where (n.FechaIndicada.Value.Subtract(DateTime.Now)).Minutes < 120 && (n.FechaIndicada.Value.Subtract(DateTime.Now)).Minutes > 0
+                            select n;
+            trabajosPorVencer = porVencer.Count();
+
+        }
+
+        int trabajosTiempoExcedido = 0;
+        int trabajosPorVencer = 0;
+
+        /// <summary>
+        /// Occurs when the BackgroundWorker reports a progress.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //pbLoad.Value = e.ProgressPercentage;
+        }
+
+        /// <summary>
+        /// Occurs when the BackgroundWorker has completed its work.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (trabajosTiempoExcedido > 0 || trabajosPorVencer > 0)
+            {
+
+                NotificationBalloon balloon = new NotificationBalloon() { BalloonText = "Atención" };
+
+                if (trabajosTiempoExcedido > 0)
+                    balloon.TxtInfo.Text = String.Format("Tienes {0} trabajos pendientes cuyo tiempo de indicado de entrega ya fue excedido", trabajosTiempoExcedido);
+                else
+                {
+                    balloon.TxtInfo.Visibility = Visibility.Collapsed;
+                    balloon.RedCircle.Visibility = Visibility.Collapsed;
+                }
+
+                if (trabajosPorVencer > 0)
+                    balloon.TxtPorVencer.Text = String.Format("Tienes {0} trabajos pendientes cuyo tiempo de indicado de entrega esta por vencer", trabajosPorVencer);
+                else
+                {
+                    balloon.TxtPorVencer.Visibility = Visibility.Collapsed;
+                    balloon.YellowCircle.Visibility = Visibility.Collapsed;
+                }
+
+                //show balloon and close it after 4 seconds
+                MyNotifyIcon.ShowCustomBalloon(balloon, PopupAnimation.Slide, 50000);
+                //_backgroundButton.IsEnabled = true;
+                //pbLoad.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        #endregion
     }
 }

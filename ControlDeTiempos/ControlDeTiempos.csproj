@@ -28,8 +28,8 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>21</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -194,6 +194,9 @@
     <Compile Include="Model\TrabajoAsignadoModel.cs" />
     <Compile Include="Model\VotosModel.cs" />
     <Compile Include="MyColumnNumber.cs" />
+    <Compile Include="Notificaciones\NotificationBalloon.xaml.cs">
+      <DependentUpon>NotificationBalloon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\WordReport.cs" />
     <Compile Include="Controles\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
@@ -270,6 +273,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Controles\ScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Notificaciones\NotificationBalloon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,6 +418,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\guiaColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Notify\Notify.csproj">
+      <Project>{6601232b-89cb-40ae-ac90-7ec655ad87af}</Project>
+      <Name>Notify</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

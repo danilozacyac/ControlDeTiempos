@@ -54,8 +54,7 @@ namespace ControlDeTiempos.Controles
 
             if (selectedAppointment != null && selectedTrabajo != null)
             {
-                VentanaCaptura vantana = new VentanaCaptura(selectedTrabajo, true);
-                vantana.Owner = this;
+                VentanaCaptura vantana = new VentanaCaptura(selectedTrabajo, true) { Owner = this };
                 vantana.ShowDialog();
             }
         }
@@ -71,8 +70,7 @@ namespace ControlDeTiempos.Controles
         public void Agregar()
         {
             TrabajoAsignado trabajo = new TrabajoAsignado();
-            VentanaCaptura ventana = new VentanaCaptura(ref trabajo);
-            ventana.Owner = this;
+            VentanaCaptura ventana = new VentanaCaptura(ref trabajo) { Owner = this };
             ventana.ShowDialog();
 
             if (ventana.DialogResult == true)
@@ -103,8 +101,7 @@ namespace ControlDeTiempos.Controles
                 return;
             }
 
-            VentanaCaptura ventana = new VentanaCaptura(selectedTrabajo, true);
-            ventana.Owner = this;
+            VentanaCaptura ventana = new VentanaCaptura(selectedTrabajo, true) { Owner = this };
             ventana.ShowDialog();
         }
 
@@ -115,8 +112,7 @@ namespace ControlDeTiempos.Controles
                 MessageBox.Show("Para poder editar la información de un asunto primero debes seleccionar el asunto ");
                 return;
             }
-            VentanaCaptura ventana = new VentanaCaptura(selectedTrabajo, false);
-            ventana.Owner = this;
+            VentanaCaptura ventana = new VentanaCaptura(selectedTrabajo, false) { Owner = this };
             ventana.ShowDialog();
         }
 
@@ -158,6 +154,15 @@ namespace ControlDeTiempos.Controles
                 MessageBox.Show("Para poder asignar a un operativo para trabajar, primero hay que seleccionar el asunto ");
                 return;
             }
+
+            if (selectedTrabajo.IdOperativo > 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Este asunto ya tienen asignado personal operativo. ¿Deseas continuar?", "Atención", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.No)
+                    return;
+            }
+
             new AsignarOperativo(selectedTrabajo).ShowDialog();
         }
 

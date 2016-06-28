@@ -39,8 +39,21 @@
                 Click="BtnAsignar_Click"
                 Content="Asignar"
                 Style="{StaticResource BlueButton}" />
-        <TextBlock HorizontalAlignment="Left" Foreground="Red" Margin="23,106,0,0" TextWrapping="Wrap" Text="**Se sugiere considerar el siguiente orden para la asignación del asunto" VerticalAlignment="Top" Width="250"/>
-        <ListBox x:Name="LstSugerido" ItemsSource="{Binding}" DisplayMemberPath="NombreCompleto" HorizontalAlignment="Left" Height="144" Margin="23,150,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock Width="250"
+                   Margin="23,106,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="Red"
+                   Text="**Se sugiere considerar el siguiente orden para la asignación del asunto"
+                   TextWrapping="Wrap" />
+        <ListBox x:Name="LstSugerido"
+                 Width="250"
+                 Height="144"
+                 Margin="23,150,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 DisplayMemberPath="NombreCompleto"
+                 ItemsSource="{Binding}" />
 
     </Grid>
 </telerik:RadWindow>
