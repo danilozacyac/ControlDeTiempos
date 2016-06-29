@@ -27,8 +27,8 @@ namespace ControlDeTiempos
 
             if (new AccesoUsuarioModel().IsValidUser())
             {
-                new MainView().Show();
-                this.Close();
+                //new MainView().Show();
+                //this.Close();
             }
             
         }
@@ -50,8 +50,8 @@ namespace ControlDeTiempos
 
             if (new AccesoUsuarioModel().IsValidUser(TxtUsuario.Text, TxtPass.Password))
             {
-                new MainView().Show();
-                this.Close();
+                //new MainView().Show();
+                //this.Close();
             }
             else
             {

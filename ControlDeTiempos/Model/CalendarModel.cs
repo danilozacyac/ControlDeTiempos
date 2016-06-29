@@ -23,9 +23,11 @@ namespace ControlDeTiempos.Model
                 string abogado = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdAbogado).Nombre;
                 string operativo = (trabajo.IdOperativo > 0) ? PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdOperativo).NombreCompleto : String.Empty;
 
+                string tipoAsunto = TipoAsuntoSingleton.TipoAsunto.SingleOrDefault(n => n.IdTipoAsunto == trabajo.IdTipoAsunto).Abreviatura;
+
                 Appointment app = new Appointment()
                 {
-                    Subject = String.Format("{0}/{1} {2} - {3}", trabajo.NumExpediente, trabajo.AnioExpediente, abogado, operativo),
+                    Subject = String.Format("{0} {1}/{2} {3} - {4}", tipoAsunto, trabajo.NumExpediente, trabajo.AnioExpediente, abogado, operativo),
                     Start = trabajo.FechaIndicada ?? DateTime.Now,
                     End = (trabajo.FechaIndicada ?? DateTime.Now).AddMinutes(25),
                     Category = GetAppointmentCategory(trabajo.IdPrioridad),
@@ -49,9 +51,11 @@ namespace ControlDeTiempos.Model
                 string abogado = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdAbogado).Nombre;
                 string operativo = PersonalSingleton.Personal.SingleOrDefault(n => n.IdPersonal == trabajo.IdOperativo).NombreCompleto;
 
+                string tipoAsunto = TipoAsuntoSingleton.TipoAsunto.SingleOrDefault(n => n.IdTipoAsunto == trabajo.IdTipoAsunto).Abreviatura;
+
                 Appointment app = new Appointment()
                 {
-                    Subject = String.Format("{0}/{1} {2} - {3}", trabajo.NumExpediente, trabajo.AnioExpediente, abogado, operativo),
+                    Subject = String.Format("{0} {1}/{2} {3} - {4}", tipoAsunto, trabajo.NumExpediente, trabajo.AnioExpediente, abogado, operativo),
                     Start = trabajo.FechaIndicada ?? DateTime.Now,
                     End = (trabajo.FechaIndicada ?? DateTime.Now).AddMinutes(25),
                     Category = GetCompletedAppointmentCategory(trabajo.EnTiempo),

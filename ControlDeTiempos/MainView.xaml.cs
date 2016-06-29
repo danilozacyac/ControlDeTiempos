@@ -12,6 +12,7 @@ using Telerik.Windows.Controls;
 using ControlDeTiempos.Model;
 using System.Collections.ObjectModel;
 using System.Threading;
+using Telerik.Windows.Controls.ScheduleView;
 
 namespace ControlDeTiempos
 {
@@ -22,6 +23,8 @@ namespace ControlDeTiempos
     {
         ScheduleView scheduleControl;
 
+        ObservableCollection<Appointment> listaAppointment;
+
 
         int vista = 1; //1. Pendientes   2. Entregados  3. Listado
 
@@ -29,6 +32,14 @@ namespace ControlDeTiempos
         {
             InitializeComponent();
             ShowInTaskbar(this, "Control de asignaciones");
+        }
+
+        public MainView(ObservableCollection<Appointment> listaAppointment)
+        {
+            
+            InitializeComponent();
+            ShowInTaskbar(this, "Control de asignaciones");
+            this.listaAppointment = listaAppointment;
         }
 
         public void ShowInTaskbar(RadWindow control, string title)
@@ -53,11 +64,7 @@ namespace ControlDeTiempos
             if (AccesoUsuario.IdTipoAbogado != 4)
                 GraphReports.Visibility = Visibility.Collapsed;
 
-            //NotificationBalloon ballon = new NotificationBalloon();
-            //ballon.BalloonText = "Estoy probando";
-            //ballon.TxtInfo.Text = "Este mensaje es de prueba";
-
-            //MyNotifyIcon.ShowCustomBalloon(ballon, PopupAnimation.Slide, 10000);
+           
             DoBackgroundWork();
         }
 

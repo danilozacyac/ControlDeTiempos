@@ -21,7 +21,7 @@ namespace ControlDeTiempos.Controles
         TrabajoAsignado selectedTrabajo;
         PersonalCcst selectedPersonal;
 
-        ObservableCollection<Appointment> listaAppointment;
+        ObservableCollection<Appointment> listaAppointment = null;
 
         bool loadEntregados;
 
@@ -30,9 +30,16 @@ namespace ControlDeTiempos.Controles
             InitializeComponent();
         }
 
+        public ScheduleView(ObservableCollection<Appointment> listaAppointment)
+        {
+            InitializeComponent();
+            this.listaAppointment = listaAppointment;
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             listaAppointment = new CalendarModel().GetPendingAppointments();
+
             RCalendar.DataContext = listaAppointment;
 
             if (AccesoUsuario.IdTipoAbogado == 4 || AccesoUsuario.IdTipoAbogado == 2)
