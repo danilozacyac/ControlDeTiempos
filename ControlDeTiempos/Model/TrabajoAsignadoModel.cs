@@ -322,12 +322,13 @@ namespace ControlDeTiempos.Model
                     dr["NumExpediente"] = trabajo.NumExpediente;
                     dr["AnioExpediente"] = trabajo.AnioExpediente;
                     dr["IdInstancia"] = trabajo.IdInstancia;
-
+                    dr["PaginasTotales"] = trabajo.PaginasTotales;
+                    dr["PaginasReales"] = trabajo.PaginasReales;
                     dataSet.Tables["Trabajo"].Rows.Add(dr);
 
                     dataAdapter.InsertCommand = connection.CreateCommand();
-                    dataAdapter.InsertCommand.CommandText = "INSERT INTO Trabajo(IdTrabajo,IdAbogado,TipoDocumento,IdActividad,OtraActividad,Particularidades,IdPrioridad,FechaInicio,FechaInicioInt,FechaIndicada,FechaIndicadaInt,IdPerOperativo,ServicioSocial,IdQuienAsigna,PaginasEjecutoria,IdTipoAsunto,NumExpediente,AnioExpediente,IdInstancia)" +
-                                                            " VALUES(@IdTrabajo,@IdAbogado,@TipoDocumento,@IdActividad,@OtraActividad,@Particularidades,@IdPrioridad,@FechaInicio,@FechaInicioInt,@FechaIndicada,@FechaIndicadaInt,@IdPerOperativo,@ServicioSocial,@IdQuienAsigna,@PaginasEjecutoria,@IdTipoAsunto,@NumExpediente,@AnioExpediente,@IdInstancia)";
+                    dataAdapter.InsertCommand.CommandText = "INSERT INTO Trabajo(IdTrabajo,IdAbogado,TipoDocumento,IdActividad,OtraActividad,Particularidades,IdPrioridad,FechaInicio,FechaInicioInt,FechaIndicada,FechaIndicadaInt,IdPerOperativo,ServicioSocial,IdQuienAsigna,PaginasEjecutoria,IdTipoAsunto,NumExpediente,AnioExpediente,IdInstancia,PaginasTotales,PaginasReales)" +
+                                                            " VALUES(@IdTrabajo,@IdAbogado,@TipoDocumento,@IdActividad,@OtraActividad,@Particularidades,@IdPrioridad,@FechaInicio,@FechaInicioInt,@FechaIndicada,@FechaIndicadaInt,@IdPerOperativo,@ServicioSocial,@IdQuienAsigna,@PaginasEjecutoria,@IdTipoAsunto,@NumExpediente,@AnioExpediente,@IdInstancia,@PaginasTotales,@PaginasReales)";
 
                     dataAdapter.InsertCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
                     dataAdapter.InsertCommand.Parameters.Add("@IdAbogado", OleDbType.Numeric, 0, "IdAbogado");
@@ -348,6 +349,8 @@ namespace ControlDeTiempos.Model
                     dataAdapter.InsertCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
                     dataAdapter.InsertCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
                     dataAdapter.InsertCommand.Parameters.Add("@IdInstancia", OleDbType.Numeric, 0, "IdInstancia");
+                    dataAdapter.InsertCommand.Parameters.Add("@PaginasTotales", OleDbType.Numeric, 0, "PaginasTotales");
+                    dataAdapter.InsertCommand.Parameters.Add("@PaginasReales", OleDbType.Numeric, 0, "PaginasReales");
 
                     dataAdapter.Update(dataSet, "Trabajo");
 
@@ -429,6 +432,7 @@ namespace ControlDeTiempos.Model
                 dr["IdQuienAsigna"] = trabajo.IdQuienAsigna;
                 dr["PaginasEjecutoria"] = trabajo.PaginasEjecutoria;
 
+
                 if (trabajo.FechaEntrega == null)
                 {
                     dr["FechaEntrega"] = DBNull.Value;
@@ -446,6 +450,8 @@ namespace ControlDeTiempos.Model
                 dr["NumExpediente"] = trabajo.NumExpediente;
                 dr["AnioExpediente"] = trabajo.AnioExpediente;
                 dr["IdInstancia"] = trabajo.IdInstancia;
+                dr["PaginasTotales"] = trabajo.PaginasTotales;
+                dr["PaginasReales"] = trabajo.PaginasReales;
                 dr.EndEdit();
 
                 dataAdapter.UpdateCommand = connection.CreateCommand();
@@ -456,8 +462,8 @@ namespace ControlDeTiempos.Model
                     "FechaIndicada = @FechaIndicada, FechaIndicadaInt = @FechaIndicadaInt,IdPerOperativo = @IdPerOperativo," +
                     "ServicioSocial = @ServicioSocial,IdQuienAsigna = @IdQuienAsigna, PaginasEjecutoria = @PaginasEjecutoria, " +
                     "FechaEntrega = @FechaEntrega, FechaEntregaInt = @FechaEntregaInt,EnTiempo = @EnTiempo, IdTipoAsunto = @IdTipoAsunto," +
-                    "NumExpediente = @NumExpediente,AnioExpediente = @AnioExpediente, IdInstancia = @IdInstancia " +
-                    " WHERE IdTrabajo = @IdTrabajo";
+                    "NumExpediente = @NumExpediente,AnioExpediente = @AnioExpediente, IdInstancia = @IdInstancia,PaginasTotales = @PaginasTotales, " +
+                    "PaginasReales = @PaginasReales WHERE IdTrabajo = @IdTrabajo";
 
                 dataAdapter.UpdateCommand.Parameters.Add("@IdAbogado", OleDbType.Numeric, 0, "IdAbogado");
                 dataAdapter.UpdateCommand.Parameters.Add("@TipoDocumento", OleDbType.Numeric, 0, "TipoDocumento");
@@ -480,6 +486,8 @@ namespace ControlDeTiempos.Model
                 dataAdapter.UpdateCommand.Parameters.Add("@NumExpediente", OleDbType.Numeric, 0, "NumExpediente");
                 dataAdapter.UpdateCommand.Parameters.Add("@AnioExpediente", OleDbType.Numeric, 0, "AnioExpediente");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdInstancia", OleDbType.Numeric, 0, "IdInstancia");
+                dataAdapter.UpdateCommand.Parameters.Add("@PaginasTotales", OleDbType.Numeric, 0, "PaginasTotales");
+                dataAdapter.UpdateCommand.Parameters.Add("@PaginasReales", OleDbType.Numeric, 0, "PaginasReales");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
 
                 dataAdapter.Update(dataSet, "Trabajo");
@@ -488,6 +496,8 @@ namespace ControlDeTiempos.Model
                 dataAdapter.Dispose();
 
                 insertCompleted = true;
+                if (trabajo.FechaEntrega != null)
+                    this.UpdateMinutosTrabajo(trabajo);
             }
             catch (OleDbException ex)
             {
@@ -556,6 +566,7 @@ namespace ControlDeTiempos.Model
                 dataAdapter.Dispose();
 
                 insertCompleted = true;
+                this.UpdateMinutosTrabajo(trabajo);
             }
             catch (OleDbException ex)
             {
@@ -574,6 +585,88 @@ namespace ControlDeTiempos.Model
 
             return insertCompleted;
         }
+
+        public bool UpdateMinutosTrabajo(TrabajoAsignado trabajo)
+        {
+
+            double minutos;
+            if (trabajo.FechaInicio.Value.Day == trabajo.FechaEntrega.Value.Day)
+            {
+                TimeSpan time = trabajo.FechaEntrega.Value.Subtract(trabajo.FechaInicio.Value);
+                minutos = time.TotalMinutes;
+            }
+            else
+            {
+                TimeSpan time = trabajo.FechaEntrega.Value.Subtract(trabajo.FechaInicio.Value);
+
+                PersonalCcst resp = PersonalSingleton.Personal.SingleOrDefault(x => x.IdPersonal == trabajo.IdOperativo);
+
+
+
+                if (time.Days > 0)
+                    minutos = time.TotalMinutes - (time.Days * resp.TiempoNoLaborableDiario);
+                else
+                    minutos = time.TotalMinutes - resp.TiempoNoLaborableDiario;
+            }
+
+            minutos = Math.Round(minutos, MidpointRounding.AwayFromZero);
+
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbDataAdapter dataAdapter;
+            OleDbCommand cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            bool insertCompleted = false;
+
+            try
+            {
+                connection.Open();
+
+                DataSet dataSet = new DataSet();
+                DataRow dr;
+
+                dataAdapter = new OleDbDataAdapter();
+                dataAdapter.SelectCommand = new OleDbCommand("SELECT * FROM Trabajo WHERE IdTrabajo = @IdTrabajo", connection);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdTrabajo", trabajo.IdTrabajo);
+                dataAdapter.Fill(dataSet, "Trabajo");
+
+                dr = dataSet.Tables["Trabajo"].Rows[0];
+                dr.BeginEdit();
+                dr["TiempoTrabajoMinutos"] = minutos;
+                dr.EndEdit();
+
+                dataAdapter.UpdateCommand = connection.CreateCommand();
+
+                dataAdapter.UpdateCommand.CommandText = "UPDATE Trabajo SET TiempoTrabajoMinutos = @TiempoTrabajoMinutos WHERE IdTrabajo = @IdTrabajo";
+
+                dataAdapter.UpdateCommand.Parameters.Add("@TiempoTrabajoMinutos", OleDbType.Numeric, 0, "TiempoTrabajoMinutos");
+                dataAdapter.UpdateCommand.Parameters.Add("@IdTrabajo", OleDbType.Numeric, 0, "IdTrabajo");
+
+                dataAdapter.Update(dataSet, "Trabajo");
+
+                dataSet.Dispose();
+                dataAdapter.Dispose();
+
+                insertCompleted = true;
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "PadronApi");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TrabajoAsignadoModel", "PadronApi");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return insertCompleted;
+        }
+
 
         public bool UpdatePersonalOperativo(TrabajoAsignado trabajo)
         {
@@ -671,5 +764,21 @@ namespace ControlDeTiempos.Model
             }
         }
 
+
+        #region ElementosTemporales
+
+
+        public void ObtenMinutosTrabajo()
+        {
+            ObservableCollection<TrabajoAsignado> trabajos = this.GetTrabajos(1);
+
+            foreach (TrabajoAsignado trabajo in trabajos)
+            {
+                this.UpdateMinutosTrabajo(trabajo);
+            }
+        }
+
+
+        #endregion
     }
 }

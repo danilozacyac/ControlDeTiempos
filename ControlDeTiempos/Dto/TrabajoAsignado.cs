@@ -29,8 +29,11 @@ namespace ControlDeTiempos.Dto
         private int paginasEjecutoria = 0;
         private ObservableCollection<Tesis> tesis;
         private ObservableCollection<Voto> votos;
+        private int paginasTotales;
+        private int paginasReales;
 
-       public int IdTrabajo
+        
+        public int IdTrabajo
         {
             get
             {
@@ -305,6 +308,38 @@ namespace ControlDeTiempos.Dto
                 this.votos = value;
             }
         }
+
+        /// <summary>
+        /// Indica el número de páginas que se van a trabajar multiplicadas por el número de actividades
+        /// que fueron asignadas
+        /// </summary>
+        public int PaginasTotales
+        {
+            get
+            {
+                return this.paginasTotales;
+            }
+            set
+            {
+                this.paginasTotales = value;
+            }
+        }
+    
+        /// <summary>
+        /// Indica el número de páginas que incluye el documento. La suma incluye tesis, ejecutorias y votos
+        /// </summary>
+        public int PaginasReales
+        {
+            get
+            {
+                return this.paginasReales;
+            }
+            set
+            {
+                this.paginasReales = value;
+            }
+        }
+
 
         #region INotifyPropertyChanged Members
 

@@ -121,8 +121,6 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Charting.xml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\NumAsuntoGraph.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\NumAsuntoGraph.g.cs
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\StatusEntrega\EnTiempo.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\StatusEntrega\EnTiempo.g.cs
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\bin\Debug\ControlDeTiempos.exe.manifest
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\bin\Debug\ControlDeTiempos.application
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Chart.dll
@@ -158,3 +156,10 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Notificaciones\NotificationBalloon.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Intro.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Intro.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Generales.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Generales.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.exe.licenses
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\EnTiempoNoTiempo.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\EnTiempoNoTiempo.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AsuntosPaginas.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AsuntosPaginas.g.cs

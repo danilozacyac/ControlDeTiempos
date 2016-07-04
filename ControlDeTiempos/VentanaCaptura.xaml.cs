@@ -314,6 +314,13 @@ namespace ControlDeTiempos
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
             int tipoDocumento = 0;
+            int numActividades = 0;
+
+            if(RdtpFechaIndicada.SelectedTime == null)
+            {
+                MessageBox.Show("Para continuar selecciona la hora indicada para la entrega del documento");
+                return;
+            }
 
             TxtPrioridades.Text = VerificationUtilities.TextBoxStringValidation(TxtPrioridades.Text);
 
@@ -342,7 +349,14 @@ namespace ControlDeTiempos
                 }
             }
 
-
+            if (isUpdating)
+            {
+                if (RdtpEntrega.SelectedDate != null && RdtpEntrega.SelectedTime == null)
+                {
+                    MessageBox.Show("Además de la fecha de entrega debes seleccionar la hora");
+                    return;
+                }
+            }
             
             trabajo.IdActividad = 0;
             foreach (Actividades actividad in listaActividades)
@@ -356,7 +370,7 @@ namespace ControlDeTiempos
 
                     trabajo.IdActividad += actividad.IdActividad;
 
-                    
+                    numActividades++;
                 }
 
             trabajo.TipoDocumento = tipoDocumento;
@@ -364,6 +378,8 @@ namespace ControlDeTiempos
             trabajo.IdTipoAsunto = Convert.ToInt32(CbxTipoAsunto.SelectedValue);
             trabajo.IdPrioridad = Convert.ToInt32(CbxPrioridad.SelectedValue);
             trabajo.IdOperativo = Convert.ToInt32(CbxOperativos.SelectedValue);
+            trabajo.PaginasReales = Convert.ToInt32(TxtTotalPags.Text);
+            trabajo.PaginasTotales = trabajo.PaginasReales * numActividades;
 
             if (trabajo.IdOperativo != -1)
                 trabajo.IdQuienAsigna = AccesoUsuario.IdUsuario;
@@ -489,6 +505,12 @@ namespace ControlDeTiempos
         private void RadPleno_Checked(object sender, RoutedEventArgs e)
         {
             trabajo.IdInstancia = 2;
+        }
+
+        private void RdtpFechaInicio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RdtpFechaIndicada.SelectableDateStart = RdtpFechaInicio.SelectedDate;
+            RdtpFechaIndicada.StartTime = RdtpFechaInicio.SelectedTime ?? DateTime.Now.TimeOfDay;
         }
        
     }

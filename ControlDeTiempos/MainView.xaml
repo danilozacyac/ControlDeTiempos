@@ -83,13 +83,24 @@
                         </StackPanel>
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup x:Name="GraphReports" Header="Graficas">
+                <telerik:RadRibbonGroup x:Name="GraphReports" Header="Información">
                     <telerik:RadRibbonButton x:Name="RBtnGraficas"
                                              Click="RBtnGraficas_Click"
                                              Content="Reporte"
                                              IsEnabled="True"
                                              LargeImage="Resources/1425495936_dashboard.png"
                                              Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnGeneral"
+                                             Click="RBtnGeneral_Click"
+                                             IsEnabled="True"
+                                             Visibility="Hidden"
+                                             LargeImage="Resources/1465239466_Control_Panel.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="General" />
+                            <TextBlock HorizontalAlignment="Center" Text="operativos" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>
                 <telerik:RadRibbonGroup Header="Ayuda">
                     <telerik:RadRibbonButton x:Name="RBtnColores"

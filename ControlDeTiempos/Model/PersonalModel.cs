@@ -37,7 +37,8 @@ namespace ControlDeTiempos.Model
                         Apellidos = reader["Apellidos"].ToString(),
                         NombreCompleto = String.Format("{0} {1}", reader["Nombre"], reader["Apellidos"]),
                         TipoPersonal = Convert.ToInt32(reader["TipoPersonal"]),
-                        Seccion = Convert.ToInt32(reader["Seccion"])
+                        Seccion = Convert.ToInt32(reader["Seccion"]),
+                        TiempoNoLaborableDiario = Convert.ToInt32(reader["TiempoNoLaboral"])
                     };
                     listaPersonal.Add(personal);
 
@@ -206,6 +207,59 @@ namespace ControlDeTiempos.Model
 
                 cmd = new OleDbCommand("SELECT * FROM Personal WHERE TipoPersonal = 3 AND Seccion = 2 AND " +
                     " IdPersonal NOT IN (SELECT IdPerOperativo FROM Trabajo GROUP BY IdPerOperativo)", connection);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    PersonalCcst personal = new PersonalCcst()
+                    {
+                        IdPersonal = Convert.ToInt32(reader["IdPersonal"]),
+                        Nombre = reader["Nombre"].ToString(),
+                        Apellidos = reader["Apellidos"].ToString(),
+                        NombreCompleto = String.Format("{0} {1}", reader["Nombre"], reader["Apellidos"]),
+                        TipoPersonal = Convert.ToInt32(reader["TipoPersonal"]),
+                        Seccion = Convert.ToInt32(reader["Seccion"])
+                    };
+                    listaPersonal.Add(personal);
+
+                }
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,PersonalCcst", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,PersonalCcst", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return listaPersonal;
+        }
+
+
+        public ObservableCollection<PersonalCcst> GetPersonalAsignado()
+        {
+            ObservableCollection<PersonalCcst> listaPersonal = new ObservableCollection<PersonalCcst>();
+
+            OleDbConnection connection = new OleDbConnection(connectionStr);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            try
+            {
+                connection.Open();
+
+                cmd = new OleDbCommand("SELECT * FROM Personal WHERE TipoPersonal = 3 AND " +
+                    " IdPersonal IN (SELECT IdPerOperativo FROM Trabajo GROUP BY IdPerOperativo)", connection);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())

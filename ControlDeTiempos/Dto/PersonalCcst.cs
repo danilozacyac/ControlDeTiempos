@@ -16,6 +16,7 @@ namespace ControlDeTiempos.Dto
         private int tipoPersonal;
         private int seccion;
         public ObservableCollection<PersonalCcst> child;
+        private int tiempoNoLaborableDiario;
 
         public int IdPersonal
         {
@@ -101,9 +102,19 @@ namespace ControlDeTiempos.Dto
             }
         }
 
-        
-        
+        public int TiempoNoLaborableDiario
+        {
+            get
+            {
+                return this.tiempoNoLaborableDiario;
+            }
+            set
+            {
+                this.tiempoNoLaborableDiario = value;
+            }
+        }
 
+        
 
         
     }

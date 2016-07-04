@@ -411,6 +411,7 @@
                                    EndTime="18:00"
                                    SelectedValue="{Binding FechaInicio,
                                                            Mode=TwoWay}"
+                                   SelectionChanged="RdtpFechaInicio_SelectionChanged"
                                    StartTime="7:00"
                                    TimeInterval="0:30" />
         <telerik:RadDateTimePicker x:Name="RdtpFechaIndicada"

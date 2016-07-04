@@ -28,8 +28,8 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,6 +70,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v13.1, Version=13.1.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Charts.v13.1, Version=13.1.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v13.1, Version=13.1.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -168,16 +172,19 @@
       <DependentUpon>ActiOper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\ActOperativos.cs" />
-    <Compile Include="Graphs\StatusEntrega\ChartSeriesTypeSwitch.cs" />
-    <Compile Include="Graphs\StatusEntrega\CombineModeToVisibilityConverter.cs" />
+    <Compile Include="Graphs\EnTiempoNoTiempo.xaml.cs">
+      <DependentUpon>EnTiempoNoTiempo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphs\GralStats\Generales.xaml.cs">
+      <DependentUpon>Generales.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Graphs\NumAsuntoGraph.xaml.cs">
       <DependentUpon>NumAsuntoGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\NumeroAsuntos.cs" />
-    <Compile Include="Graphs\StatusEntrega\EnTiempo.xaml.cs">
-      <DependentUpon>EnTiempo.xaml</DependentUpon>
+    <Compile Include="Graphs\Particulares\Operativos\AsuntosPaginas.xaml.cs">
+      <DependentUpon>AsuntosPaginas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\StatusEntrega\EnTiempoViewModel.cs" />
     <Compile Include="Intro.xaml.cs">
       <DependentUpon>Intro.xaml</DependentUpon>
     </Compile>
@@ -247,11 +254,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Graphs\EnTiempoNoTiempo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphs\GralStats\Generales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Graphs\NumAsuntoGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\StatusEntrega\EnTiempo.xaml">
+    <Page Include="Graphs\Particulares\Operativos\AsuntosPaginas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,6 +333,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -437,6 +453,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\monitor_512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\1465239466_Control_Panel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

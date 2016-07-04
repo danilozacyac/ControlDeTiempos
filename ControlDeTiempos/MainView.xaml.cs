@@ -11,8 +11,8 @@ using ControlDeTiempos.Notificaciones;
 using Telerik.Windows.Controls;
 using ControlDeTiempos.Model;
 using System.Collections.ObjectModel;
-using System.Threading;
 using Telerik.Windows.Controls.ScheduleView;
+using ControlDeTiempos.Graphs.GralStats;
 
 namespace ControlDeTiempos
 {
@@ -215,7 +215,7 @@ namespace ControlDeTiempos
             trabajosTiempoExcedido = tiempoExcedido.Count();
 
             var porVencer = from n in listaTrabajos
-                            where (n.FechaIndicada.Value.Subtract(DateTime.Now)).Minutes < 120 && (n.FechaIndicada.Value.Subtract(DateTime.Now)).Minutes > 0
+                            where (n.FechaIndicada.Value.Subtract(DateTime.Now)).TotalMinutes < 120 && (n.FechaIndicada.Value.Subtract(DateTime.Now)).TotalMinutes > 0
                             select n;
             trabajosPorVencer = porVencer.Count();
 
@@ -270,5 +270,11 @@ namespace ControlDeTiempos
         }
 
         #endregion
+
+        private void RBtnGeneral_Click(object sender, RoutedEventArgs e)
+        {
+            Generales gralStats = new Generales() ;
+            gralStats.ShowDialog();
+        }
     }
 }

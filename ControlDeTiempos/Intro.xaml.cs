@@ -41,6 +41,9 @@ namespace ControlDeTiempos
             if (new AccesoUsuarioModel().IsValidUser())
             {
                 Thread.Sleep(2000);
+
+                new TrabajoAsignadoModel().ObtenMinutosTrabajo();
+
                 MainView main = new MainView();
                 main.Show();
                 this.Close();
