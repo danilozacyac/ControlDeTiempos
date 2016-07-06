@@ -5,19 +5,86 @@
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
-             d:DesignWidth="300"
+             d:DesignWidth="500"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <dxc:RingMarker2DModel x:Key="ringMark"/>
+            <DataTemplate x:Key="BubbleLabelTemplate">
+                <Border BorderThickness="1"
+                        CornerRadius="9"
+                        Background="Transparent"
+                        Opacity="1.0">
+                    <TextBlock Foreground="Black"
+                               FontSize="10"
+                               Margin="7,1,7,1.5" TextWrapping="Wrap"
+                               Text="{Binding Path=Text}"
+                               TextAlignment="Center">
+
+                    </TextBlock>
+                </Border>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
 
-        <dxc:ChartControl x:Name="ChAsuntoPags"
+        <dxc:ChartControl x:Name="ChAsuntoPags" BorderThickness="0"
                           HorizontalAlignment="Left"
-                          VerticalAlignment="Top">
-            <dxc:ChartControl.Legend>
-                <dxc:Legend />
-            </dxc:ChartControl.Legend>
+                          VerticalAlignment="Top"
+                          CrosshairEnabled="True"
+                          EnableAnimation="True">
             <dxc:XYDiagram2D>
-                <dxc:BarSideBySideSeries2D DisplayName="Series 1" />
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D GridLinesMinorVisible="True">
+                        <dxc:AxisY2D.Range>
+                            <dxc:AxisRange MinValue="0" MaxValue="150"/>
+                        </dxc:AxisY2D.Range>
+                        <dxc:AxisY2D.Title>
+                            <dxc:AxisTitle Content="Número de asuntos"></dxc:AxisTitle>
+                        </dxc:AxisY2D.Title>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D Visible="False">
+                        <dxc:AxisX2D.Range>
+                            <dxc:AxisRange MinValueInternal="-1" MaxValueInternal="10" />
+                        </dxc:AxisX2D.Range>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.Series>
+                    <dxc:BubbleSeries2D x:Name="Series"
+                                        AnimationAutoStartMode="SetStartState"
+                                        ArgumentDataMember="Mes"
+                                        ColorEach="True"
+                                        MinSize="1"
+                                        MaxSize="2"
+                                        Transparency="0"
+                                        MarkerModel="{StaticResource ringMark}"
+                                        ValueDataMember="NumeroAsuntos"
+                                        WeightDataMember="NumeroPaginas">
+
+                        <dxc:BubbleSeries2D.PointOptions>
+                            <dxc:PointOptions Pattern="{}{A}&#xD;({V})" />
+                        </dxc:BubbleSeries2D.PointOptions>
+                        <dxc:BubbleSeries2D.PointAnimation>
+                            <dxc:Marker2DWidenAnimation PointOrder="Random" />
+                        </dxc:BubbleSeries2D.PointAnimation>
+                        <dxc:BubbleSeries2D.Label>
+                            <dxc:SeriesLabel ConnectorVisible="False"
+                                                 ElementTemplate="{StaticResource BubbleLabelTemplate}"
+                                                 dxc:MarkerSeries2D.Angle="90"
+                                                 Indent="0"
+                                                 Visible="True"
+                                                 dxc:BubbleSeries2D.LabelPosition="Center" />
+                        </dxc:BubbleSeries2D.Label>
+                    </dxc:BubbleSeries2D>
+                </dxc:XYDiagram2D.Series>
             </dxc:XYDiagram2D>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Dock="Top" HorizontalAlignment="Center" Content="Total páginas trabajadas" />
+                <dxc:Title Dock="Top" HorizontalAlignment="Center" FontSize="16" Content="Por número de asuntos" />
+            </dxc:ChartControl.Titles>
         </dxc:ChartControl>
 
     </Grid>

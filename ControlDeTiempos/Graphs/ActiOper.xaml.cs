@@ -34,7 +34,7 @@ namespace ControlDeTiempos.Graphs
         {
             Cbxoperativos.DataContext = PersonalSingleton.Personal.Where(n => n.TipoPersonal == 3);
 
-
+            Cbxoperativos.SelectedIndex = 2;
            
         }
 
@@ -57,6 +57,7 @@ namespace ControlDeTiempos.Graphs
             chart.Animate();
 
             OperStatus.Operativo = selectedPersonal;
+            AsunPag.Operativo = selectedPersonal;
         }
 
         bool IsClick(DateTime mouseUpTime)

@@ -9,7 +9,7 @@
              Loaded="UserControl_Loaded"
              mc:Ignorable="d">
     <Grid>
-        <dxc:ChartControl Name="TiempoNoTiempo"
+        <dxc:ChartControl Name="TiempoNoTiempo" BorderThickness="0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch">
             <dxc:ChartControl.Legend>

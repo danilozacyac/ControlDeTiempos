@@ -1,4 +1,5 @@
 ﻿using ControlDeTiempos.Dto;
+using ControlDeTiempos.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,8 @@ namespace ControlDeTiempos.Graphs.Particulares.Operativos
         public AsuntosPaginas()
         {
             InitializeComponent();
+
+
         }
         #region INotifyPropertyChanged Members
 
@@ -50,20 +53,11 @@ namespace ControlDeTiempos.Graphs.Particulares.Operativos
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 
-            //if (TiempoNoTiempo.Diagram.Series.Count() > 1)
-            //{
-            //    TiempoNoTiempo.Diagram.Series.RemoveAt(1);
-            //    TiempoNoTiempo.Diagram.Series.RemoveAt(0);
-            //}
-            //else if (TiempoNoTiempo.Diagram.Series.Count() == 1)
-            //{
-            //    TiempoNoTiempo.Diagram.Series.RemoveAt(0);
-            //}
-
-            //TiempoNoTiempo.Diagram.Series.Add(new GraficasModel().GetTiemposTrbajo(Operativo, 1, 1));
-            //TiempoNoTiempo.Diagram.Series.Add(new GraficasModel().GetTiemposTrbajo(Operativo, 1, 0));
-        }
+            Series.DataSource = new GraficasModel().GetAsuntosPaginas("IdPerOperativo", Operativo.IdPersonal, 1);
+            Series.ToolTipPointPattern = "{A} ({W})";
+            ChAsuntoPags.Animate();
 
         #endregion // INotifyPropertyChanged Members
+        }
     }
 }

@@ -93,7 +93,6 @@
                     <telerik:RadRibbonButton x:Name="RBtnGeneral"
                                              Click="RBtnGeneral_Click"
                                              IsEnabled="True"
-                                             Visibility="Hidden"
                                              LargeImage="Resources/1465239466_Control_Panel.png"
                                              Size="Large">
                         <StackPanel Orientation="Vertical">

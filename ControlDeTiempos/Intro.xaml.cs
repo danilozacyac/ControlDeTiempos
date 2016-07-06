@@ -42,7 +42,7 @@ namespace ControlDeTiempos
             {
                 Thread.Sleep(2000);
 
-                new TrabajoAsignadoModel().ObtenMinutosTrabajo();
+               // new TrabajoAsignadoModel().ObtenMinutosTrabajo();
 
                 MainView main = new MainView();
                 main.Show();

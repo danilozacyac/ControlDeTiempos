@@ -604,7 +604,10 @@ namespace ControlDeTiempos.Model
 
 
                 if (time.Days > 0)
-                    minutos = time.TotalMinutes - (time.Days * resp.TiempoNoLaborableDiario);
+                    if (time.Hours <= 12)
+                        minutos = time.TotalMinutes - (time.Days * resp.TiempoNoLaborableDiario);
+                    else
+                        minutos = time.TotalMinutes - ((time.Days + 1) * resp.TiempoNoLaborableDiario);
                 else
                     minutos = time.TotalMinutes - resp.TiempoNoLaborableDiario;
             }
