@@ -9,7 +9,8 @@
                    Height="700"
                    Header="Informe del personal operativo"
                    Loaded="RadWindow_Loaded"
-                   WindowStartupLocation="CenterScreen">
+                   WindowStartupLocation="CenterScreen"
+                   WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -60,10 +61,10 @@
                           VerticalAlignment="Stretch"
                           BorderThickness="0"
                           EnableAnimation="True"
-                          MouseDown="chart_MouseDown"
-                          MouseMove="chart_MouseMove"
-                          MouseUp="chart_MouseUp"
-                          QueryChartCursor="chart_QueryChartCursor">
+                          MouseDown="ChartMouseDown"
+                          MouseMove="ChartMouseMove"
+                          MouseUp="ChartMouseUp"
+                          QueryChartCursor="ChartQueryChartCursor">
             <dxc:ChartControl.Titles>
                 <dxc:Title HorizontalAlignment="Center"
                            Content="Distribución de actividades asignadas"
@@ -85,7 +86,7 @@
                         </dxc:PointOptions>
                     </dxc:PieSeries2D.PointOptions>
                     <dxc:PieSeries2D.Label>
-                        <dxc:SeriesLabel dxc:PieSeries.LabelPosition="Outside" RenderMode="RectangleConnectedToCenter" />
+                        <dxc:SeriesLabel dxc:PieSeries.LabelPosition="Outside" RenderMode="Rectangle" />
                     </dxc:PieSeries2D.Label>
                 </dxc:PieSeries2D>
             </dxc:SimpleDiagram2D>
@@ -102,7 +103,11 @@
                                 Grid.Row="2"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top" />
-
+        <Operativos:AvgActividades x:Name="Promedios"
+Grid.Row="2"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"></Operativos:AvgActividades>
 
 
     </Grid>

@@ -70,6 +70,29 @@ namespace ControlDeTiempos.Model
             return lista;
         }
 
+        
+
+       
+
+        #region StatusEntrega
+
+        public AreaStackedSeries2D GetTiemposTrbajo(PersonalCcst operativo, int monthsToShow, int enTiempo)
+        {
+            AreaStackedSeries2D serie = new AreaStackedSeries2D() { DisplayName = (enTiempo == 1) ? "En tiempo" : "Con retrazo" };
+            //serie.Name = operativo.NombreCompleto;
+            DateTime finalTime = DateTime.Now;
+            DateTime initialTime = finalTime.AddMonths(-monthsToShow);
+
+            while (initialTime <= finalTime)
+            {
+                serie.Points.Add(new SeriesPoint(String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(initialTime.Month), initialTime.Year),
+                    this.GetTotalPorStatusPorMes(enTiempo, operativo, initialTime.Month, initialTime.Year)));
+
+                initialTime = initialTime.AddMonths(1);
+            }
+            return serie;
+        }
+
         /// <summary>
         /// Devuelve el número de asunto de un status específico para el personal operativo seleccionado
         /// de acuerdo al mes y año
@@ -79,7 +102,7 @@ namespace ControlDeTiempos.Model
         /// <param name="mes"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public int GetTotalPorStatusPorMes(int enTiempo, int idOperativo, int mes, int year)
+        public int GetTotalPorStatusPorMes(int enTiempo, PersonalCcst operativo, int mes, int year)
         {
             int total = 0;
 
@@ -90,16 +113,22 @@ namespace ControlDeTiempos.Model
             try
             {
                 string sqlQuery = "SELECT COUNT(EnTiempo) AS Total FROM Trabajo " +
-                                  "WHERE FechaEntregaInt > 0 AND EnTiempo = @EnTiempo AND IdPerOperativo = @IdOperativo " +
+                                  "WHERE FechaEntregaInt > 0 AND EnTiempo = @EnTiempo " +
                                   "AND (MONTH(FechaEntrega) = @mMes AND YEAR(FechaEntrega) = @mYear)";
+
+                if (operativo != null)
+                    sqlQuery += " AND IdPerOperativo = @IdOperativo ";
 
                 connection.Open();
 
                 cmd = new OleDbCommand(sqlQuery, connection);
                 cmd.Parameters.AddWithValue("@EnTiempo", enTiempo);
-                cmd.Parameters.AddWithValue("@IdOperativo", idOperativo);
                 cmd.Parameters.AddWithValue("@mMes", mes);
                 cmd.Parameters.AddWithValue("@mYear", year);
+
+                if(operativo != null)
+                    cmd.Parameters.AddWithValue("@IdOperativo", operativo.IdPersonal);
+
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -128,44 +157,10 @@ namespace ControlDeTiempos.Model
             return total;
         }
 
-        public AreaStackedSeries2D GetTiemposTrbajo(PersonalCcst operativo, int monthsToShow, int enTiempo)
-        {
-            AreaStackedSeries2D serie = new AreaStackedSeries2D() { DisplayName = (enTiempo == 1) ? "En tiempo" : "Con retrazo" };
-            //serie.Name = operativo.NombreCompleto;
-            DateTime finalTime = DateTime.Now;
-            DateTime initialTime = finalTime.AddMonths(-monthsToShow);
+        #endregion
 
-            while (initialTime <= finalTime)
-            {
-                serie.Points.Add(new SeriesPoint(String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(initialTime.Month), initialTime.Year),
-                    this.GetTotalPorStatusPorMes(enTiempo, operativo.IdPersonal, initialTime.Month, initialTime.Year)));
-
-                initialTime = initialTime.AddMonths(1);
-            }
-            return serie;
-        }
 
         #region PaginasTotales
-
-        //public LineSeries GetTotalPaginasTrabajadas(PersonalCcst operativo, int monthsToShow,int nda)
-        //{
-        //    LineSeries serie = new LineSeries();
-        //    //serie.Name = operativo.NombreCompleto;
-        //    DateTime finalTime = DateTime.Now;
-        //    DateTime initialTime = finalTime.AddMonths(-monthsToShow);
-
-        //    while (initialTime <= finalTime)
-        //    {
-        //        serie.DataPoints.Add(new CategoricalDataPoint()
-        //        {
-        //            Category = String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(initialTime.Month), initialTime.Year),
-        //            Value = this.GetTotalPaginasPorMes(operativo.IdPersonal, initialTime.Month, initialTime.Year)
-        //        });
-
-        //        initialTime = initialTime.AddMonths(1);
-        //    }
-        //    return serie;
-        //}
 
         public LineSeries2D GetTotalPaginasTrabajadas(PersonalCcst operativo, int monthsToShow)
         {
@@ -278,70 +273,6 @@ namespace ControlDeTiempos.Model
 
         #region PromedioTiempoPorActividad
 
-
-        public BarSideBySideSeries3D GetTiempoPromGeneral()
-        {
-            BarSideBySideSeries3D serie = new BarSideBySideSeries3D();
-            //serie.Name = operativo.NombreCompleto;
-
-            foreach (KeyValuePair<string, int> punto in GetPromTiempoActs())
-                serie.Points.Add(new SeriesPoint(punto.Key, punto.Value));
-
-            return serie;
-        }
-
-        public List<KeyValuePair<string, int>> GetPromTiempoActs()
-        {
-            List<KeyValuePair<string, int>> paginasMes = new List<KeyValuePair<string, int>>();
-
-            OleDbConnection connection = new OleDbConnection(connectionStr);
-            OleDbCommand cmd;
-            OleDbDataReader reader;
-
-            try
-            {
-                string sqlQuery = "SELECT T.IdActividad, Sum(T.PaginasTotales) AS Paginas, Sum(T.TiempoTrabajoMinutos) AS TotMinutos, A.Descripcion " +
-                                  "FROM Trabajo T INNER JOIN TipoActividad A ON T.IdActividad = A.IdActividad " +
-                                  "WHERE T.Idactividad In (select IdActividad from TipoActividad) AND T.FechaEntregaInt > 0 " +
-                                  "GROUP BY T.IdActividad, A.Descripcion";
-
-                connection.Open();
-
-                cmd = new OleDbCommand(sqlQuery, connection);
-                reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    int paginas = Convert.ToInt32(reader["Paginas"]);
-                    int minutos = Convert.ToInt32(reader["TotMinutos"]);
-
-                    double pagsXhora = ((paginas * 60) / minutos);
-                    pagsXhora = Math.Round(pagsXhora, MidpointRounding.AwayFromZero);
-
-                    paginasMes.Add(new KeyValuePair<string, int>(reader["Descripcion"].ToString(),Convert.ToInt32(pagsXhora)));
-                }
-
-                reader.Close();
-                cmd.Dispose();
-            }
-            catch (OleDbException ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return paginasMes;
-        }
-
         public RadarLineSeries2D GetTiempoPromedio(PersonalCcst operativo)
         {
             RadarLineSeries2D serie = new RadarLineSeries2D() { DisplayName = operativo.NombreCompleto };
@@ -405,7 +336,161 @@ namespace ControlDeTiempos.Model
 
             return paginasMes;
         }
-        
+
+
+        public BarSideBySideSeries2D GetAvgTimeActOperativos(PersonalCcst operativo, int monthsToShow, Actividades actividad)
+        {
+            BarSideBySideSeries2D serie = new BarSideBySideSeries2D() { DisplayName = actividad.Actividad };
+            FlatGlassBar2DModel mode = new FlatGlassBar2DModel();
+            serie.Model = mode;
+
+            string inicioDate = String.Format("{0}{1}{2}", DateTime.Now.AddMonths(-monthsToShow).Year, DateTime.Now.AddMonths(-monthsToShow).Month.ToString("00"), "01");
+            string finDate = String.Format("{0}{1}{2}", DateTime.Now.Year, DateTime.Now.Month.ToString("00"), "31");
+
+            if(operativo != null)
+            foreach (Graficas punto in GetAvgTimeActOperativos(operativo,inicioDate,finDate,actividad.IdActividad))
+                serie.Points.Add(new SeriesPoint(punto.Mes, punto.Promedio));
+            else
+                foreach (Graficas punto in GetAvgTimeActOperativos(inicioDate, finDate, actividad.IdActividad))
+                    serie.Points.Add(new SeriesPoint(punto.Mes, punto.Promedio));
+
+            return serie;
+        }
+
+        /// <summary>
+        /// Obtiene el número de páginas por hora que se están trabajando para el personal seleccionado
+        /// </summary>
+        /// <param name="operativo">Personal operativo del que se requiere la estadística</param>
+        /// <param name="inicio">Inicio del periodo del que se solicita la estadística</param>
+        /// <param name="fin">Final del periodo del que se solicita la estadística</param>
+        /// <param name="actividad">Actividad de la que se obtiene la estadística</param>
+        /// <returns></returns>
+        private List<Graficas> GetAvgTimeActOperativos(PersonalCcst operativo, string inicio, string fin, int actividad)
+        {
+            List<Graficas> paginasMes = new List<Graficas>();
+
+            OleDbConnection connection = new OleDbConnection(connectionStr);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            try
+            {
+                string sqlQuery = "SELECT IdActividad, Sum(PaginasTotales) AS Paginas, Sum(TiempoTrabajoMinutos) AS TotMinutos, MONTH(FechaEntrega) AS mMes, " +
+                                  "YEAR(FechaEntrega) AS mYear FROM Trabajo  " +
+                                  "WHERE Idactividad = @IdActividad AND IdPerOperativo = @IdOperativo AND FechaEntregaInt BETWEEN @InicioF AND @FinF " +
+                                  "GROUP BY IdActividad, MONTH(FechaEntrega),YEAR(FechaEntrega) ORDER BY YEAR(FechaEntrega),MONTH(FechaEntrega)";
+
+                connection.Open();
+
+                cmd = new OleDbCommand(sqlQuery, connection);
+                cmd.Parameters.AddWithValue("@IdActividad", actividad);
+                cmd.Parameters.AddWithValue("@IdOperativo", operativo.IdPersonal);
+                cmd.Parameters.AddWithValue("@InicioF", inicio);
+                cmd.Parameters.AddWithValue("@FinF", fin);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Graficas grafica = new Graficas();
+                    int paginas = Convert.ToInt32(reader["Paginas"]);
+                    int minutos = Convert.ToInt32(reader["TotMinutos"]);
+
+                    double pagsXhora = ((paginas * 60) / minutos);
+                    pagsXhora = Math.Round(pagsXhora, MidpointRounding.AwayFromZero);
+
+                    grafica.Mes = String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(reader["mMes"])), Convert.ToInt32(reader["mYear"]));
+                    grafica.Promedio = Convert.ToInt32(pagsXhora);
+
+                    paginasMes.Add(grafica);
+                }
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return paginasMes;
+        }
+
+        /// <summary>
+        /// Obtiene el promedio páginas por hora que se estan trabajando para cada actividad
+        /// </summary>
+        /// <param name="inicio">Inicio del periodo del que se solicita la estadística</param>
+        /// <param name="fin">Final del periodo del que se solicita la estadística</param>
+        /// <param name="actividad">Actividad de la que se obtiene la estadística</param>
+        /// <returns></returns>
+        private List<Graficas> GetAvgTimeActOperativos(string inicio, string fin, int actividad)
+        {
+            List<Graficas> paginasMes = new List<Graficas>();
+
+            OleDbConnection connection = new OleDbConnection(connectionStr);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            try
+            {
+                string sqlQuery = "SELECT IdActividad, Sum(PaginasTotales) AS Paginas, Sum(TiempoTrabajoMinutos) AS TotMinutos, MONTH(FechaEntrega) AS mMes, " +
+                                  "YEAR(FechaEntrega) AS mYear FROM Trabajo  " +
+                                  "WHERE Idactividad = @IdActividad AND FechaEntregaInt BETWEEN @InicioF AND @FinF " +
+                                  "GROUP BY IdActividad, MONTH(FechaEntrega),YEAR(FechaEntrega) ORDER BY YEAR(FechaEntrega),MONTH(FechaEntrega)";
+
+                connection.Open();
+
+                cmd = new OleDbCommand(sqlQuery, connection);
+                cmd.Parameters.AddWithValue("@IdActividad", actividad);
+                cmd.Parameters.AddWithValue("@InicioF", inicio);
+                cmd.Parameters.AddWithValue("@FinF", fin);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Graficas grafica = new Graficas();
+                    int paginas = Convert.ToInt32(reader["Paginas"]);
+                    int minutos = Convert.ToInt32(reader["TotMinutos"]);
+
+                    double pagsXhora = ((paginas * 60) / minutos);
+                    pagsXhora = Math.Round(pagsXhora, MidpointRounding.AwayFromZero);
+
+                    grafica.Mes = String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(reader["mMes"])), Convert.ToInt32(reader["mYear"]));
+                    grafica.Promedio = Convert.ToInt32(pagsXhora);
+
+                    paginasMes.Add(grafica);
+                }
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return paginasMes;
+        }
+
         #endregion
 
 

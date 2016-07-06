@@ -9,10 +9,26 @@
              mc:Ignorable="d">
     <Grid>
 
-        <dxc:ChartControl x:Name="Promedio"
+        <dxc:ChartControl x:Name="Promedio" BorderThickness="0"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Top"
                           Loaded="Promedio_Loaded">
+            <dxc:ChartControl.Palette>
+                <dxc:CustomPalette>
+                    <dxc:CustomPalette.Colors>
+                        <Color>#0C2016</Color>
+                        <Color>#FFE500</Color>
+                        <Color>#AEF400</Color>
+                        <Color>#3F0DC2</Color>
+                        <Color>#FF0000</Color>
+                        <Color>#C36AC8</Color>
+                        <Color>#4FEAFF</Color>
+                        <Color>#F1644D</Color>
+                        <Color>#48DD00</Color>
+                        <Color>#000000</Color>
+                    </dxc:CustomPalette.Colors>
+                </dxc:CustomPalette>
+            </dxc:ChartControl.Palette>
             <dxc:ChartControl.Legend>
                 <dxc:Legend />
             </dxc:ChartControl.Legend>

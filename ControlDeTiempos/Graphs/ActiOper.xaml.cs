@@ -19,7 +19,7 @@ namespace ControlDeTiempos.Graphs
     {
         PersonalCcst selectedPersonal;
 
-        const int clickDelta = 200;
+        const int ClickDelta = 200;
 
         DateTime mouseDownTime;
         bool rotate;
@@ -49,20 +49,21 @@ namespace ControlDeTiempos.Graphs
             while (DistrActsSerie.Points.Count() > 0)
                 DistrActsSerie.Points.RemoveAt(0);
 
-            
 
-            foreach(ActOperativos actividad in distr)
+
+            foreach (ActOperativos actividad in distr)
                 DistrActsSerie.Points.Add(new SeriesPoint(actividad.Etiqueta, actividad.Valor));
 
             chart.Animate();
 
             OperStatus.Operativo = selectedPersonal;
             AsunPag.Operativo = selectedPersonal;
+            Promedios.Operativo = selectedPersonal;
         }
 
         bool IsClick(DateTime mouseUpTime)
         {
-            return (mouseUpTime - mouseDownTime).TotalMilliseconds < clickDelta;
+            return (mouseUpTime - mouseDownTime).TotalMilliseconds < ClickDelta;
         }
 
         double CalcAngle(Point p1, Point p2)
@@ -79,7 +80,7 @@ namespace ControlDeTiempos.Graphs
                 angle = 180 + angle;
             return angle;
         }
-        void chart_MouseUp(object sender, MouseButtonEventArgs e)
+        void ChartMouseUp(object sender, MouseButtonEventArgs e)
         {
             ChartHitInfo hitInfo = chart.CalcHitInfo(e.GetPosition(chart));
             rotate = false;
@@ -95,7 +96,7 @@ namespace ControlDeTiempos.Graphs
             Storyboard.SetTargetProperty(animation, new PropertyPath(PieSeries.ExplodedDistanceProperty));
             storyBoard.Begin();
         }
-        void chart_MouseDown(object sender, MouseButtonEventArgs e)
+        void ChartMouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseDownTime = DateTime.Now;
             Point position = e.GetPosition(chart);
@@ -106,7 +107,7 @@ namespace ControlDeTiempos.Graphs
                 startPosition = position;
             }
         }
-        void chart_MouseMove(object sender, MouseEventArgs e)
+        void ChartMouseMove(object sender, MouseEventArgs e)
         {
             Point position = e.GetPosition(chart);
             ChartHitInfo hitInfo = chart.CalcHitInfo(position);
@@ -116,12 +117,7 @@ namespace ControlDeTiempos.Graphs
             {
                 PieSeries2D series = chart.Diagram.Series[0] as PieSeries2D;
                 double angleDelta = CalcAngle(startPosition, position);
-                //if (Math.Abs(slRotation.Value + angleDelta) < 360)
-                //    slRotation.Value += angleDelta;
-                //else if (slRotation.Value + angleDelta > 360)
-                //    slRotation.Value = -360;
-                //else
-                //    slRotation.Value = 360;
+                
                 startPosition = position;
             }
         }
@@ -130,7 +126,7 @@ namespace ControlDeTiempos.Graphs
             
         }
         
-        void chart_QueryChartCursor(object sender, QueryChartCursorEventArgs e)
+        void ChartQueryChartCursor(object sender, QueryChartCursorEventArgs e)
         {
             ChartHitInfo hitInfo = chart.CalcHitInfo(e.Position);
             if (hitInfo != null && hitInfo.SeriesPoint != null)

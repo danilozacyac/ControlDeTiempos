@@ -1,13 +1,15 @@
-﻿<Window x:Class="ControlDeTiempos.Graphs.GralStats.Generales"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Operativos="clr-namespace:ControlDeTiempos.Graphs.GralStats.Operativos"
-        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        Title="Generales"
-        Width="1000"
-        Height="700"
-        Loaded="Window_Loaded">
+﻿<telerik:RadWindow x:Class="ControlDeTiempos.Graphs.GralStats.Generales"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:Graphs="clr-namespace:ControlDeTiempos.Graphs"
+                   xmlns:Operativos="clr-namespace:ControlDeTiempos.Graphs.GralStats.Operativos"
+                   xmlns:Operativos1="clr-namespace:ControlDeTiempos.Graphs.Particulares.Operativos"
+                   xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="1000"
+                   Height="700"
+                   Header="Generales"
+                   Loaded="Window_Loaded">
     <Grid x:Name="CentralContent">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -18,7 +20,24 @@
         <dxc:ChartControl x:Name="devchart1"
                           Grid.Row="0"
                           HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch">
+                          VerticalAlignment="Stretch"
+                          BorderThickness="0">
+            <dxc:ChartControl.Palette>
+                <dxc:CustomPalette>
+                    <dxc:CustomPalette.Colors>
+                        <Color>#0C2016</Color>
+                        <Color>#FFE500</Color>
+                        <Color>#AEF400</Color>
+                        <Color>#3F0DC2</Color>
+                        <Color>#FF0000</Color>
+                        <Color>#C36AC8</Color>
+                        <Color>#4FEAFF</Color>
+                        <Color>#F1644D</Color>
+                        <Color>#48DD00</Color>
+                        <Color>#000000</Color>
+                    </dxc:CustomPalette.Colors>
+                </dxc:CustomPalette>
+            </dxc:ChartControl.Palette>
             <dxc:ChartControl.Legend>
                 <dxc:Legend />
             </dxc:ChartControl.Legend>
@@ -35,8 +54,28 @@
                                   ValueDataMember="Y" />
             </dxc:XYDiagram2D>
         </dxc:ChartControl>
-        <Operativos:PromActividades Grid.Row="1"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top" />
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width=".8*" />
+            </Grid.ColumnDefinitions>
+            <Operativos:PromActividades HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Operativos1:AvgActividades x:Name="Promedio"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch" />
+                <Graphs:EnTiempoNoTiempo x:Name="Tiempo" Grid.Row="1"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch" />
+            </Grid>
+
+        </Grid>
     </Grid>
-</Window>
+</telerik:RadWindow>

@@ -184,3 +184,7 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\ru\DevExpress.Xpf.Core.v13.1.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Operativos\PromActividades.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Operativos\PromActividades.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\DistrActividades.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\DistrActividades.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AvgActividades.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AvgActividades.g.cs

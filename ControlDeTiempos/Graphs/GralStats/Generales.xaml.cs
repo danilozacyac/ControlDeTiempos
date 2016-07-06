@@ -23,7 +23,7 @@ namespace ControlDeTiempos.Graphs.GralStats
     /// <summary>
     /// Interaction logic for Generales.xaml
     /// </summary>
-    public partial class Generales : Window
+    public partial class Generales 
     {
 
         
@@ -41,6 +41,9 @@ namespace ControlDeTiempos.Graphs.GralStats
             {
                 devchart1.Diagram.Series.Add(new GraficasModel().GetTotalPaginasTrabajadas(operativo, 1));
             }
+
+            Promedio.Operativo = null;
+            Tiempo.Operativo = null;
             //devchart1.Diagram.Series.Add(devSeries);
         }
     }

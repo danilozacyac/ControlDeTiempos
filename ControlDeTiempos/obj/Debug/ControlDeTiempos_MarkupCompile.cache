@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\App.xaml
-22-1344773919
+24-1538382093
 
-63-844719657
+662126903930
 351254487335
-Colores.xaml;Controles\ListView.xaml;Controles\ScheduleViewEntregados.xaml;ErrorWin.xaml;Formularios\AltaErrores.xaml;Formularios\AsignarOperativo.xaml;Graphs\ActiOper.xaml;Graphs\EnTiempoNoTiempo.xaml;Graphs\GralStats\Generales.xaml;Graphs\GralStats\Operativos\PromActividades.xaml;Graphs\NumAsuntoGraph.xaml;Graphs\Particulares\Operativos\AsuntosPaginas.xaml;Intro.xaml;ListaAsuntos.xaml;MainView.xaml;MainWindow.xaml;Controles\ScheduleView.xaml;Notificaciones\NotificationBalloon.xaml;TesisWin.xaml;Theme\ControlTheme.xaml;VentanaCaptura.xaml;VotosWin.xaml;
+Colores.xaml;Controles\ListView.xaml;Controles\ScheduleViewEntregados.xaml;ErrorWin.xaml;Formularios\AltaErrores.xaml;Formularios\AsignarOperativo.xaml;Graphs\ActiOper.xaml;Graphs\EnTiempoNoTiempo.xaml;Graphs\GralStats\Generales.xaml;Graphs\GralStats\Operativos\PromActividades.xaml;Graphs\NumAsuntoGraph.xaml;Graphs\Particulares\Operativos\AsuntosPaginas.xaml;Graphs\Particulares\Operativos\AvgActividades.xaml;Graphs\Particulares\Operativos\DistrActividades.xaml;Intro.xaml;ListaAsuntos.xaml;MainView.xaml;MainWindow.xaml;Controles\ScheduleView.xaml;Notificaciones\NotificationBalloon.xaml;TesisWin.xaml;Theme\ControlTheme.xaml;VentanaCaptura.xaml;VotosWin.xaml;
 
 False
 

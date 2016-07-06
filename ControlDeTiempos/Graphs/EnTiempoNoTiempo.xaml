@@ -9,9 +9,18 @@
              Loaded="UserControl_Loaded"
              mc:Ignorable="d">
     <Grid>
-        <dxc:ChartControl Name="TiempoNoTiempo" BorderThickness="0"
+        <dxc:ChartControl Name="TiempoNoTiempo"
                           HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch">
+                          VerticalAlignment="Stretch"
+                          BorderThickness="0">
+            <dxc:ChartControl.Palette>
+                <dxc:CustomPalette>
+                    <dxc:CustomPalette.Colors>
+                        <Color>LightGreen</Color>
+                        <Color>LightPink</Color>
+                    </dxc:CustomPalette.Colors>
+                </dxc:CustomPalette>
+            </dxc:ChartControl.Palette>
             <dxc:ChartControl.Legend>
                 <dxc:Legend HorizontalPosition="Right" ReverseItems="True" />
             </dxc:ChartControl.Legend>
