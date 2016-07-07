@@ -2,8 +2,6 @@
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:Graphs="clr-namespace:ControlDeTiempos.Graphs"
-                   xmlns:Operativos="clr-namespace:ControlDeTiempos.Graphs.GralStats.Operativos"
-                   xmlns:Operativos1="clr-namespace:ControlDeTiempos.Graphs.Particulares.Operativos"
                    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="1000"
@@ -15,9 +13,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <!--<Operativos:PaginasTrabajas />-->
 
-
-        <dxc:ChartControl x:Name="devchart1"
+        <!--<dxc:ChartControl x:Name="devchart1"
                           Grid.Row="0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
@@ -53,7 +51,7 @@
                                   DataSource="{Binding}"
                                   ValueDataMember="Y" />
             </dxc:XYDiagram2D>
-        </dxc:ChartControl>
+        </dxc:ChartControl>-->
 
         <Grid Grid.Row="1">
 
@@ -61,19 +59,20 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width=".8*" />
             </Grid.ColumnDefinitions>
-            <Operativos:PromActividades HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <!--<Operativos:PromActividades HorizontalAlignment="Left" VerticalAlignment="Top" />-->
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Operativos1:AvgActividades x:Name="Promedio"
+                <!--<Operativos1:AvgActividades x:Name="Promedio"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch" />
-                <Graphs:EnTiempoNoTiempo x:Name="Tiempo" Grid.Row="1"
+                <Graphs:EnTiempoNoTiempo x:Name="Tiempo"
+                                         Grid.Row="1"
                                          HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Stretch" />
+                                         VerticalAlignment="Stretch" />-->
             </Grid>
 
         </Grid>

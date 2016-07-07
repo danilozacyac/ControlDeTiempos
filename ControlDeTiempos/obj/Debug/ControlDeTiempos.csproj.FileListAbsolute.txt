@@ -119,8 +119,6 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\AsignarOperativo.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Charting.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Charting.xml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\NumAsuntoGraph.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\NumAsuntoGraph.g.cs
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\bin\Debug\ControlDeTiempos.exe.manifest
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\bin\Debug\ControlDeTiempos.application
 C:\Users\Luis\Documents\GitHub\ControlDeTiempos\ControlDeTiempos\bin\Debug\Telerik.Windows.Controls.Chart.dll
@@ -159,10 +157,6 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Generales.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Generales.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\ControlDeTiempos.exe.licenses
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\EnTiempoNoTiempo.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\EnTiempoNoTiempo.g.cs
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AsuntosPaginas.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AsuntosPaginas.g.cs
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\DevExpress.Charts.v13.1.Core.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\DevExpress.Data.v13.1.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\DevExpress.Xpf.Charts.v13.1.dll
@@ -182,9 +176,19 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\es\DevExpress.Xpf.Core.v13.1.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\ja\DevExpress.Xpf.Core.v13.1.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\bin\Debug\ru\DevExpress.Xpf.Core.v13.1.resources.dll
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Operativos\PromActividades.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralStats\Operativos\PromActividades.g.cs
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\DistrActividades.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\DistrActividades.g.cs
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AvgActividades.baml
-C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Particulares\Operativos\AvgActividades.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\EnTiempoNoTiempo.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\PaginasTrabajas.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\PromActividades.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\AsuntosPaginas.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\AvgActividades.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\DistrActividades.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\EnTiempoNoTiempo.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\PaginasTrabajas.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\PromActividades.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\AsuntosPaginas.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\AvgActividades.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\DistrActividades.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\PorOperativo.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\PorOperativo.baml
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralOperativos.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralOperativos.baml

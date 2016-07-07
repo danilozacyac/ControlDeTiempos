@@ -94,20 +94,7 @@
 
 
 
-        <Operativos:AsuntosPaginas x:Name="AsunPag"
-                                   Grid.Row="1"
-                                   Grid.Column="1"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top" />
-        <local:EnTiempoNoTiempo x:Name="OperStatus"
-                                Grid.Row="2"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top" />
-        <Operativos:AvgActividades x:Name="Promedios"
-Grid.Row="2"
-                                   Grid.Column="1"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"></Operativos:AvgActividades>
+       
 
 
     </Grid>

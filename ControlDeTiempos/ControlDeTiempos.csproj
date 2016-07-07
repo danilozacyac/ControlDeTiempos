@@ -28,7 +28,7 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -181,29 +181,35 @@
       <DependentUpon>ActiOper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\ActOperativos.cs" />
-    <Compile Include="Graphs\EnTiempoNoTiempo.xaml.cs">
+    <Compile Include="Graphs\GralOperativos.xaml.cs">
+      <DependentUpon>GralOperativos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphs\Operativos\EnTiempoNoTiempo.xaml.cs">
       <DependentUpon>EnTiempoNoTiempo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\GralStats\Generales.xaml.cs">
       <DependentUpon>Generales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\GralStats\Operativos\PromActividades.xaml.cs">
+    <Compile Include="Graphs\Operativos\PaginasTrabajas.xaml.cs">
+      <DependentUpon>PaginasTrabajas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphs\Operativos\PromActividades.xaml.cs">
       <DependentUpon>PromActividades.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\NumAsuntoGraph.xaml.cs">
-      <DependentUpon>NumAsuntoGraph.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Graphs\NumeroAsuntos.cs" />
-    <Compile Include="Graphs\Particulares\Operativos\AsuntosPaginas.xaml.cs">
+    <Compile Include="Graphs\Operativos\AsuntosPaginas.xaml.cs">
       <DependentUpon>AsuntosPaginas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\Particulares\Operativos\AvgActividades.xaml.cs">
+    <Compile Include="Graphs\Operativos\AvgActividades.xaml.cs">
       <DependentUpon>AvgActividades.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\Particulares\Operativos\DistrActividades.xaml.cs">
+    <Compile Include="Graphs\Operativos\DistrActividades.xaml.cs">
       <DependentUpon>DistrActividades.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\Particulares\Operativos\PaginasAsuntos.cs" />
+    <Compile Include="Graphs\PorOperativo.xaml.cs">
+      <DependentUpon>PorOperativo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Intro.xaml.cs">
       <DependentUpon>Intro.xaml</DependentUpon>
     </Compile>
@@ -273,7 +279,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Graphs\EnTiempoNoTiempo.xaml">
+    <Page Include="Graphs\GralOperativos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Graphs\Operativos\EnTiempoNoTiempo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,25 +291,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\GralStats\Operativos\PromActividades.xaml">
+    <Page Include="Graphs\Operativos\PaginasTrabajas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\NumAsuntoGraph.xaml">
+    <Page Include="Graphs\Operativos\PromActividades.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\Particulares\Operativos\AsuntosPaginas.xaml">
+    <Page Include="Graphs\Operativos\AsuntosPaginas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\Particulares\Operativos\AvgActividades.xaml">
+    <Page Include="Graphs\Operativos\AvgActividades.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\Particulares\Operativos\DistrActividades.xaml">
+    <Page Include="Graphs\Operativos\DistrActividades.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphs\PorOperativo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Intro.xaml">
       <SubType>Designer</SubType>
@@ -499,6 +513,9 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Graphs\Abogados\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

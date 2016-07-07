@@ -1,0 +1,38 @@
+﻿<telerik:RadWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   xmlns:Operativos="clr-namespace:ControlDeTiempos.Graphs.Operativos" x:Class="ControlDeTiempos.Graphs.GralOperativos"
+                   WindowState="Maximized"
+        Header="Información general del personal operativo de la CCST" Height="600" Width="800" Loaded="RadWindow_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width=".7*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    
+                </Grid.RowDefinitions>
+                <Operativos:AvgActividades HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="PromActividades" />
+                <Operativos:EnTiempoNoTiempo HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="Status" Grid.Row="1"/>
+            </Grid>
+            <Operativos:PromActividades HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            
+        </Grid>
+
+        <Operativos:PaginasTrabajas HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"/>
+
+    </Grid>
+</telerik:RadWindow>

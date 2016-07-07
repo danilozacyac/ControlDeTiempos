@@ -124,8 +124,10 @@ namespace ControlDeTiempos
 
         private void RBtnGraficas_Click(object sender, RoutedEventArgs e)
         {
-            ActiOper graph = new ActiOper();
-            graph.ShowDialog();
+            PorOperativo graphs = new PorOperativo() { Owner = this };
+            graphs.ShowDialog();
+            //ActiOper graph = new ActiOper();
+            //graph.ShowDialog();
         }
 
         
@@ -273,7 +275,8 @@ namespace ControlDeTiempos
 
         private void RBtnGeneral_Click(object sender, RoutedEventArgs e)
         {
-            Generales gralStats = new Generales() ;
+            GralOperativos gralStats = new GralOperativos();
+            gralStats.Owner = this;
             gralStats.ShowDialog();
         }
     }

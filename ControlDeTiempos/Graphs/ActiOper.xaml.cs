@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 using ControlDeTiempos.Dto;
 using ControlDeTiempos.Model;
 using ControlDeTiempos.Singleton;
 using DevExpress.Xpf.Charts;
-using System.Windows.Media.Animation;
-using System.Windows.Input;
 
 namespace ControlDeTiempos.Graphs
 {
@@ -56,9 +56,9 @@ namespace ControlDeTiempos.Graphs
 
             chart.Animate();
 
-            OperStatus.Operativo = selectedPersonal;
-            AsunPag.Operativo = selectedPersonal;
-            Promedios.Operativo = selectedPersonal;
+            //OperStatus.Operativo = selectedPersonal;
+            //AsunPag.Operativo = selectedPersonal;
+            //Promedios.Operativo = selectedPersonal;
         }
 
         bool IsClick(DateTime mouseUpTime)

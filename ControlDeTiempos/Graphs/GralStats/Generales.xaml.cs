@@ -37,13 +37,10 @@ namespace ControlDeTiempos.Graphs.GralStats
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (PersonalCcst operativo in new PersonalModel().GetPersonalAsignado())
-            {
-                devchart1.Diagram.Series.Add(new GraficasModel().GetTotalPaginasTrabajadas(operativo, 1));
-            }
+            
 
-            Promedio.Operativo = null;
-            Tiempo.Operativo = null;
+            //Promedio.Operativo = null;
+            //Tiempo.Operativo = null;
             //devchart1.Diagram.Series.Add(devSeries);
         }
     }

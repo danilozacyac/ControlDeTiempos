@@ -351,6 +351,12 @@ namespace ControlDeTiempos
 
             if (isUpdating)
             {
+                if (RdtpEntrega.SelectedDate != null && (RdtpEntrega.SelectedDate < RdtpFechaInicio.SelectedDate))
+                {
+                    MessageBox.Show("La fecha de entrega no puede ser menor a la fecha de inicio");
+                    return;
+                }
+
                 if (RdtpEntrega.SelectedDate != null && RdtpEntrega.SelectedTime == null)
                 {
                     MessageBox.Show("Además de la fecha de entrega debes seleccionar la hora");
@@ -511,6 +517,9 @@ namespace ControlDeTiempos
         {
             RdtpFechaIndicada.SelectableDateStart = RdtpFechaInicio.SelectedDate;
             RdtpFechaIndicada.StartTime = RdtpFechaInicio.SelectedTime ?? DateTime.Now.TimeOfDay;
+
+            RdtpEntrega.SelectableDateStart = RdtpFechaInicio.SelectedDate;
+            RdtpEntrega.StartTime = RdtpFechaInicio.SelectedTime ?? DateTime.Now.TimeOfDay;
         }
        
     }
