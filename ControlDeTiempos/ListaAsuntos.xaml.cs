@@ -67,8 +67,8 @@ namespace ControlDeTiempos
 
         private void RBtnGraficas_Click(object sender, RoutedEventArgs e)
         {
-            ActiOper graph = new ActiOper();
-            graph.ShowDialog();
+            //ActiOper graph = new ActiOper();
+            //graph.ShowDialog();
         }
 
         

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using ControlDeTiempos.Dto;
 using ControlDeTiempos.Model;
@@ -10,9 +10,9 @@ using DevExpress.Xpf.Charts;
 namespace ControlDeTiempos.Graphs.Operativos
 {
     /// <summary>
-    /// Interaction logic for DistrActividades.xaml
+    /// Interaction logic for Distribucion.xaml
     /// </summary>
-    public partial class DistrActividades : UserControl, INotifyPropertyChanged
+    public partial class Distribucion : UserControl, INotifyPropertyChanged
     {
         private PersonalCcst operativo;
 
@@ -29,11 +29,16 @@ namespace ControlDeTiempos.Graphs.Operativos
             }
         }
 
-        public DistrActividades()
+        public Distribucion()
         {
             InitializeComponent();
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            GlossyPie2DModel glossy = new GlossyPie2DModel();
+            DistrPoints.Model = glossy;
+        }
 
         #region INotifyPropertyChanged Members
 
@@ -44,13 +49,15 @@ namespace ControlDeTiempos.Graphs.Operativos
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 
-            List<ActOperativos> distr = new ActividadesModel().GetActividadesByOperativo(Operativo.IdPersonal);
-            foreach (ActOperativos actividad in distr)
-                DistrActsSerie.Points.Add(new SeriesPoint(actividad.Etiqueta, actividad.Valor));
+            if (DistrPoints.Points != null)
+                while(DistrPoints.Points.Count > 0)
+                DistrPoints.Points.RemoveAt(0);
 
-            DistrChart.Animate();
+            DistrPoints.Points.AddRange(new GraficasModel().GetDistribucionPersonal(Operativo));
+            DistribucionChart.Animate();
+        }
 
         #endregion // INotifyPropertyChanged Members
-        }
     }
+
 }

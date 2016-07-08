@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.OleDb;
-using System.Linq;
-using ControlDeTiempos.Dto;
-using ControlDeTiempos.Graphs;
-using ScjnUtilities;
 using System.Globalization;
-using System.Collections.Generic;
+using ControlDeTiempos.Dto;
 using DevExpress.Xpf.Charts;
-using ControlDeTiempos.Graphs.Particulares.Operativos;
+using ScjnUtilities;
 
 namespace ControlDeTiempos.Model
 {
@@ -17,62 +13,6 @@ namespace ControlDeTiempos.Model
     {
         private readonly string connectionStr = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
-        public ObservableCollection<NumeroAsuntos> GetTotalAsuntoByMesYear(int mes, int year)
-        {
-            ObservableCollection<NumeroAsuntos> lista = new ObservableCollection<NumeroAsuntos>();
-
-            OleDbConnection connection = new OleDbConnection(connectionStr);
-            OleDbCommand cmd;
-            OleDbDataReader reader;
-
-            try
-            {
-                string sqlQuery = "SELECT Nombre, mMes, mYear, COUNT(IdAbogado) AS Total FROM AsuntosAbogado " +
-                                  "WHERE mMes = @Mes AND mYear = @Year " +
-                                  "GROUP BY Nombre, mMes, mYear";
-
-                connection.Open();
-
-                cmd = new OleDbCommand(sqlQuery, connection);
-                cmd.Parameters.AddWithValue("@Mes", mes);
-                cmd.Parameters.AddWithValue("@Year", year);
-                reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    NumeroAsuntos tesis = new NumeroAsuntos()
-                    {
-                        Nombre = reader["Nombre"].ToString(),
-                        Periodo = String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt16(reader["mMes"])), reader["mYear"]),
-                        Total = Convert.ToInt32(reader["Total"])
-                    };
-                    lista.Add(tesis);
-                }
-
-                reader.Close();
-                cmd.Dispose();
-            }
-            catch (OleDbException ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,GraficasModel", "ControlDeTiempos");
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return lista;
-        }
-
-        
-
-       
 
         #region StatusEntrega
 
@@ -498,9 +438,9 @@ namespace ControlDeTiempos.Model
 
         
 
-        public List<PaginasAsuntos> GetAsuntosPaginas(string tipoPersonalColumnName, int idPersonal, int monthsToShow)
+        public List<Graficas> GetAsuntosPaginas(string tipoPersonalColumnName, int idPersonal, int monthsToShow)
         {
-            List<PaginasAsuntos> listaTotales = new List<PaginasAsuntos>();
+            List<Graficas> listaTotales = new List<Graficas>();
 
             string fin = String.Format("{0}{1}{2}", DateTime.Now.Year, DateTime.Now.Month.ToString("00"), "31");
 
@@ -525,7 +465,7 @@ namespace ControlDeTiempos.Model
 
                 while (reader.Read())
                 {
-                    PaginasAsuntos asunto = new PaginasAsuntos()
+                    Graficas asunto = new Graficas()
                     {
                         Mes = String.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32(reader["mMes"])), Convert.ToInt32(reader["mYear"])),
                         NumeroAsuntos = Convert.ToInt32(reader["Asuntos"]),
@@ -559,6 +499,98 @@ namespace ControlDeTiempos.Model
 
         #endregion
 
+
+        #region DistribucionActividades
+
+        public SeriesPointCollection GetDistribucionPersonal(PersonalCcst operativo)
+        {
+            SeriesPointCollection puntos = new SeriesPointCollection();
+
+            foreach (Graficas graph in GetActividadesByOperativo(operativo.IdPersonal))
+            {
+                puntos.Add(new SeriesPoint(graph.Actividad, graph.NumeroAsuntos));
+            }
+
+            return puntos;
+        }
+
+        public List<Graficas> GetActividadesByOperativo(int idOperativo)
+        {
+            int legislacion = 0, estandarizacion = 0, cotejo = 0, correcciones = 0, octava = 0, subvinculo = 0, otros = 0;
+
+            List<Graficas> listadoActs = new List<Graficas>();
+
+            OleDbConnection connection = new OleDbConnection(connectionStr);
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            try
+            {
+                connection.Open();
+
+                cmd = new OleDbCommand("SELECT * FROM trabajo WHERE IdPerOperativo = @IdPerOperativo", connection);
+                cmd.Parameters.AddWithValue("@IdPerOperativo", idOperativo);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    List<int> acts = NumericUtilities.GetDecimalsInBinary(Convert.ToInt32(reader["IdActividad"]));
+
+                    if (acts.Contains(1))
+                        legislacion += 1;
+                    if (acts.Contains(2))
+                        estandarizacion += 1;
+                    if (acts.Contains(4))
+                        cotejo += 1;
+                    if (acts.Contains(8))
+                        correcciones += 1;
+                    if (acts.Contains(16))
+                        octava += 1;
+                    if (acts.Contains(32))
+                        subvinculo += 1;
+                    if (acts.Contains(64))
+                        otros += 1;
+
+                }
+
+                if (legislacion > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Legislación", NumeroAsuntos = legislacion });
+                if (estandarizacion > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Estandarización", NumeroAsuntos = estandarizacion });
+                if (cotejo > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Cotejo", NumeroAsuntos = cotejo });
+                if (correcciones > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Correcciones", NumeroAsuntos = correcciones });
+                if (octava > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Octava Parte", NumeroAsuntos = octava });
+                if (subvinculo > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Subvínculo Precedentes", NumeroAsuntos = subvinculo });
+                if (otros > 0)
+                    listadoActs.Add(new Graficas() { Actividad = "Otro", NumeroAsuntos = otros });
+
+                reader.Close();
+                cmd.Dispose();
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TesisModel", "ControlDeTiempos");
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,TesisModel", "ControlDeTiempos");
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return listadoActs;
+        }
+
+
+        #endregion
 
     }
 }

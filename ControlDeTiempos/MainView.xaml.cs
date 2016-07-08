@@ -12,7 +12,6 @@ using Telerik.Windows.Controls;
 using ControlDeTiempos.Model;
 using System.Collections.ObjectModel;
 using Telerik.Windows.Controls.ScheduleView;
-using ControlDeTiempos.Graphs.GralStats;
 
 namespace ControlDeTiempos
 {
@@ -156,6 +155,9 @@ namespace ControlDeTiempos
                 GrpAsignaciones.Visibility = Visibility.Visible;
             }
 
+            if (AccesoUsuario.IdUsuario != 10)
+                RGrpTools.Visibility = Visibility.Collapsed;
+
             if (vista == 2)
             {
                 RBtnAgregarTrabajo.IsEnabled = false;
@@ -278,6 +280,11 @@ namespace ControlDeTiempos
             GralOperativos gralStats = new GralOperativos();
             gralStats.Owner = this;
             gralStats.ShowDialog();
+        }
+
+        private void RBtnUpdateTime_Click(object sender, RoutedEventArgs e)
+        {
+            new TrabajoAsignadoModel().ObtenMinutosTrabajo();
         }
     }
 }

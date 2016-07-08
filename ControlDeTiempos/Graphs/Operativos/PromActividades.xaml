@@ -10,6 +10,7 @@
     <Grid>
 
         <dxc:ChartControl x:Name="Promedio"
+                          EnableAnimation="True"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Top"
                           BorderThickness="0"

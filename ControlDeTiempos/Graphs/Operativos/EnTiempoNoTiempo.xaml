@@ -10,6 +10,7 @@
              mc:Ignorable="d">
     <Grid>
         <dxc:ChartControl Name="TiempoNoTiempo"
+                          EnableAnimation="True"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
                           BorderThickness="0">

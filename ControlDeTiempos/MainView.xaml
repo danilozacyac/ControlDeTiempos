@@ -100,6 +100,7 @@
                             <TextBlock HorizontalAlignment="Center" Text="operativos" />
                         </StackPanel>
                     </telerik:RadRibbonButton>
+
                 </telerik:RadRibbonGroup>
                 <telerik:RadRibbonGroup Header="Ayuda">
                     <telerik:RadRibbonButton x:Name="RBtnColores"
@@ -110,6 +111,18 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Guía de" />
                             <TextBlock HorizontalAlignment="Center" Text="colores" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup x:Name="RGrpTools" Header="Herramientas">
+                    <telerik:RadRibbonButton x:Name="RBtnUpdateTime"
+                                             Click="RBtnUpdateTime_Click"
+                                             IsEnabled="True"
+                                             LargeImage="Resources/updateTime.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Actualizar" />
+                            <TextBlock HorizontalAlignment="Center" Text="tiempos" />
                         </StackPanel>
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>

@@ -33,13 +33,25 @@
                VerticalAlignment="Top"
                Content="Personal:"
                FontWeight="Bold" />
+        <Operativos:Distribucion x:Name="Distribucion"
+                                     Grid.Row="1"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top" />
+        <Operativos:AsuntosPaginas x:Name="Asuntos"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top" />
 
         <Operativos:EnTiempoNoTiempo x:Name="Status"
                                      Grid.Row="2"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top" />
-        <Operativos:AvgActividades x:Name="Promedio" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top"/>
-        <Operativos:AsuntosPaginas x:Name="Asuntos" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"/>
+        <Operativos:AvgActividades x:Name="Promedio"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top" />
 
     </Grid>
 </telerik:RadWindow>

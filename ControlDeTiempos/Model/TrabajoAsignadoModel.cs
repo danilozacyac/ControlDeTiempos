@@ -770,7 +770,9 @@ namespace ControlDeTiempos.Model
 
         #region ElementosTemporales
 
-
+        /// <summary>
+        /// Obtiene el total de minutos trabajados a cada asunto"
+        /// </summary>
         public void ObtenMinutosTrabajo()
         {
             ObservableCollection<TrabajoAsignado> trabajos = this.GetTrabajos(1);

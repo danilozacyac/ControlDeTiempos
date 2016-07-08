@@ -8,17 +8,17 @@ namespace ControlDeTiempos.Graphs
         private int valor;
         private string etiqueta;
 
-        public int Valor
-        {
-            get
-            {
-                return this.valor;
-            }
-            set
-            {
-                this.valor = value;
-            }
-        }
+        //public int Valor
+        //{
+        //    get
+        //    {
+        //        return this.valor;
+        //    }
+        //    set
+        //    {
+        //        this.valor = value;
+        //    }
+        //}
 
         public string Etiqueta
         {

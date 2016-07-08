@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Linq;
 using ControlDeTiempos.Graphs;
 using ScjnUtilities;
+using ControlDeTiempos.Dto;
 
 namespace ControlDeTiempos.Model
 {
@@ -13,11 +14,11 @@ namespace ControlDeTiempos.Model
 
         private readonly string connectionStr = ConfigurationManager.ConnectionStrings["Base"].ConnectionString;
 
-        public List<ActOperativos> GetActividadesByOperativo(int idOperativo)
+        public List<Graficas> GetActividadesByOperativo(int idOperativo)
         {
             int legislacion = 0, estandarizacion = 0, cotejo = 0, correcciones = 0, octava = 0, subvinculo = 0, otros = 0;
 
-            List<ActOperativos> listadoActs = new List<ActOperativos>();
+            List<Graficas> listadoActs = new List<Graficas>();
 
             OleDbConnection connection = new OleDbConnection(connectionStr);
             OleDbCommand cmd;
@@ -53,19 +54,19 @@ namespace ControlDeTiempos.Model
                 }
 
                 if (legislacion > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Legislación", Valor = legislacion });
+                    listadoActs.Add(new Graficas() { Actividad = "Legislación", NumeroAsuntos = legislacion });
                 if (estandarizacion > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Estandarización", Valor = estandarizacion });
+                    listadoActs.Add(new Graficas() { Actividad = "Estandarización", NumeroAsuntos = estandarizacion });
                 if (cotejo > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Cotejo", Valor = cotejo });
+                    listadoActs.Add(new Graficas() { Actividad = "Cotejo", NumeroAsuntos = cotejo });
                 if (correcciones > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Correcciones", Valor = correcciones });
+                    listadoActs.Add(new Graficas() { Actividad = "Correcciones", NumeroAsuntos = correcciones });
                 if (octava > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Octava Parte", Valor = octava });
+                    listadoActs.Add(new Graficas() { Actividad = "Octava Parte", NumeroAsuntos = octava });
                 if (subvinculo > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Subvínculo Precedentes", Valor = subvinculo });
+                    listadoActs.Add(new Graficas() { Actividad = "Subvínculo Precedentes", NumeroAsuntos = subvinculo });
                 if (otros > 0)
-                    listadoActs.Add(new ActOperativos() { Etiqueta = "Otro", Valor = otros });
+                    listadoActs.Add(new Graficas() { Actividad = "Otro", NumeroAsuntos = otros });
 
                 reader.Close();
                 cmd.Dispose();

@@ -28,7 +28,7 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -146,9 +146,6 @@
     <Compile Include="Controles\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controles\ScheduleViewEntregados.xaml.cs">
-      <DependentUpon>ScheduleViewEntregados.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converter\ATiempoConverter.cs" />
     <Compile Include="Converter\EmisorConverter.cs" />
     <Compile Include="Converter\EstadoEntregaConverter.cs" />
@@ -177,18 +174,15 @@
     <Compile Include="Formularios\AsignarOperativo.xaml.cs">
       <DependentUpon>AsignarOperativo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\ActiOper.xaml.cs">
-      <DependentUpon>ActiOper.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Graphs\ActOperativos.cs" />
     <Compile Include="Graphs\GralOperativos.xaml.cs">
       <DependentUpon>GralOperativos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Graphs\Operativos\Distribucion.xaml.cs">
+      <DependentUpon>Distribucion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Graphs\Operativos\EnTiempoNoTiempo.xaml.cs">
       <DependentUpon>EnTiempoNoTiempo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Graphs\GralStats\Generales.xaml.cs">
-      <DependentUpon>Generales.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\Operativos\PaginasTrabajas.xaml.cs">
       <DependentUpon>PaginasTrabajas.xaml</DependentUpon>
@@ -196,17 +190,12 @@
     <Compile Include="Graphs\Operativos\PromActividades.xaml.cs">
       <DependentUpon>PromActividades.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\NumeroAsuntos.cs" />
     <Compile Include="Graphs\Operativos\AsuntosPaginas.xaml.cs">
       <DependentUpon>AsuntosPaginas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\Operativos\AvgActividades.xaml.cs">
       <DependentUpon>AvgActividades.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\Operativos\DistrActividades.xaml.cs">
-      <DependentUpon>DistrActividades.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Graphs\Particulares\Operativos\PaginasAsuntos.cs" />
     <Compile Include="Graphs\PorOperativo.xaml.cs">
       <DependentUpon>PorOperativo.xaml</DependentUpon>
     </Compile>
@@ -259,10 +248,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controles\ScheduleViewEntregados.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ErrorWin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -275,19 +260,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Graphs\ActiOper.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Graphs\GralOperativos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Graphs\Operativos\EnTiempoNoTiempo.xaml">
+    <Page Include="Graphs\Operativos\Distribucion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Graphs\GralStats\Generales.xaml">
+    <Page Include="Graphs\Operativos\EnTiempoNoTiempo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,10 +285,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Graphs\Operativos\AvgActividades.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Graphs\Operativos\DistrActividades.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -515,7 +492,7 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graphs\Abogados\" />
+    <Resource Include="Resources\updateTime.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -34,6 +34,7 @@ namespace ControlDeTiempos.Graphs
             Status.Operativo = selectedPersonal;
             Promedio.Operativo = selectedPersonal;
             Asuntos.Operativo = selectedPersonal;
+            Distribucion.Operativo = selectedPersonal;
         }
     }
 }

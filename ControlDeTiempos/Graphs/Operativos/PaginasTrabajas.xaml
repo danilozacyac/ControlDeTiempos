@@ -11,6 +11,7 @@
     <Grid>
         <dxc:ChartControl x:Name="devchart1"
                           Grid.Row="0"
+                          EnableAnimation="True"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
                           BorderThickness="0">

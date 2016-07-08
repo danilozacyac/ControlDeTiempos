@@ -362,6 +362,12 @@ namespace ControlDeTiempos
                     MessageBox.Show("Además de la fecha de entrega debes seleccionar la hora");
                     return;
                 }
+
+                if (RdtpEntrega.SelectedDate != null && CbxOperativos.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Para poder marcar un asunto como entregado tienes que seleccionar al personal al que se le asignaron las actividades señaladas");
+                    return;
+                }
             }
             
             trabajo.IdActividad = 0;
