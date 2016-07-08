@@ -1,0 +1,138 @@
+﻿<telerik:RadWindow x:Class="ControlDeTiempos.Formularios.SetOperativoForAsunto"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:converter="clr-namespace:ControlDeTiempos.Converter"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="540"
+                   Height="800"
+                   Header="SetOperativoForAsunto"
+                   Loaded="RadWindow_Loaded"
+                   WindowStartupLocation="CenterScreen">
+    <telerik:RadWindow.Resources>
+        <converter:PersonalConverter x:Key="nombreConv" />
+    </telerik:RadWindow.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Label Margin="10,20,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Selecciona al personal que realizará las actividades señaladas:"
+               FontSize="14"
+               FontWeight="Bold" />
+        <ListBox x:Name="LstOperativos"
+                 Margin="10,55,10,15"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 ItemsSource="{Binding}"
+                 SelectionChanged="LstOperativos_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="76" />
+
+                        </Grid.RowDefinitions>
+                        <Label Margin="10,3"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               Content="{Binding IdPersonal,
+                                                 Converter={StaticResource nombreConv}}"
+                               FontWeight="Bold" />
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="10,3,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="U. Asiganción:" />
+                            <Label Margin="10,34,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="U. Entrega:"
+                                   ToolTip="Fecha de la última entrega programada" />
+                            <TextBlock Width="140"
+                                       Margin="100,5,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Text="{Binding UltimaAsignacion,
+                                                      StringFormat='{}{0:dd/MM/yyyy HH:mm tt}'}" />
+                            <TextBlock Width="140"
+                                       Margin="100,36,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Text="{Binding UltimaEntrega,
+                                                      StringFormat='{}{0:dd/MM/yyyy HH:mm tt}'}" />
+                            <GroupBox Grid.Column="1"
+                                      Margin="10,0"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      FontWeight="Black"
+                                      Header="Pendientes">
+                                <Grid>
+                                    <Label Margin="10,3,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Asuntos:"
+                                           FontWeight="Normal" />
+                                    <Label Margin="71,3,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="{Binding AsuntosPendientes}" />
+                                    <Label Margin="10,25,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Fojas:"
+                                           FontWeight="Normal" />
+                                    <Label Margin="71,25,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="{Binding HojasPendientes}" />
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Grid.Row="1"
+                   Width="500"
+                   Margin="10,0,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Foreground="Red"
+                   Text="**Se sugiere considerar el orden señalado para la asignación del asunto"
+                   TextWrapping="Wrap" />
+
+
+        <Button x:Name="BtnCancelar"
+                Grid.Row="2"
+                Width="80"
+                Margin="0,10,10,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="BtnCancelar_Click"
+                Content="Cancelar"
+                Style="{StaticResource BlueButton}" />
+        <Button x:Name="BtnAsignar"
+                Grid.Row="2"
+                Width="80"
+                Margin="0,10,96,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="BtnAsignar_Click"
+                Content="Asignar"
+                Style="{StaticResource BlueButton}" />
+
+    </Grid>
+</telerik:RadWindow>

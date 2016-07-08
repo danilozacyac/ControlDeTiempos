@@ -170,7 +170,8 @@ namespace ControlDeTiempos.Controles
                     return;
             }
 
-            new AsignarOperativo(selectedTrabajo).ShowDialog();
+            //new AsignarOperativo(selectedTrabajo).ShowDialog();
+            new SetOperativoForAsunto(selectedTrabajo).ShowDialog();
         }
 
 

@@ -28,7 +28,7 @@
     <PublisherName>Suprema Corte De Justicia de la Nación</PublisherName>
     <SuiteName>CCST</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -156,6 +156,7 @@
     <Compile Include="Converter\TipoVotoConverter.cs" />
     <Compile Include="Dto\AccesoUsuario.cs" />
     <Compile Include="Dto\Actividades.cs" />
+    <Compile Include="Dto\Asignacion.cs" />
     <Compile Include="Dto\Emisor.cs" />
     <Compile Include="Dto\ErrorOperativo.cs" />
     <Compile Include="Dto\Graficas.cs" />
@@ -173,6 +174,9 @@
     </Compile>
     <Compile Include="Formularios\AsignarOperativo.xaml.cs">
       <DependentUpon>AsignarOperativo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\SetOperativoForAsunto.xaml.cs">
+      <DependentUpon>SetOperativoForAsunto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphs\ActOperativos.cs" />
     <Compile Include="Graphs\GralOperativos.xaml.cs">
@@ -257,6 +261,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Formularios\AsignarOperativo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\SetOperativoForAsunto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

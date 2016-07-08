@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 using ControlDeTiempos.Converter;
+using DevExpress.Xpf.Charts;
 using System;
 using System.Diagnostics;
 using System.Globalization;

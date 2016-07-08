@@ -23,11 +23,11 @@
                         <Color>#AEF400</Color>
                         <Color>#3F0DC2</Color>
                         <Color>#FF0000</Color>
+                        <Color>#000000</Color>
                         <Color>#C36AC8</Color>
                         <Color>#4FEAFF</Color>
                         <Color>#F1644D</Color>
                         <Color>#48DD00</Color>
-                        <Color>#000000</Color>
                     </dxc:CustomPalette.Colors>
                 </dxc:CustomPalette>
             </dxc:ChartControl.Palette>

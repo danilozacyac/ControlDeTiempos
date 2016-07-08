@@ -186,3 +186,5 @@ C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDe
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\GralOperativos.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\Distribucion.baml
 C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Graphs\Operativos\Distribucion.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\SetOperativoForAsunto.g.cs
+C:\Users\lavega\Documents\Visual Studio 2013\Projects\ControlDeTiempos\ControlDeTiempos\obj\Debug\Formularios\SetOperativoForAsunto.baml
